@@ -58,7 +58,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background on scroll
+// Navbar shrink on scroll
 const navbar = document.querySelector('.navbar');
 let lastScroll = 0;
 
@@ -66,7 +66,11 @@ window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     const isDarkMode = body.classList.contains('dark-mode');
     
-    if (currentScroll > 100) {
+    // Add shrink class when scrolling down
+    if (currentScroll > 50) {
+        navbar.classList.add('shrink');
+        
+        // Update background and shadow
         if (isDarkMode) {
             navbar.style.background = 'rgba(10, 25, 41, 0.98)';
             navbar.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.4)';
@@ -75,6 +79,9 @@ window.addEventListener('scroll', () => {
             navbar.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.1)';
         }
     } else {
+        navbar.classList.remove('shrink');
+        
+        // Reset background and shadow
         if (isDarkMode) {
             navbar.style.background = 'rgba(10, 25, 41, 0.95)';
             navbar.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.3)';
