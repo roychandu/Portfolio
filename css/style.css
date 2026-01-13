@@ -337,6 +337,19 @@ body.dark-mode .hero {
     font-size: 1.5rem;
     font-weight: 400;
     color: var(--accent-color);
+    position: relative;
+}
+
+.greeting::after {
+    content: '|';
+    animation: blink 1s infinite;
+    margin-left: 2px;
+    color: var(--accent-color);
+    display: none;
+}
+
+.greeting.typing::after {
+    display: inline;
 }
 
 .name {
@@ -347,12 +360,44 @@ body.dark-mode .hero {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     line-height: 1.2;
+    position: relative;
+}
+
+.name::after {
+    content: '|';
+    animation: blink 1s infinite;
+    margin-left: 2px;
+    color: var(--accent-color);
+    -webkit-text-fill-color: var(--accent-color);
+    display: none;
+}
+
+.name.typing::after {
+    display: inline;
 }
 
 .role {
     font-size: 2rem;
     font-weight: 600;
     color: var(--accent-color);
+    position: relative;
+}
+
+.role::after {
+    content: '|';
+    animation: blink 1s infinite;
+    margin-left: 2px;
+    color: var(--accent-color);
+    display: none;
+}
+
+.role.typing::after {
+    display: inline;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
 }
 
 .hero-description {
@@ -1033,7 +1078,7 @@ body.dark-mode .form-input {
 /* Responsive Design */
 @media (max-width: 968px) {
     .nav-menu {
-        position: fixed;
+    position: fixed;
         left: -100%;
         top: 70px;
         flex-direction: column;
@@ -1046,7 +1091,7 @@ body.dark-mode .form-input {
     }
 
     .nav-menu.active {
-        left: 0;
+    left: 0;
     }
 
     .hamburger {

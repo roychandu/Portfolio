@@ -267,6 +267,89 @@ document.querySelectorAll('.project-card').forEach(card => {
     });
 });
 
+// Typewriter Effect for Hero Title (with loop)
+let typewriterTimeout = null;
+
+// Store original texts (only fetch once)
+function getOriginalTexts() {
+    const greeting = document.querySelector('.greeting');
+    const name = document.querySelector('.name');
+    const role = document.querySelector('.role');
+    
+    return {
+        greeting: greeting ? greeting.textContent.trim() : '',
+        name: name ? name.textContent.trim() : '',
+        role: role ? role.textContent.trim() : ''
+    };
+}
+
+function typeWriterEffect() {
+    const greeting = document.querySelector('.greeting');
+    const name = document.querySelector('.name');
+    const role = document.querySelector('.role');
+    
+    // Get original texts
+    const texts = getOriginalTexts();
+    const greetingText = texts.greeting;
+    const nameText = texts.name;
+    const roleText = texts.role;
+    
+    // Clear all texts initially
+    if (greeting) greeting.textContent = '';
+    if (name) name.textContent = '';
+    if (role) role.textContent = '';
+    
+    // Remove typing class if exists
+    if (greeting) greeting.classList.remove('typing');
+    if (name) name.classList.remove('typing');
+    if (role) role.classList.remove('typing');
+    
+    // Typewriter function
+    function typeText(element, text, speed, callback) {
+        // Add typing class to show cursor
+        element.classList.add('typing');
+        let i = 0;
+        const interval = setInterval(() => {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+            } else {
+                clearInterval(interval);
+                // Remove typing class to hide cursor
+                element.classList.remove('typing');
+                if (callback) {
+                    setTimeout(callback, 400); // Delay before next line
+                }
+            }
+        }, speed);
+    }
+    
+    // Type each line sequentially
+    if (greeting && greetingText) {
+        typeText(greeting, greetingText, 100, () => {
+            if (name && nameText) {
+                typeText(name, nameText, 80, () => {
+                    if (role && roleText) {
+                        typeText(role, roleText, 100, () => {
+                            // All typing complete - wait 3 seconds then restart
+                            clearTimeout(typewriterTimeout);
+                            typewriterTimeout = setTimeout(() => {
+                                typeWriterEffect(); // Restart the effect
+                            }, 3000); // 3 seconds delay before restart
+                        });
+                    }
+                });
+            }
+        });
+    }
+}
+
+// Initialize typewriter effect when page loads
+window.addEventListener('load', () => {
+    // Small delay to ensure DOM is fully loaded
+    setTimeout(typeWriterEffect, 500);
+});
+
 // Console message
 console.log('%c👋 Hello! Welcome to my Flutter Developer Portfolio!', 'color: #13B9FD; font-size: 20px; font-weight: bold;');
 console.log('%cBuilt with ❤️ using Flutter colors', 'color: #02569B; font-size: 14px;');
