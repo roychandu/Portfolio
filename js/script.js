@@ -12,19 +12,32 @@ if (currentTheme === 'dark') {
 }
 
 // Theme toggle event listener
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    
-    if (body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark');
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-    } else {
-        localStorage.setItem('theme', 'light');
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
-    }
-});
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+            if (themeIcon) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        } else {
+            localStorage.setItem('theme', 'light');
+            if (themeIcon) {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+        
+        // Update navbar styles after theme change
+        setTimeout(() => {
+            if (navbar) {
+                updateNavbarStyles();
+            }
+        }, 50);
+    });
+}
 
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
@@ -62,9 +75,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const navbar = document.querySelector('.navbar');
 let lastScroll = 0;
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
+function updateNavbarStyles() {
+    if (!navbar) return;
+    
     const isDarkMode = body.classList.contains('dark-mode');
+    const currentScroll = window.pageYOffset;
     
     // Add shrink class when scrolling down
     if (currentScroll > 50) {
@@ -90,9 +105,20 @@ window.addEventListener('scroll', () => {
             navbar.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.1)';
         }
     }
+}
+
+if (navbar) {
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        updateNavbarStyles();
+        lastScroll = currentScroll;
+    });
     
-    lastScroll = currentScroll;
-});
+    // Initialize navbar styles on page load
+    window.addEventListener('load', () => {
+        updateNavbarStyles();
+    });
+}
 
 // Active navigation link on scroll
 const sections = document.querySelectorAll('section[id]');
