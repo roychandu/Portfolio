@@ -11,6 +11,7 @@ import { createSkillBarObserver, createScrollAnimationObserver, createStatsObser
 import { animateStaggered } from './utils/animations.js';
 import { initTypewriter } from './utils/typewriter.js';
 import { initContactForm } from './utils/form.js';
+import { initHero3DScene } from './utils/threejs.js';
 
 // Initialize theme
 initTheme();
@@ -21,10 +22,17 @@ initNavigation();
 // Initialize navbar scroll
 const updateNavbarOnThemeChange = initNavbarScroll();
 
+// Initialize 3D scene in hero section
+let hero3DScene = null;
+
 // Setup theme toggle with navbar update callback
 setupThemeToggle(() => {
     if (updateNavbarOnThemeChange) {
         updateNavbarOnThemeChange();
+    }
+    // Update 3D scene colors on theme change
+    if (hero3DScene && hero3DScene.updateColors) {
+        hero3DScene.updateColors(isDarkMode());
     }
 });
 
@@ -33,6 +41,19 @@ initParallaxEffect();
 
 // Initialize typewriter effect
 initTypewriter();
+
+// Initialize 3D scene when page loads
+window.addEventListener('load', () => {
+    // Initialize 3D particle scene (change 'particles' to 'geometric' for geometric shapes)
+    hero3DScene = initHero3DScene('particles', {
+        particleCount: 1500,
+        speed: 0.3,
+        colors: {
+            light: [0x02569B, 0x0175C2, 0x13B9FD],
+            dark: [0x13B9FD, 0x0175C2, 0x02569B]
+        }
+    });
+});
 
 // Initialize skill bar animations
 const skillBarObserver = createSkillBarObserver();
