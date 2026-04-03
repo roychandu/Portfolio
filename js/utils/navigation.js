@@ -1,44 +1,25 @@
 /**
- * Navigation Utilities
- * Handles navigation menu, smooth scrolling, and active link highlighting
+ * Navigation Utilities v2.0
+ * Handles app-frame scrolling, tab-bar navigation, and active tab indicator
  */
 
 /**
- * Initialize mobile navigation toggle
+ * Setup smooth scrolling for anchor links within the app container
  */
-export function initMobileNavigation() {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    if (!hamburger || !navMenu) return;
-    
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        hamburger.classList.toggle('active');
-    });
-    
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-        });
-    });
-}
+export function setupSmoothScrolling() {
+    const appContent = document.getElementById('appContent');
+    if (!appContent) return;
 
-/**
- * Setup smooth scrolling for anchor links
- * @param {number} offset - Offset from top in pixels
- */
-export function setupSmoothScrolling(offset = 80) {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const targetId = this.getAttribute('href');
+            const target = document.querySelector(targetId);
+            
             if (target) {
-                const offsetTop = target.offsetTop - offset;
-                window.scrollTo({
-                    top: offsetTop,
+                // Scroll the container, not the window
+                appContent.scrollTo({
+                    top: target.offsetTop,
                     behavior: 'smooth'
                 });
             }
@@ -47,22 +28,28 @@ export function setupSmoothScrolling(offset = 80) {
 }
 
 /**
- * Activate navigation link based on scroll position
+ * Activate tab item based on scroll position in the app container
  */
-export function activateNavLink() {
-    const scrollY = window.pageYOffset;
+export function activateTab() {
+    const appContent = document.getElementById('appContent');
+    if (!appContent) return;
+
+    const scrollY = appContent.scrollTop;
     const sections = document.querySelectorAll('section[id]');
+    const tabItems = document.querySelectorAll('.tab-item');
+    const indicator = document.querySelector('.tab-indicator');
 
     sections.forEach(section => {
         const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
+        const sectionTop = section.offsetTop - 150; // Offset for header
         const sectionId = section.getAttribute('id');
 
         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${sectionId}`) {
-                    link.classList.add('active');
+            tabItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${sectionId}`) {
+                    item.classList.add('active');
+                    updateTabIndicator(item, indicator);
                 }
             });
         }
@@ -70,13 +57,73 @@ export function activateNavLink() {
 }
 
 /**
+ * Update the sliding indicator position
+ */
+function updateTabIndicator(activeItem, indicator) {
+    if (!indicator) return;
+    
+    const rect = activeItem.getBoundingClientRect();
+    const parentRect = activeItem.parentElement.getBoundingClientRect();
+    
+    // Position indicator at the bottom of the active tab
+    indicator.style.width = `20px`;
+    indicator.style.left = `${rect.left - parentRect.left + (rect.width / 2) - 10}px`;
+    indicator.style.opacity = '1';
+}
+
+/**
+ * Toggle the mobile navigation menu
+ */
+export function toggleMobileNav() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileNav = document.querySelector('.mobile-nav');
+    
+    if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            
+            // Disable scrolling when menu is open
+            const appContent = document.getElementById('appContent');
+            if (appContent) {
+                if (mobileNav.classList.contains('active')) {
+                    appContent.style.overflow = 'hidden';
+                } else {
+                    appContent.style.overflow = 'auto';
+                }
+            }
+        });
+        
+        // Close menu when clicking a link
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('active');
+                
+                const appContent = document.getElementById('appContent');
+                if (appContent) {
+                    appContent.style.overflow = 'auto';
+                }
+            });
+        });
+    }
+}
+
+/**
  * Initialize navigation functionality
  */
 export function initNavigation() {
-    initMobileNavigation();
-    setupSmoothScrolling();
+    const appContent = document.getElementById('appContent');
     
-    window.addEventListener('scroll', activateNavLink);
-    window.addEventListener('load', activateNavLink);
+    setupSmoothScrolling();
+    toggleMobileNav();
+    
+    if (appContent) {
+        appContent.addEventListener('scroll', activateTab);
+        // Initial call to set active state
+        window.addEventListener('load', () => {
+            activateTab();
+        });
+    }
 }
 

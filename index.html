@@ -3,11 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Flutter Developer Portfolio - Mobile App Development Expert">
+    <meta name="description" content="Chandan Roy - Premium Flutter Developer Portfolio v2.0">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/utils/animations.css">
     <link rel="stylesheet" href="css/utils/transitions.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <script type="importmap">
     {
         "imports": {
@@ -15,36 +30,40 @@
         }
     }
     </script>
-    <title>Flutter Developer | Portfolio</title>
+    <title>Chandan Roy | Portfolio v2.0</title>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <span class="logo">FD</span>
-                <span class="brand-text">Flutter Dev</span>
+    <!-- Top Navigation Bar -->
+    <header class="main-header">
+        <div class="container container-header">
+            <div class="header-logo">
+                <span class="logo-circle">CR</span>
+                <span class="logo-text">Chandan Roy</span>
             </div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="nav-actions">
+            
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon" id="themeIcon"></i>
                 </button>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+                <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
-    </nav>
+    </header>
+
+    <main class="main-content">
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -124,8 +143,9 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <div class="image-placeholder">
-                        <i class="fas fa-user"></i>
+                    <div class="about-image-card">
+                        <img src="assets/images/about.png" alt="Chandan Roy" class="about-img">
+                        <div class="card-glow"></div>
                     </div>
                 </div>
             </div>
@@ -136,72 +156,47 @@
     <section id="skills" class="skills">
         <div class="container">
             <h2 class="section-title">Skills & Technologies</h2>
-            <div class="skills-content">
-                <div class="skills-category">
-                    <h3 class="category-title">
-                        <i class="fab fa-flutter"></i>
-                        Flutter & Dart
-                    </h3>
-                    <div class="skills-grid">
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fab fa-flutter"></i>
-                            </div>
-                            <span class="skill-name">Flutter Framework</span>
-                            <div class="skill-level">
-                                <div class="skill-bar" data-level="95"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fas fa-code"></i>
-                            </div>
-                            <span class="skill-name">Dart Programming</span>
-                            <div class="skill-level">
-                                <div class="skill-bar" data-level="90"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
-                            <span class="skill-name">Mobile UI/UX</span>
-                            <div class="skill-level">
-                                <div class="skill-bar" data-level="88"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-icon">
-                                <i class="fas fa-fire"></i>
-                            </div>
-                            <span class="skill-name">State Management</span>
-                            <div class="skill-level">
-                                <div class="skill-bar" data-level="85"></div>
-                            </div>
-                        </div>
+            <div class="skills-bento">
+                <div class="bento-item large">
+                    <div class="bento-icon"><i class="fab fa-flutter"></i></div>
+                    <div class="bento-info">
+                        <h3 class="bento-title">Mobile Development</h3>
+                        <p class="bento-desc">Crafting premium cross-platform experiences with Flutter and Dart, focused on performance and fluid motion.</p>
+                        <ul class="bento-list">
+                            <li><i class="fas fa-check"></i> State Management</li>
+                            <li><i class="fas fa-check"></i> Custom Animations</li>
+                            <li><i class="fas fa-check"></i> Native Integration</li>
+                            <li><i class="fas fa-check"></i> UI/UX Fidelity</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="skills-category">
-                    <h3 class="category-title">
-                        <i class="fas fa-tools"></i>
-                        Tools & Technologies
-                    </h3>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Provider</span>
-                        <span class="tech-tag">Bloc</span>
-                        <span class="tech-tag">Riverpod</span>
-                        <span class="tech-tag">GetX</span>
-                        <span class="tech-tag">Firebase</span>
-                        <span class="tech-tag">REST APIs</span>
-                        <span class="tech-tag">GraphQL</span>
-                        <span class="tech-tag">Git</span>
-                        <span class="tech-tag">GitHub</span>
-                        <span class="tech-tag">VS Code</span>
-                        <span class="tech-tag">Android Studio</span>
-                        <span class="tech-tag">Xcode</span>
-                        <span class="tech-tag">CI/CD</span>
-                        <span class="tech-tag">Docker</span>
-                        <span class="tech-tag">Agile</span>
+                <div class="bento-item tall">
+                    <div class="bento-icon"><i class="fas fa-server"></i></div>
+                    <div class="bento-info">
+                        <h3 class="bento-title">Backend & Cloud</h3>
+                        <p class="bento-desc">Scalable infrastructure using Firebase and Node.js.</p>
+                        <ul class="bento-list" style="grid-template-columns: 1fr;">
+                            <li><i class="fas fa-cloud"></i> Firebase Auth/Store</li>
+                            <li><i class="fas fa-database"></i> SQL & NoSQL</li>
+                            <li><i class="fas fa-shield-alt"></i> Security Rules</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bento-item">
+                    <div class="bento-icon"><i class="fab fa-figma"></i></div>
+                    <h3 class="bento-title">Design</h3>
+                    <p class="bento-desc">Premium UI/UX design via Figma.</p>
+                </div>
+                <div class="bento-item">
+                    <div class="bento-icon"><i class="fas fa-terminal"></i></div>
+                    <h3 class="bento-title">DevOps</h3>
+                    <p class="bento-desc">Git, Docker & CI/CD workflows.</p>
+                </div>
+                <div class="bento-item wide">
+                    <div class="bento-icon"><i class="fas fa-code"></i></div>
+                    <div class="bento-info">
+                        <h3 class="bento-title">Web Technologies</h3>
+                        <p class="bento-desc">Building modern, responsive web applications with HTML, CSS, and JavaScript.</p>
                     </div>
                 </div>
             </div>
@@ -213,101 +208,93 @@
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card reveal">
                     <div class="project-image">
+                        <img src="assets/images/project1.png" alt="NexStore E-Commerce" class="project-img">
+                        <div class="image-mask"></div>
                         <div class="project-overlay">
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                        </div>
-                        <div class="image-placeholder">
-                            <i class="fas fa-mobile-alt"></i>
+                            <div class="project-links">
+                                <a href="#" class="project-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" class="project-link" aria-label="Demo"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">E-Commerce Mobile App</h3>
-                        <p class="project-description">
-                            A full-featured e-commerce application with shopping cart, payment integration,
-                            and real-time order tracking. Built with Flutter and Firebase.
-                        </p>
                         <div class="project-tags">
                             <span class="tag">Flutter</span>
                             <span class="tag">Firebase</span>
-                            <span class="tag">Provider</span>
                             <span class="tag">Stripe</span>
                         </div>
+                        <h2 class="project-title">NexStore E-Commerce</h2>
+                        <p class="project-description">A premium retail experience featuring seamless navigation, real-time sync, and fluid animations.</p>
                     </div>
+                    <div class="card-glow"></div>
                 </div>
-                <div class="project-card">
+                <div class="project-card reveal reveal-delay-1">
                     <div class="project-image">
+                        <img src="assets/images/project2.png" alt="Aura Fitness Tracker" class="project-img">
+                        <div class="image-mask"></div>
                         <div class="project-overlay">
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                        </div>
-                        <div class="image-placeholder">
-                            <i class="fas fa-mobile-alt"></i>
+                            <div class="project-links">
+                                <a href="#" class="project-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" class="project-link" aria-label="Demo"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">Social Media App</h3>
-                        <p class="project-description">
-                            A modern social media platform with real-time messaging, stories, and feed.
-                            Features include image sharing, comments, and likes.
-                        </p>
                         <div class="project-tags">
                             <span class="tag">Flutter</span>
-                            <span class="tag">Bloc</span>
-                            <span class="tag">Firebase</span>
-                            <span class="tag">WebSocket</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                        </div>
-                        <div class="image-placeholder">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Fitness Tracker</h3>
-                        <p class="project-description">
-                            A comprehensive fitness tracking app with workout plans, progress charts,
-                            and health metrics. Includes offline mode and data synchronization.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Flutter</span>
-                            <span class="tag">Riverpod</span>
-                            <span class="tag">SQLite</span>
                             <span class="tag">Charts</span>
+                            <span class="tag">HealthKit</span>
                         </div>
+                        <h2 class="project-title">Aura Fitness Tracker</h2>
+                        <p class="project-description">Advanced wellness monitoring with stunning data visualization and social workout sharing features.</p>
                     </div>
+                    <div class="card-glow"></div>
                 </div>
-                <div class="project-card">
+                <div class="project-card reveal reveal-delay-2">
                     <div class="project-image">
+                        <img src="assets/images/project3.png" alt="Wanderlust Explorer" class="project-img">
+                        <div class="image-mask"></div>
                         <div class="project-overlay">
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="#" class="project-link"><i class="fab fa-github"></i></a>
-                        </div>
-                        <div class="image-placeholder">
-                            <i class="fas fa-mobile-alt"></i>
+                            <div class="project-links">
+                                <a href="#" class="project-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" class="project-link" aria-label="Demo"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">Weather Forecast App</h3>
-                        <p class="project-description">
-                            Beautiful weather app with location-based forecasts, detailed weather maps,
-                            and customizable widgets. Features smooth animations and intuitive UI.
-                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Flutter</span>
+                            <span class="tag">Maps</span>
+                            <span class="tag">Travel API</span>
+                        </div>
+                        <h2 class="project-title">Wanderlust Explorer</h2>
+                        <p class="project-description">A high-end travel companion for discovering hidden gems and effortless itinerary planning.</p>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+                <div class="project-card reveal reveal-delay-3">
+                    <div class="project-image">
+                        <img src="assets/images/project4.png" alt="Weather Forecast App" class="project-img">
+                        <div class="image-mask"></div>
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" class="project-link" aria-label="Demo"><i class="fas fa-external-link-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
                         <div class="project-tags">
                             <span class="tag">Flutter</span>
                             <span class="tag">GetX</span>
-                            <span class="tag">API</span>
-                            <span class="tag">Maps</span>
+                            <span class="tag">OpenWeather API</span>
                         </div>
+                        <h2 class="project-title">Weather Forecast App</h2>
+                        <p class="project-description">Beautiful weather app with location-based forecasts, detailed weather maps, and customizable widgets. Features smooth animations and intuitive UI.</p>
                     </div>
+                    <div class="card-glow"></div>
                 </div>
             </div>
         </div>
@@ -379,77 +366,85 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <p class="contact-intro">
-                        I'm always open to discussing new projects, creative ideas, or opportunities
-                        to be part of your vision. Feel free to reach out!
-                    </p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-text">
-                                <h4>Email</h4>
-                                <a href="mailto:your.email@example.com">your.email@example.com</a>
-                            </div>
+            <div class="section-header reveal">
+                <span class="section-tag">Explore Connections</span>
+                <h2 class="section-title">Let's Create Something Great</h2>
+            </div>
+            
+            <div class="contact-container">
+                <!-- Social Hub -->
+                <div class="contact-hub reveal reveal-delay-1">
+                    <a href="mailto:contact@roychandu.com" class="social-card glass-card">
+                        <div class="card-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="card-info">
+                            <h3>Email</h3>
+                            <p>contact@roychandu.com</p>
                         </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="contact-text">
-                                <h4>Phone</h4>
-                                <a href="tel:+1234567890">+1 (234) 567-890</a>
-                            </div>
+                    </a>
+                    <a href="#" class="social-card glass-card">
+                        <div class="card-icon"><i class="fab fa-linkedin-in"></i></div>
+                        <div class="card-info">
+                            <h3>LinkedIn</h3>
+                            <p>linkedin.com/in/roychandu</p>
                         </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="contact-text">
-                                <h4>Location</h4>
-                                <p>Your City, Country</p>
-                            </div>
+                    </a>
+                    <a href="#" class="social-card glass-card">
+                        <div class="card-icon"><i class="fab fa-github"></i></div>
+                        <div class="card-info">
+                            <h3>GitHub</h3>
+                            <p>github.com/roychandu</p>
                         </div>
-                    </div>
-                    <div class="social-links contact-social">
-                        <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link" aria-label="Medium"><i class="fab fa-medium"></i></a>
-                    </div>
+                    </a>
                 </div>
-                <form class="contact-form">
+
+                <!-- Contact Form -->
+                <form class="contact-form-premium glass-card reveal reveal-delay-2">
                     <div class="form-group">
-                        <input type="text" class="form-input" placeholder="Your Name" required>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-input" placeholder="Your Name" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-input" placeholder="Your Email" required>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-input" placeholder="your@email.com" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-input" placeholder="Subject" required>
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-input" rows="5" placeholder="How can we build something great together?" required></textarea>
                     </div>
-                    <div class="form-group">
-                        <textarea class="form-input form-textarea" placeholder="Your Message" rows="6" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-submit">Send Message</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
+    </main>
+
+    <footer class="main-footer">
         <div class="container">
-            <p class="footer-text">
-                © 2024 Flutter Developer Portfolio. Built with <i class="fas fa-heart"></i> and Flutter passion.
-            </p>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo-circle">CR</div>
+                    <span class="logo-text">Chandan Roy</span>
+                </div>
+                <p class="copyright">
+                    &copy; 2024 Chandan Roy. Built with passion & Flutter spirit.
+                </p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+                </div>
+            </div>
         </div>
-        </footer>
-        
+    </footer>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
     <script type="module" src="js/script.js"></script>
 </body>
 </html>
+

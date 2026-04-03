@@ -7,17 +7,22 @@
 import { initTheme, setupThemeToggle, isDarkMode } from './utils/theme.js';
 import { initNavigation } from './utils/navigation.js';
 import { initNavbarScroll, initParallaxEffect } from './utils/scroll.js';
-import { createSkillBarObserver, createScrollAnimationObserver, createStatsObserver } from './utils/observers.js';
+import { createSkillBarObserver, createScrollAnimationObserver, createStatsObserver, createRevealObserver } from './utils/observers.js';
 import { animateStaggered } from './utils/animations.js';
 import { initTypewriter } from './utils/typewriter.js';
 import { initContactForm } from './utils/form.js';
 import { initHero3DScene } from './utils/threejs.js';
+import { initCustomCursor, initMagneticElements } from './utils/cursor.js';
 
 // Initialize theme
 initTheme();
 
 // Initialize navigation
 initNavigation();
+
+// Initialize custom cursor interaction
+initCustomCursor();
+initMagneticElements();
 
 // Initialize navbar scroll
 const updateNavbarOnThemeChange = initNavbarScroll();
@@ -99,16 +104,14 @@ document.querySelectorAll('.stat-item').forEach(stat => {
     statsObserver.observe(stat);
 });
 
-// Add hover effect to project cards
-document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-10px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
-    });
+// Initialize Reveal Observer
+const revealObserver = createRevealObserver();
+document.querySelectorAll('.reveal').forEach(el => {
+    revealObserver.observe(el);
 });
+
+// Contact form initialization
+initContactForm();
 
 // Initialize contact form
 initContactForm();

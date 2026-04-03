@@ -1,13 +1,21 @@
 /**
- * IntersectionObserver Utilities
- * Common observer patterns for scroll animations
+ * IntersectionObserver Utilities v2.0
+ * Common observer patterns for scroll animations within the app frame
  */
+
+/**
+ * Get the app content container as the default root
+ */
+function getRoot() {
+    return document.getElementById('appContent');
+}
 
 /**
  * Create a skill bar observer
  */
 export function createSkillBarObserver() {
     const observerOptions = {
+        root: getRoot(),
         threshold: 0.5,
         rootMargin: '0px'
     };
@@ -31,6 +39,7 @@ export function createSkillBarObserver() {
  */
 export function createScrollAnimationObserver(options = {}) {
     const defaultOptions = {
+        root: getRoot(),
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
@@ -57,27 +66,56 @@ export function createStatsObserver() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const statNumber = entry.target.querySelector('.stat-number');
-                const targetValue = parseInt(statNumber.textContent);
+                const originalText = statNumber.textContent;
+                const targetValue = parseInt(originalText.replace(/[^0-9]/g, ''));
+                const suffix = originalText.replace(/[0-9]/g, '');
+                
                 let currentValue = 0;
-                const increment = targetValue / 50;
                 const duration = 2000;
-                const stepTime = duration / 50;
+                const frames = 60;
+                const increment = targetValue / frames;
+                const stepTime = duration / frames;
                 
                 const timer = setInterval(() => {
                     currentValue += increment;
                     if (currentValue >= targetValue) {
-                        statNumber.textContent = statNumber.textContent; // Keep original format
+                        statNumber.textContent = targetValue + suffix;
                         clearInterval(timer);
                     } else {
-                        statNumber.textContent = Math.floor(currentValue) + statNumber.textContent.replace(/[0-9]/g, '');
+                        statNumber.textContent = Math.floor(currentValue) + suffix;
                     }
                 }, stepTime);
                 
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.5 });
+    }, { 
+        root: getRoot(),
+        threshold: 0.5 
+    });
 
     return observer;
 }
 
+/**
+ * Create a reveal animation observer
+ * For premium scroll-triggered entrance animations
+ */
+export function createRevealObserver() {
+    const options = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                // Optional: stop observing once revealed
+                // observer.unobserve(entry.target);
+            }
+        });
+    }, options);
+
+    return observer;
+}
