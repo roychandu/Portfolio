@@ -7,8 +7,9 @@
  * Get the app content container as the default root
  */
 function getRoot() {
-    return document.getElementById('appContent');
+    return null; // Search the whole viewport
 }
+
 
 /**
  * Create a skill bar observer

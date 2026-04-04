@@ -110,9 +110,6 @@ document.querySelectorAll('.reveal').forEach(el => {
     revealObserver.observe(el);
 });
 
-// Contact form initialization
-initContactForm();
-
 // Initialize contact form
 initContactForm();
 

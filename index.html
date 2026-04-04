@@ -87,9 +87,9 @@
                         Crafting beautiful, performant mobile applications with Flutter & Dart.
                         Passionate about creating seamless user experiences across iOS and Android.
                     </p>
-                    <div class="hero-buttons">
+                    <div class="hero-btns-container reveal-stagger active">
                         <a href="#projects" class="btn btn-primary">View My Work</a>
-                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                        <a href="assets/resume.pdf" class="btn btn-outline" download>Download CV</a>
                     </div>
                     <div class="social-links">
                         <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
@@ -107,7 +107,7 @@
             </div>
         </div>
         <div class="scroll-indicator">
-            <span>Scroll Down</span>
+            <span class="scroll-text">Scroll Down</span>
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
@@ -144,8 +144,8 @@
                 </div>
                 <div class="about-image">
                     <div class="about-image-card">
-                        <img src="assets/images/about.png" alt="Chandan Roy" class="about-img">
                         <div class="card-glow"></div>
+                        <div class="glass-overlay"></div>
                     </div>
                 </div>
             </div>
@@ -221,11 +221,11 @@
                     </div>
                     <div class="project-content">
                         <div class="project-tags">
-                            <span class="tag">Flutter</span>
-                            <span class="tag">Firebase</span>
-                            <span class="tag">Stripe</span>
+                            <span class="project-tag">Flutter</span>
+                            <span class="project-tag">Firebase</span>
+                            <span class="project-tag">Stripe</span>
                         </div>
-                        <h2 class="project-title">NexStore E-Commerce</h2>
+                        <h3 class="project-title">NexStore E-Commerce</h3>
                         <p class="project-description">A premium retail experience featuring seamless navigation, real-time sync, and fluid animations.</p>
                     </div>
                     <div class="card-glow"></div>
@@ -243,11 +243,11 @@
                     </div>
                     <div class="project-content">
                         <div class="project-tags">
-                            <span class="tag">Flutter</span>
-                            <span class="tag">Charts</span>
-                            <span class="tag">HealthKit</span>
+                            <span class="project-tag">Flutter</span>
+                            <span class="project-tag">Charts</span>
+                            <span class="project-tag">HealthKit</span>
                         </div>
-                        <h2 class="project-title">Aura Fitness Tracker</h2>
+                        <h3 class="project-title">Aura Fitness Tracker</h3>
                         <p class="project-description">Advanced wellness monitoring with stunning data visualization and social workout sharing features.</p>
                     </div>
                     <div class="card-glow"></div>
@@ -265,11 +265,11 @@
                     </div>
                     <div class="project-content">
                         <div class="project-tags">
-                            <span class="tag">Flutter</span>
-                            <span class="tag">Maps</span>
-                            <span class="tag">Travel API</span>
+                            <span class="project-tag">Flutter</span>
+                            <span class="project-tag">Maps</span>
+                            <span class="project-tag">Travel API</span>
                         </div>
-                        <h2 class="project-title">Wanderlust Explorer</h2>
+                        <h3 class="project-title">Wanderlust Explorer</h3>
                         <p class="project-description">A high-end travel companion for discovering hidden gems and effortless itinerary planning.</p>
                     </div>
                     <div class="card-glow"></div>
@@ -287,11 +287,11 @@
                     </div>
                     <div class="project-content">
                         <div class="project-tags">
-                            <span class="tag">Flutter</span>
-                            <span class="tag">GetX</span>
-                            <span class="tag">OpenWeather API</span>
+                            <span class="project-tag">Flutter</span>
+                            <span class="project-tag">GetX</span>
+                            <span class="project-tag">OpenWeather API</span>
                         </div>
-                        <h2 class="project-title">Weather Forecast App</h2>
+                        <h3 class="project-title">Weather Forecast App</h3>
                         <p class="project-description">Beautiful weather app with location-based forecasts, detailed weather maps, and customizable widgets. Features smooth animations and intuitive UI.</p>
                     </div>
                     <div class="card-glow"></div>
@@ -444,6 +444,12 @@
     <div class="custom-cursor"></div>
     <div class="cursor-follower"></div>
 
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top" id="scroll-to-top" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Scripts -->
     <script type="module" src="js/script.js"></script>
 </body>
 </html>

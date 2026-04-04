@@ -16,21 +16,18 @@ export function initNavbarScroll() {
  * Parallax effect for hero section within the app frame
  */
 export function initParallaxEffect() {
-    const appContent = document.getElementById('appContent');
-    if (!appContent) return;
-
-    appContent.addEventListener('scroll', () => {
-        const scrolled = appContent.scrollTop;
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
         const hero = document.querySelector('.hero');
         
         if (hero) {
             const heroContent = hero.querySelector('.hero-content');
             if (heroContent && scrolled < hero.offsetHeight) {
-                // Adjust parallax factor for the smaller frame
                 heroContent.style.transform = `translateY(${scrolled * 0.4}px)`;
                 heroContent.style.opacity = 1 - (scrolled / (hero.offsetHeight * 0.8));
             }
         }
     });
 }
+
 
