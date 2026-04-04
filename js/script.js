@@ -49,10 +49,10 @@ initTypewriter();
 
 // Initialize 3D scene when page loads
 window.addEventListener('load', () => {
-    // Initialize 3D particle scene (change 'particles' to 'geometric' for geometric shapes)
-    hero3DScene = initHero3DScene('particles', {
-        particleCount: 1500,
-        speed: 0.3,
+    // Initialize 3D neural scene (change 'particles' to 'geometric' for geometric shapes)
+    hero3DScene = initHero3DScene('neural', {
+        particleCount: 150,
+        speed: 0.4,
         colors: {
             light: [0x02569B, 0x0175C2, 0x13B9FD],
             dark: [0x13B9FD, 0x0175C2, 0x02569B]
@@ -114,5 +114,5 @@ document.querySelectorAll('.reveal').forEach(el => {
 initContactForm();
 
 // Console message
-console.log('%c👋 Hello! Welcome to my Flutter Developer Portfolio!', 'color: #13B9FD; font-size: 20px; font-weight: bold;');
-console.log('%cBuilt with ❤️ using Flutter colors', 'color: #02569B; font-size: 14px;');
+console.log('%c👋 Hello! Welcome to Chandan Roy\'s Portfolio!', 'color: #13B9FD; font-size: 20px; font-weight: bold;');
+console.log('%cFull Stack Developer & UI/UX Specialist', 'color: #02569B; font-size: 14px;');

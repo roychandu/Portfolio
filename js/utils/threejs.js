@@ -1,19 +1,13 @@
 /**
- * Three.js 3D Animation Utilities v2.0
- * Creates and manages 3D scenes for the portfolio, optimized for app-frame containment.
- */
-
-import * as THREE from 'three';
-
-/**
- * Create a 3D particle system for hero background
+ * Create a premium 3D Neural/Connective Graph scene
  * @param {HTMLElement} container - Container element for the canvas
  * @param {Object} options - Configuration options
  */
-export function createParticleScene(container, options = {}) {
+export function createNeuralScene(container, options = {}) {
     const {
-        particleCount = 2500, // Increased for premium density
-        speed = 1.0,
+        particleCount = 100,
+        connectionDistance = 2.5,
+        speed = 0.5,
         colors = {
             light: [0x02569B, 0x0175C2, 0x13B9FD],
             dark: [0x13B9FD, 0x0175C2, 0x02569B]
@@ -26,7 +20,7 @@ export function createParticleScene(container, options = {}) {
     // Scene setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    camera.position.z = 2;
+    camera.position.z = 5;
 
     // Renderer setup
     const renderer = new THREE.WebGLRenderer({
@@ -38,92 +32,113 @@ export function createParticleScene(container, options = {}) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // Particle system
-    const particlesGeometry = new THREE.BufferGeometry();
-    const posArray = new Float32Array(particleCount * 3);
-    const initialPosArray = new Float32Array(particleCount * 3);
-    const colorArray = new Float32Array(particleCount * 3);
-    const velocityArray = new Float32Array(particleCount * 3);
-
+    // Particles/Nodes
+    const particles = [];
+    const particleGeometry = new THREE.SphereGeometry(0.05, 8, 8);
+    
     const isDark = document.body.classList.contains('dark-mode');
     const themeColors = isDark ? colors.dark : colors.light;
 
-    for (let i = 0; i < particleCount * 3; i += 3) {
-        const x = (Math.random() - 0.5) * 10;
-        const y = (Math.random() - 0.5) * 10;
-        const z = (Math.random() - 0.5) * 10;
+    for (let i = 0; i < particleCount; i++) {
+        const material = new THREE.MeshBasicMaterial({
+            color: themeColors[Math.floor(Math.random() * themeColors.length)],
+            transparent: true,
+            opacity: 0.8
+        });
+        const mesh = new THREE.Mesh(particleGeometry, material);
         
-        posArray[i] = initialPosArray[i] = x;
-        posArray[i + 1] = initialPosArray[i + 1] = y;
-        posArray[i + 2] = initialPosArray[i + 2] = z;
+        mesh.position.set(
+            (Math.random() - 0.5) * 10,
+            (Math.random() - 0.5) * 10,
+            (Math.random() - 0.5) * 10
+        );
 
-        const color = new THREE.Color(themeColors[Math.floor(Math.random() * themeColors.length)]);
-        colorArray[i] = color.r;
-        colorArray[i + 1] = color.g;
-        colorArray[i + 2] = color.b;
+        mesh.userData = {
+            velocity: new THREE.Vector3(
+                (Math.random() - 0.5) * 0.02 * speed,
+                (Math.random() - 0.5) * 0.02 * speed,
+                (Math.random() - 0.5) * 0.02 * speed
+            )
+        };
 
-        velocityArray[i] = (Math.random() - 0.5) * 0.01;
-        velocityArray[i + 1] = (Math.random() - 0.5) * 0.01;
-        velocityArray[i + 2] = (Math.random() - 0.5) * 0.01;
+        scene.add(mesh);
+        particles.push(mesh);
     }
 
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
-
-    const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.005,
-        vertexColors: true,
+    // Lines/Connections
+    const lineMaterial = new THREE.LineBasicMaterial({
+        color: isDark ? 0x13B9FD : 0x02569B,
         transparent: true,
-        opacity: 0.8,
-        blending: THREE.AdditiveBlending
+        opacity: 0.2
     });
+    
+    const linesGeometry = new THREE.BufferGeometry();
+    const linePositions = new Float32Array(particleCount * particleCount * 3);
+    linesGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+    const lineMesh = new THREE.LineSegments(linesGeometry, lineMaterial);
+    scene.add(lineMesh);
 
-    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particlesMesh);
-
-    // Mouse tracking
-    let mouseX = 0, mouseY = 0;
+    // Mouse interaction
+    let mouse = new THREE.Vector2(-1000, -1000);
     const onMouseMove = (event) => {
-        mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-        mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        const rect = container.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
     };
     window.addEventListener('mousemove', onMouseMove);
 
     // Animation
-    let frame = 0;
     let animationId;
     function animate() {
-        frame += 0.001 * speed;
+        // Find line connections
+        let vertexIndex = 0;
+        const positions = linesGeometry.attributes.position.array;
         
-        const positions = particlesGeometry.attributes.position.array;
-        
-        for (let i = 0; i < particleCount * 3; i += 3) {
-            // Apply base movement
-            positions[i] += velocityArray[i];
-            positions[i + 1] += velocityArray[i + 1];
-            positions[i + 2] += velocityArray[i + 2];
+        // Raycaster for mouse interaction
+        const raycaster = new THREE.Raycaster();
+        raycaster.setFromCamera(mouse, camera);
+        const mouseIntersects = new THREE.Vector3();
+        raycaster.ray.at(5, mouseIntersects);
 
-            // Boundaries
-            if (Math.abs(positions[i]) > 5) velocityArray[i] *= -1;
-            if (Math.abs(positions[i+1]) > 5) velocityArray[i+1] *= -1;
-            if (Math.abs(positions[i+2]) > 5) velocityArray[i+2] *= -1;
-
-            // Mouse Repulsion
-            const dx = positions[i] - mouseX * 5;
-            const dy = positions[i + 1] - mouseY * 5;
-            const dist = Math.sqrt(dx * dx + dy * dy);
+        for (let i = 0; i < particleCount; i++) {
+            const p1 = particles[i];
             
-            if (dist < 1.5) {
-                const force = (1.5 - dist) / 1.5;
-                positions[i] += dx * force * 0.1;
-                positions[i + 1] += dy * force * 0.1;
-            } else {
-                // Smoothly return to original or base path if needed
+            // Move particles
+            p1.position.add(p1.userData.velocity);
+
+            // Bounds check
+            if (Math.abs(p1.position.x) > 6) p1.userData.velocity.x *= -1;
+            if (Math.abs(p1.position.y) > 6) p1.userData.velocity.y *= -1;
+            if (Math.abs(p1.position.z) > 6) p1.userData.velocity.z *= -1;
+
+            // Mouse interaction (gentle attraction)
+            const distToMouse = p1.position.distanceTo(mouseIntersects);
+            if (distToMouse < 2) {
+                const attraction = mouseIntersects.clone().sub(p1.position).multiplyScalar(0.01);
+                p1.position.add(attraction);
+            }
+
+            for (let j = i + 1; j < particleCount; j++) {
+                const p2 = particles[j];
+                const distance = p1.position.distanceTo(p2.position);
+
+                if (distance < connectionDistance) {
+                    positions[vertexIndex++] = p1.position.x;
+                    positions[vertexIndex++] = p1.position.y;
+                    positions[vertexIndex++] = p1.position.z;
+                    positions[vertexIndex++] = p2.position.x;
+                    positions[vertexIndex++] = p2.position.y;
+                    positions[vertexIndex++] = p2.position.z;
+                }
             }
         }
+
+        linesGeometry.attributes.position.needsUpdate = true;
+        linesGeometry.setDrawRange(0, vertexIndex / 3);
         
-        particlesMesh.rotation.y = frame;
-        particlesGeometry.attributes.position.needsUpdate = true;
+        // Rotate the whole scene slightly
+        scene.rotation.y += 0.001;
+        scene.rotation.x += 0.0005;
 
         renderer.render(scene, camera);
         animationId = requestAnimationFrame(animate);
@@ -146,150 +161,12 @@ export function createParticleScene(container, options = {}) {
             cancelAnimationFrame(animationId);
             window.removeEventListener('mousemove', onMouseMove);
             resizeObserver.disconnect();
-            renderer.dispose();
-            particlesGeometry.dispose();
-            particlesMaterial.dispose();
-            if (container.contains(renderer.domElement)) {
-                container.removeChild(renderer.domElement);
-            }
-        },
-        updateColors: (isDarkMode) => {
-            const newColors = isDarkMode ? colors.dark : colors.light;
-            const colorsArray = particlesGeometry.attributes.color.array;
-            for (let i = 0; i < particleCount * 3; i += 3) {
-                const color = new THREE.Color(newColors[Math.floor(Math.random() * newColors.length)]);
-                colorsArray[i] = color.r;
-                colorsArray[i + 1] = color.g;
-                colorsArray[i + 2] = color.b;
-            }
-            particlesGeometry.attributes.color.needsUpdate = true;
-        }
-    };
-}
-
-/**
- * Create a 3D geometric shapes scene
- * @param {HTMLElement} container - Container element for the canvas
- * @param {Object} options - Configuration options
- */
-export function createGeometricScene(container, options = {}) {
-    const {
-        shapeCount = 5,
-        rotationSpeed = 0.01,
-        colors = {
-            light: [0x02569B, 0x0175C2, 0x13B9FD],
-            dark: [0x13B9FD, 0x0175C2, 0x02569B]
-        }
-    } = options;
-
-    const width = container.clientWidth || 400;
-    const height = container.clientHeight || 800;
-
-    // Scene setup
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-        75,
-        width / height,
-        0.1,
-        1000
-    );
-    camera.position.z = 10;
-
-    // Renderer setup
-    const renderer = new THREE.WebGLRenderer({
-        alpha: true,
-        antialias: true
-    });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    container.appendChild(renderer.domElement);
-
-    // Get current theme colors
-    const isDark = document.body.classList.contains('dark-mode');
-    const themeColors = isDark ? colors.dark : colors.light;
-
-    // Create geometric shapes
-    const shapes = [];
-    const geometries = [
-        () => new THREE.IcosahedronGeometry(1.2, 0),
-        () => new THREE.OctahedronGeometry(1.2, 0),
-        () => new THREE.TetrahedronGeometry(1.2, 0),
-        () => new THREE.BoxGeometry(1.2, 1.2, 1.2),
-        () => new THREE.SphereGeometry(1.2, 16, 16)
-    ];
-
-    for (let i = 0; i < shapeCount; i++) {
-        const geometry = geometries[i % geometries.length]();
-        const material = new THREE.MeshStandardMaterial({
-            color: themeColors[i % themeColors.length],
-            transparent: true,
-            opacity: 0.3,
-            wireframe: true,
-            metalness: 0.5,
-            roughness: 0.5
-        });
-
-        const mesh = new THREE.Mesh(geometry, material);
-        
-        // Random position
-        mesh.position.x = (Math.random() - 0.5) * 10;
-        mesh.position.y = (Math.random() - 0.5) * 15;
-        mesh.position.z = (Math.random() - 0.5) * 5;
-
-        // Random rotation
-        mesh.rotation.x = Math.random() * Math.PI;
-        mesh.rotation.y = Math.random() * Math.PI;
-
-        scene.add(mesh);
-        shapes.push(mesh);
-    }
-
-    // Add ambient light
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
-
-    // Add directional light
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    directionalLight.position.set(5, 5, 5);
-    scene.add(directionalLight);
-
-    // Animation
-    let animationId;
-    function animate() {
-        shapes.forEach((shape, index) => {
-            shape.rotation.x += rotationSpeed * (index % 2 === 0 ? 1 : -1);
-            shape.rotation.y += rotationSpeed * (index % 3 === 0 ? 1 : -1);
-            shape.position.y += Math.sin(Date.now() * 0.001 + index) * 0.005;
-        });
-
-        renderer.render(scene, camera);
-        animationId = requestAnimationFrame(animate);
-    }
-
-    // Handle resize using ResizeObserver
-    const resizeObserver = new ResizeObserver(entries => {
-        for (let entry of entries) {
-            const { width, height } = entry.contentRect;
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-            renderer.setSize(width, height);
-        }
-    });
-    resizeObserver.observe(container);
-
-    // Start animation
-    animate();
-
-    // Return cleanup function
-    return {
-        destroy: () => {
-            cancelAnimationFrame(animationId);
-            resizeObserver.disconnect();
-            shapes.forEach(shape => {
-                shape.geometry.dispose();
-                shape.material.dispose();
-                scene.remove(shape);
+            particles.forEach(p => {
+                p.geometry.dispose();
+                p.material.dispose();
             });
+            linesGeometry.dispose();
+            lineMaterial.dispose();
             renderer.dispose();
             if (container.contains(renderer.domElement)) {
                 container.removeChild(renderer.domElement);
@@ -297,16 +174,17 @@ export function createGeometricScene(container, options = {}) {
         },
         updateColors: (isDarkMode) => {
             const newColors = isDarkMode ? colors.dark : colors.light;
-            shapes.forEach((shape, index) => {
-                shape.material.color.setHex(newColors[index % newColors.length]);
+            particles.forEach(p => {
+                p.material.color.setHex(newColors[Math.floor(Math.random() * newColors.length)]);
             });
+            lineMaterial.color.setHex(isDarkMode ? 0x13B9FD : 0x02569B);
         }
     };
 }
 
 /**
  * Initialize 3D scene in hero section
- * @param {string} type - Type of scene ('particles' or 'geometric')
+ * @param {string} type - Type of scene ('particles', 'geometric', or 'neural')
  * @param {Object} options - Configuration options
  */
 export function initHero3DScene(type = 'particles', options = {}) {
@@ -328,6 +206,8 @@ export function initHero3DScene(type = 'particles', options = {}) {
     let sceneController;
     if (type === 'geometric') {
         sceneController = createGeometricScene(canvasContainer, options);
+    } else if (type === 'neural') {
+        sceneController = createNeuralScene(canvasContainer, options);
     } else {
         sceneController = createParticleScene(canvasContainer, options);
     }
@@ -352,6 +232,194 @@ export function initHero3DScene(type = 'particles', options = {}) {
             if (sceneController && sceneController.destroy) {
                 sceneController.destroy();
             }
+        }
+    };
+}
+
+/**
+ * Existing сцены logic below (keeping for compatibility)
+ */
+export function createParticleScene(container, options = {}) {
+    const {
+        particleCount = 2500,
+        speed = 1.0,
+        colors = {
+            light: [0x02569B, 0x0175C2, 0x13B9FD],
+            dark: [0x13B9FD, 0x0175C2, 0x02569B]
+        }
+    } = options;
+
+    const width = container.clientWidth || window.innerWidth;
+    const height = container.clientHeight || window.innerHeight;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    camera.position.z = 2;
+
+    const renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true
+    });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    const particlesGeometry = new THREE.BufferGeometry();
+    const posArray = new Float32Array(particleCount * 3);
+    const colorArray = new Float32Array(particleCount * 3);
+    const velocityArray = new Float32Array(particleCount * 3);
+
+    const isDark = document.body.classList.contains('dark-mode');
+    const themeColors = isDark ? colors.dark : colors.light;
+
+    for (let i = 0; i < particleCount * 3; i += 3) {
+        posArray[i] = (Math.random() - 0.5) * 10;
+        posArray[i + 1] = (Math.random() - 0.5) * 10;
+        posArray[i + 2] = (Math.random() - 0.5) * 10;
+
+        const color = new THREE.Color(themeColors[Math.floor(Math.random() * themeColors.length)]);
+        colorArray[i] = color.r;
+        colorArray[i + 1] = color.g;
+        colorArray[i + 2] = color.b;
+
+        velocityArray[i] = (Math.random() - 0.5) * 0.01;
+        velocityArray[i + 1] = (Math.random() - 0.5) * 0.01;
+        velocityArray[i + 2] = (Math.random() - 0.5) * 0.01;
+    }
+
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+
+    const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.005,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending
+    });
+
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particlesMesh);
+
+    let animationId;
+    function animate() {
+        const positions = particlesGeometry.attributes.position.array;
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            positions[i] += velocityArray[i];
+            positions[i + 1] += velocityArray[i + 1];
+            positions[i + 2] += velocityArray[i + 2];
+
+            if (Math.abs(positions[i]) > 5) velocityArray[i] *= -1;
+            if (Math.abs(positions[i + 1]) > 5) velocityArray[i + 1] *= -1;
+            if (Math.abs(positions[i + 2]) > 5) velocityArray[i + 2] *= -1;
+        }
+        particlesGeometry.attributes.position.needsUpdate = true;
+        particlesMesh.rotation.y += 0.001 * speed;
+        renderer.render(scene, camera);
+        animationId = requestAnimationFrame(animate);
+    }
+    animate();
+
+    return {
+        destroy: () => {
+            cancelAnimationFrame(animationId);
+            renderer.dispose();
+            particlesGeometry.dispose();
+            particlesMaterial.dispose();
+            if (container.contains(renderer.domElement)) {
+                container.removeChild(renderer.domElement);
+            }
+        },
+        updateColors: (isDark) => {
+            const newColors = isDark ? colors.dark : colors.light;
+            const colorsArray = particlesGeometry.attributes.color.array;
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                const color = new THREE.Color(newColors[Math.floor(Math.random() * newColors.length)]);
+                colorsArray[i] = color.r;
+                colorsArray[i + 1] = color.g;
+                colorsArray[i + 2] = color.b;
+            }
+            particlesGeometry.attributes.color.needsUpdate = true;
+        }
+    };
+}
+
+export function createGeometricScene(container, options = {}) {
+    const {
+        shapeCount = 5,
+        rotationSpeed = 0.01,
+        colors = {
+            light: [0x02569B, 0x0175C2, 0x13B9FD],
+            dark: [0x13B9FD, 0x0175C2, 0x02569B]
+        }
+    } = options;
+
+    const width = container.clientWidth || 400;
+    const height = container.clientHeight || 800;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    camera.position.z = 10;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    const shapes = [];
+    const geometries = [
+        new THREE.IcosahedronGeometry(1.2, 0),
+        new THREE.OctahedronGeometry(1.2, 0),
+        new THREE.BoxGeometry(1.2, 1.2, 1.2)
+    ];
+
+    const isDark = document.body.classList.contains('dark-mode');
+    const themeColors = isDark ? colors.dark : colors.light;
+
+    for (let i = 0; i < shapeCount; i++) {
+        const material = new THREE.MeshStandardMaterial({
+            color: themeColors[i % themeColors.length],
+            transparent: true,
+            opacity: 0.3,
+            wireframe: true
+        });
+        const mesh = new THREE.Mesh(geometries[i % geometries.length], material);
+        mesh.position.set((Math.random() - 0.5) * 10, (Math.random() - 0.5) * 15, (Math.random() - 0.5) * 5);
+        scene.add(mesh);
+        shapes.push(mesh);
+    }
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    directionalLight.position.set(5, 5, 5);
+    scene.add(directionalLight);
+
+    let animationId;
+    function animate() {
+        shapes.forEach((shape, index) => {
+            shape.rotation.x += rotationSpeed;
+            shape.rotation.y += rotationSpeed;
+            shape.position.y += Math.sin(Date.now() * 0.001 + index) * 0.005;
+        });
+        renderer.render(scene, camera);
+        animationId = requestAnimationFrame(animate);
+    }
+    animate();
+
+    return {
+        destroy: () => {
+            cancelAnimationFrame(animationId);
+            renderer.dispose();
+            if (container.contains(renderer.domElement)) {
+                container.removeChild(renderer.domElement);
+            }
+        },
+        updateColors: (isDark) => {
+            const newColors = isDark ? colors.dark : colors.light;
+            shapes.forEach((shape, index) => {
+                shape.material.color.setHex(newColors[index % newColors.length]);
+            });
         }
     };
 }
