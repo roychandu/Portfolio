@@ -1,118 +1,185 @@
 /**
- * Main Application Script
- * Imports and initializes all utility modules
+ * Chandan Roy - Portfolio Script
+ * Exact Match Version
  */
 
-// Import utilities
-import { initTheme, setupThemeToggle, isDarkMode } from './utils/theme.js';
-import { initNavigation } from './utils/navigation.js';
-import { initNavbarScroll, initParallaxEffect } from './utils/scroll.js';
-import { createSkillBarObserver, createScrollAnimationObserver, createStatsObserver, createRevealObserver } from './utils/observers.js';
-import { animateStaggered } from './utils/animations.js';
-import { initTypewriter } from './utils/typewriter.js';
-import { initContactForm } from './utils/form.js';
-import { initHero3DScene } from './utils/threejs.js';
-import { initCustomCursor, initMagneticElements } from './utils/cursor.js';
-
-// Initialize theme
-initTheme();
-
-// Initialize navigation
-initNavigation();
-
-// Initialize custom cursor interaction
-initCustomCursor();
-initMagneticElements();
-
-// Initialize navbar scroll
-const updateNavbarOnThemeChange = initNavbarScroll();
-
-// Initialize 3D scene in hero section
-let hero3DScene = null;
-
-// Setup theme toggle with navbar update callback
-setupThemeToggle(() => {
-    if (updateNavbarOnThemeChange) {
-        updateNavbarOnThemeChange();
+// --- Scramble Text Effect ---
+class ScrambleText {
+    constructor(el) {
+        this.el = el;
+        this.chars = '!<>-_\\/[]{}—=+*^?#________';
+        this.update = this.update.bind(this);
     }
-    // Update 3D scene colors on theme change
-    if (hero3DScene && hero3DScene.updateColors) {
-        hero3DScene.updateColors(isDarkMode());
-    }
-});
 
-// Initialize parallax effect
-initParallaxEffect();
-
-// Initialize typewriter effect
-initTypewriter();
-
-// Initialize 3D scene when page loads
-window.addEventListener('load', () => {
-    // Initialize 3D neural scene (change 'particles' to 'geometric' for geometric shapes)
-    hero3DScene = initHero3DScene('neural', {
-        particleCount: 150,
-        speed: 0.4,
-        colors: {
-            light: [0x02569B, 0x0175C2, 0x13B9FD],
-            dark: [0x13B9FD, 0x0175C2, 0x02569B]
+    setText(newText) {
+        const oldText = this.el.innerText;
+        const length = Math.max(oldText.length, newText.length);
+        const promise = new Promise((resolve) => this.resolve = resolve);
+        this.queue = [];
+        for (let i = 0; i < length; i++) {
+            const from = oldText[i] || '';
+            const to = newText[i] || '';
+            const start = Math.floor(Math.random() * 40);
+            const end = start + Math.floor(Math.random() * 40);
+            this.queue.push({ from, to, start, end });
         }
-    });
-});
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+        this.update();
+        return promise;
+    }
 
-// Initialize skill bar animations
-const skillBarObserver = createSkillBarObserver();
-document.querySelectorAll('.skill-bar').forEach(bar => {
-    skillBarObserver.observe(bar);
-});
+    update() {
+        let output = '';
+        let complete = 0;
+        for (let i = 0, n = this.queue.length; i < n; i++) {
+            let { from, to, start, end, char } = this.queue[i];
+            if (this.frame >= end) {
+                complete++;
+                output += to;
+            } else if (this.frame >= start) {
+                if (!char || Math.random() < 0.28) {
+                    char = this.randomChar();
+                    this.queue[i].char = char;
+                }
+                output += `<span class="scramble-char">${char}</span>`;
+            } else {
+                output += from;
+            }
+        }
+        this.el.innerHTML = output;
+        if (complete === this.queue.length) {
+            this.resolve();
+        } else {
+            this.frameRequest = requestAnimationFrame(this.update);
+            this.frame++;
+        }
+    }
 
-// Initialize scroll animations
-const animateOnScroll = createScrollAnimationObserver();
-
-// Animate project cards
-const projectCards = document.querySelectorAll('.project-card');
-if (projectCards.length > 0) {
-    animateStaggered(projectCards, 'up', 30, 0.6, 0.1);
-    projectCards.forEach(card => {
-        animateOnScroll.observe(card);
-    });
+    randomChar() {
+        return this.chars[Math.floor(Math.random() * this.chars.length)];
+    }
 }
 
-// Animate timeline items
-const timelineItems = document.querySelectorAll('.timeline-item');
-if (timelineItems.length > 0) {
-    timelineItems.forEach((item, index) => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateX(-30px)';
-        item.style.transition = `opacity 0.6s ease ${index * 0.2}s, transform 0.6s ease ${index * 0.2}s`;
-        animateOnScroll.observe(item);
-    });
-}
+// --- Initialize Effects ---
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Scramble Elements on Intersection
+    const scrambleElements = document.querySelectorAll('[data-scramble]');
+    const scrambleObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const text = el.getAttribute('data-scramble');
+                const fx = new ScrambleText(el);
+                fx.setText(text);
+                scrambleObserver.unobserve(el);
+            }
+        });
+    }, { threshold: 0.1 });
 
-// Animate about section
-const aboutContent = document.querySelector('.about-content');
-if (aboutContent) {
-    aboutContent.style.opacity = '0';
-    aboutContent.style.transform = 'translateY(30px)';
-    aboutContent.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-    animateOnScroll.observe(aboutContent);
-}
+    scrambleElements.forEach(el => scrambleObserver.observe(el));
 
-// Initialize stats counter
-const statsObserver = createStatsObserver();
-document.querySelectorAll('.stat-item').forEach(stat => {
-    statsObserver.observe(stat);
+    // 2. Scroll Spy for Sidebar Links
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.sidebar-link');
+
+    const handleScrollSpy = () => {
+        const scrollY = window.pageYOffset;
+
+        sections.forEach(current => {
+            const sectionHeight = current.offsetHeight;
+            const sectionTop = current.offsetTop - 100;
+            const sectionId = current.getAttribute('id');
+
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    };
+
+    window.addEventListener('scroll', handleScrollSpy);
+    handleScrollSpy(); // Initial call
+
+    // 3. Custom Cursor with Hover Effects
+    const cursor = document.querySelector('.custom-cursor');
+
+    if (cursor) {
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        const hoverables = document.querySelectorAll('a, button, .work-card, .tech-cell, .sidebar-link, .experience-item, .feature-list-item');
+        hoverables.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+        });
+    }
+
+    // 4. Update Time in Header
+    const timeEl = document.querySelector('.status-bar .status-item:last-child');
+    if (timeEl) {
+        const updateTime = () => {
+            const now = new Date();
+            const options = { hour: '2-digit', minute: '2-digit', hour12: true };
+            timeEl.innerText = now.toLocaleTimeString([], options);
+        };
+        setInterval(updateTime, 10000); // Update every 10 seconds
+        updateTime();
+    }
+
+    // 5. Line Number Gutter Generation (VS Code Style)
+    const gutter = document.getElementById('line-numbers');
+    const mainContent = document.querySelector('.main-content');
+    
+    if (gutter && mainContent) {
+        const updateLineNumbers = () => {
+            const lineHeight = 24; // Must match CSS line-height
+            
+            // Calculate height from the top of the gutter to the bottom of the last content element
+            // We exclude the gutter itself from the calculation
+            const contentElements = Array.from(mainContent.children).filter(el => el.id !== 'line-numbers');
+            if (contentElements.length === 0) return;
+            
+            const lastElement = contentElements[contentElements.length - 1];
+            const contentBottom = lastElement.offsetTop + lastElement.offsetHeight;
+            const gutterTop = gutter.offsetTop;
+            
+            const totalHeight = contentBottom - gutterTop;
+            const count = Math.max(0, Math.floor(totalHeight / lineHeight));
+            
+            let html = '';
+            for (let i = 1; i <= count; i++) {
+                html += `<span>${i}</span>`;
+            }
+            gutter.innerHTML = html;
+            
+            // Ensure gutter height matches the calculated range exactly
+            gutter.style.height = `${totalHeight}px`;
+        };
+
+        // Update on load and when images/content might change
+        window.addEventListener('load', updateLineNumbers);
+        updateLineNumbers();
+        
+        if (window.ResizeObserver) {
+            const ro = new ResizeObserver(() => {
+                // Use requestAnimationFrame to avoid "ResizeObserver loop limit exceeded"
+                window.requestAnimationFrame(updateLineNumbers);
+            });
+            ro.observe(mainContent);
+            // Also observe the last element specifically
+            const sections = mainContent.querySelectorAll('section, footer');
+            if (sections.length > 0) {
+                ro.observe(sections[sections.length - 1]);
+            }
+        } else {
+            window.addEventListener('resize', updateLineNumbers);
+        }
+    }
 });
-
-// Initialize Reveal Observer
-const revealObserver = createRevealObserver();
-document.querySelectorAll('.reveal').forEach(el => {
-    revealObserver.observe(el);
-});
-
-// Initialize contact form
-initContactForm();
-
-// Console message
-console.log('%c👋 Hello! Welcome to Chandan Roy\'s Portfolio!', 'color: #13B9FD; font-size: 20px; font-weight: bold;');
-console.log('%cFull Stack Developer & UI/UX Specialist', 'color: #02569B; font-size: 14px;');
