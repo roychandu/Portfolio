@@ -780,6 +780,15 @@ h6 {
     border-color: var(--accent);
 }
 
+/* --- Scramble Animation Utilities --- */
+[data-scramble] {
+    opacity: 0;
+}
+
+.scramble-active {
+    opacity: 1 !important;
+}
+
 /* --- Top Navigation Bar (Full Width) --- */
 .top-nav {
     width: 100%;

@@ -13,14 +13,21 @@ class ScrambleText {
 
     setText(newText) {
         const oldText = this.el.innerText;
+        this.el.innerText = ''; // Clear existing text immediately for "invisible start"
+        this.el.classList.add('scramble-active'); // Make element visible now that animation is starting
         const length = Math.max(oldText.length, newText.length);
         const promise = new Promise((resolve) => this.resolve = resolve);
         this.queue = [];
         for (let i = 0; i < length; i++) {
             const from = oldText[i] || '';
             const to = newText[i] || '';
-            const start = Math.floor(Math.random() * 40);
-            const end = start + Math.floor(Math.random() * 40);
+            
+            // Sequential Typewriter Timing: 
+            // i * 1.5 creates the typewriter reveal progression
+            // i * 1.5 + random(12) ensures each character scrambles briefly before settling
+            const start = Math.floor(i * 1.2); 
+            const end = start + Math.floor(Math.random() * 12);
+            
             this.queue.push({ from, to, start, end });
         }
         cancelAnimationFrame(this.frameRequest);
@@ -44,7 +51,7 @@ class ScrambleText {
                 }
                 output += `<span class="scramble-char">${char}</span>`;
             } else {
-                output += from;
+                output += ''; // Do not show 'from' text, keeping it invisible until reveal
             }
         }
         this.el.innerHTML = output;
