@@ -719,6 +719,44 @@ h1, h2, h3, h4, h5, h6 {
     border-color: var(--accent);
 }
 
+/* --- Sticky Footer Status Bar --- */
+.main-footer-status {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(31, 31, 31, 0.9);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border);
+    padding: 15px 40px 15px 60px; /* Aligned with counting bar offset */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-slate);
+    z-index: 950;
+}
+
+.delivered-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.social-icons-footer {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icons-footer a {
+    color: var(--text-slate);
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+.social-icons-footer a:hover {
+    color: var(--text-white);
+}
+
 /* --- Responsive --- */
 @media (max-width: 1200px) {
     .sidebar-right {
