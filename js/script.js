@@ -127,6 +127,62 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', handleScrollSpy);
     handleScrollSpy(); // Initial call
 
+    // 5. Work Grid Toggle Functionality (FLIP Animation)
+    const gridToggle = document.getElementById('work-grid-toggle');
+    const workGrid = document.querySelector('.work-grid-brutalist');
+    const workCards = document.querySelectorAll('.work-card');
+
+    if (gridToggle && workGrid) {
+        const buttons = gridToggle.querySelectorAll('.toggle-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.classList.contains('active')) return;
+
+                // 1. FIRST: Record the current positions
+                const firstRects = Array.from(workCards).map(card => card.getBoundingClientRect());
+
+                // 2. LAST: Update classes
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const gridMode = btn.getAttribute('data-grid');
+                workGrid.classList.remove('grid-4', 'grid-6');
+                workGrid.classList.add(gridMode);
+
+                // 3. INVERT & PLAY
+                requestAnimationFrame(() => {
+                    workCards.forEach((card, i) => {
+                        const lastRect = card.getBoundingClientRect();
+                        const firstRect = firstRects[i];
+
+                        const dx = firstRect.left - lastRect.left;
+                        const dy = firstRect.top - lastRect.top;
+                        const dw = firstRect.width / lastRect.width;
+                        const dh = firstRect.height / lastRect.height;
+
+                        // Invert
+                        card.style.transition = 'none';
+                        card.style.transformOrigin = 'top left';
+                        card.style.transform = `translate(${dx}px, ${dy}px) scale(${dw}, ${dh})`;
+
+                        // Play
+                        requestAnimationFrame(() => {
+                            card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+                            card.style.transform = 'none';
+                        });
+                    });
+
+                    // Recalculate line numbers after a short delay to match final height
+                    setTimeout(() => {
+                        if (typeof updateLineNumbers === 'function') {
+                            updateLineNumbers();
+                        }
+                    }, 600);
+                });
+            });
+        });
+    }
+
     // 3. Custom Cursor with Hover Effects
     const cursor = document.querySelector('.custom-cursor');
 

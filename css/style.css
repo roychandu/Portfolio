@@ -481,8 +481,24 @@ h6 {
 
 .work-grid-brutalist {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 20px;
+}
+
+.work-grid-brutalist.grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.work-grid-brutalist.grid-6 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Adjust card details for the denser grid-6 view */
+.grid-6 .card-header {
+    padding: 16px;
+}
+
+.grid-6 .card-title {
+    font-size: 16px;
 }
 
 .work-card {
