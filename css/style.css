@@ -391,7 +391,8 @@ h6 {
 
 .pre-title {
     color: var(--text-slate);
-    font-family: var(--font-body); /* Monospace */
+    font-family: var(--font-body);
+    /* Monospace */
     font-size: 14px;
     text-transform: none;
     letter-spacing: 0;
@@ -779,28 +780,151 @@ h6 {
     border-color: var(--accent);
 }
 
-/* --- Sticky Footer Status Bar --- */
-.main-footer-status {
-    position: sticky;
-    bottom: 0;
+/* --- Top Navigation Bar (Full Width) --- */
+.top-nav {
     width: 100%;
-    background-color: rgba(31, 31, 31, 0.9);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid var(--border);
-    padding: 8px 40px 8px 60px;
-    /* Aligned with counting bar offset */
+    height: 40px;
+    border-bottom: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.85rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(31, 31, 31, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1100;
+}
+
+.nav-welcome {
+    width: 320px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+    border-right: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-family: var(--font-body);
+}
+
+.nav-links {
+    flex: 1;
+    display: flex;
+    gap: 30px;
+    padding-left: 60px;
+    /* Aligned with main-content offset */
+}
+
+.nav-link {
+    text-decoration: none;
     color: var(--text-slate);
-    z-index: 950;
+    font-size: 0.85rem;
+    font-family: var(--font-heading);
+    transition: var(--transition);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text-white);
+}
+
+.status-bar {
+    width: 230px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 40px;
+    gap: 20px;
+    border-left: 1px solid var(--border);
+    font-size: 0.75rem;
+    color: var(--text-slate);
+    white-space: nowrap;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #2ecc71;
+    border-radius: 50%;
+}
+
+/* --- Sidebar Left --- */
+.sidebar-left {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    width: 320px;
+    height: calc(100vh - 40px);
+    /* Goes all the way to bottom */
+    background-color: var(--bg-jet);
+    border-right: 1px solid var(--border);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+/* --- Sidebar Right --- */
+.sidebar-right {
+    position: fixed;
+    top: 40px;
+    right: 0;
+    width: 230px;
+    height: calc(100vh - 75px);
+    background-color: var(--bg-jet);
+    border-left: 1px solid var(--border);
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+/* --- Main Content Area Adjustments --- */
+.main-content {
+    margin-left: 320px;
+    margin-right: 230px;
+    width: calc(100% - 550px);
+    position: relative;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Sticky Footer Status Bar --- */
+.main-footer-status {
+    position: fixed;
+    bottom: 0;
+    left: 320px;
+    width: calc(100% - 320px);
+    height: 35px;
+    background-color: rgba(24, 24, 24, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--text-slate);
+    z-index: 1100;
 }
 
 .delivered-status {
     display: flex;
     align-items: center;
     gap: 10px;
+    font-family: var(--font-body);
 }
 
 .social-icons-footer {
@@ -810,7 +934,7 @@ h6 {
 
 .social-icons-footer a {
     color: var(--text-slate);
-    font-size: 1.1rem;
+    font-size: 1rem;
     transition: var(--transition);
 }
 
@@ -818,9 +942,11 @@ h6 {
     color: var(--text-white);
 }
 
-/* --- Responsive --- */
+/* --- Responsive Updates --- */
 @media (max-width: 1200px) {
-    .sidebar-right {
+
+    .sidebar-right,
+    .status-bar {
         display: none;
     }
 
@@ -828,10 +954,16 @@ h6 {
         margin-right: 0;
         width: calc(100% - 320px);
     }
+
+    .top-nav {
+        justify-content: flex-start;
+    }
 }
 
 @media (max-width: 992px) {
-    .sidebar-left {
+
+    .sidebar-left,
+    .nav-welcome {
         display: none;
     }
 
@@ -840,24 +972,29 @@ h6 {
         width: 100%;
     }
 
-    .section-title-h1 {
-        font-size: 52px;
+    .main-footer-status {
+        left: 0;
+        width: 100%;
     }
+}
 
-    .section-title-h2 {
-        font-size: 32px;
-    }
+.section-title-h1 {
+    font-size: 52px;
+}
 
-    .tech-grid-6col {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.section-title-h2 {
+    font-size: 32px;
+}
 
-    .feature-grid-3col {
-        grid-template-columns: 1fr;
-    }
+.tech-grid-6col {
+    grid-template-columns: repeat(3, 1fr);
+}
 
-    .about-layout,
-    .contact-layout {
-        grid-template-columns: 1fr;
-    }
+.feature-grid-3col {
+    grid-template-columns: 1fr;
+}
+
+.about-layout,
+.contact-layout {
+    grid-template-columns: 1fr;
 }
