@@ -181,37 +181,28 @@ h6 {
 .sidebar-buttons {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
+    margin-top: 30px;
 }
 
-.btn-sidebar {
-    width: 100%;
-    padding: 14px;
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text-white);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-align: left;
+.sidebar-social-row {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 24px;
+    margin-top: auto;
+    padding-top: 30px;
+    border-top: 1px solid var(--border);
+    justify-content: flex-start;
+}
+
+.sidebar-social-row a {
+    color: var(--text-slate);
+    font-size: 1.2rem;
     transition: var(--transition);
-    text-decoration: none;
 }
 
-.btn-sidebar.primary {
-    background: var(--text-white);
-    color: #0F0F0F;
-    justify-content: center;
-}
-
-.btn-sidebar:hover {
-    border-color: var(--text-white);
-}
-
-/* --- Right Sidebar (Index) --- */
-.sidebar-right {
+.sidebar-social-row a:hover {
+    color: var(--text-white);
+}.sidebar-right {
     width: 230px;
     height: 100vh;
     position: fixed;
@@ -490,69 +481,6 @@ h6 {
 
 .work-grid-brutalist.grid-6 {
     grid-template-columns: repeat(3, 1fr);
-}
-
-/* Adjust card details for the denser grid-6 view */
-.grid-6 .card-header {
-    padding: 16px;
-}
-
-.grid-6 .card-title {
-    font-size: 16px;
-}
-
-.work-card {
-    border: 1px solid var(--border);
-    background-color: var(--bg-jet);
-    overflow: hidden;
-    transition: var(--transition);
-    cursor: pointer;
-    display: block;
-    text-decoration: none;
-    color: inherit;
-}
-
-.work-card:hover {
-    border-color: var(--text-white);
-}
-
-.card-header {
-    padding: 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border);
-}
-
-.card-title {
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.card-arrow {
-    font-size: 1.1rem;
-    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.work-card:hover .card-arrow {
-    transform: translateX(6px);
-}
-
-.card-body {
-    width: 100%;
-    padding: 0;
-    overflow: hidden;
-}
-
-.card-body img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.work-card:hover .card-body img {
-    transform: scale(1.03);
 }
 
 .work-cta-wrap {
