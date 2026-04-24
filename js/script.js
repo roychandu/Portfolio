@@ -79,27 +79,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     scrambleElements.forEach(el => scrambleObserver.observe(el));
 
-    // 2. Scroll Spy for Sidebar Links
+    // 2. Scroll Spy for Sidebar Links & Sliding Indicator
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.sidebar-link');
+    const indicator = document.querySelector('.nav-active-indicator');
+
+    const updateIndicator = (activeLink) => {
+        if (!activeLink || !indicator) return;
+        const linkRect = activeLink.getBoundingClientRect();
+        const navRect = activeLink.closest('.sidebar-nav').getBoundingClientRect();
+        const topOffset = linkRect.top - navRect.top + (linkRect.height / 2) - 12; // 12 is half of indicator height (24)
+        indicator.style.transform = `translateY(${topOffset}px)`;
+    };
 
     const handleScrollSpy = () => {
         const scrollY = window.pageYOffset;
+        let currentSectionId = '';
 
         sections.forEach(current => {
             const sectionHeight = current.offsetHeight;
-            const sectionTop = current.offsetTop - 100;
+            const sectionTop = current.offsetTop - 100; // Offset for sticky header
             const sectionId = current.getAttribute('id');
 
             if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
+                currentSectionId = sectionId;
             }
         });
+
+        if (currentSectionId) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSectionId}`) {
+                    link.classList.add('active');
+                    updateIndicator(link);
+                }
+            });
+        }
     };
 
     window.addEventListener('scroll', handleScrollSpy);
