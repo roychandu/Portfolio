@@ -22,7 +22,7 @@
     /* Charcoal Black */
 
     /* Typography - Exact Matches */
-    --font-heading: 'Geist', sans-serif;
+    --font-heading: 'IBM Plex Mono', monospace;
     --font-body: 'IBM Plex Mono', monospace;
 
     /* Transitions */
@@ -446,33 +446,97 @@ h6 {
     padding: 160px 0 0 0;
 }
 
+.work-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 24px;
+}
+
+.view-toggle {
+    display: flex;
+    border: 1px solid var(--border);
+    background: var(--bg-jet);
+}
+
+.toggle-btn {
+    padding: 10px 14px;
+    cursor: pointer;
+    color: var(--text-slate);
+    transition: var(--transition);
+    border-left: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-btn:first-child {
+    border-left: none;
+}
+
+.toggle-btn.active {
+    background: var(--text-white);
+    color: var(--bg-graphite);
+}
+
 .work-grid-brutalist {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-    margin-top: 40px;
 }
 
 .work-card {
-    background-color: var(--bg-jet);
     border: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 40px;
-    cursor: pointer;
+    background-color: var(--bg-jet);
+    overflow: hidden;
     transition: var(--transition);
+    cursor: pointer;
+    display: block;
     text-decoration: none;
     color: inherit;
 }
 
 .work-card:hover {
-    background-color: #252525;
+    border-color: var(--text-white);
 }
 
-.work-card h3 {
-    font-size: 24px;
-    font-weight: 700;
+.card-header {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.card-arrow {
+    font-size: 1.1rem;
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.work-card:hover .card-arrow {
+    transform: translateX(6px);
+}
+
+.card-body {
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+
+.card-body img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.work-card:hover .card-body img {
+    transform: scale(1.03);
 }
 
 .work-cta-wrap {
