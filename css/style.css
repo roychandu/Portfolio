@@ -786,7 +786,7 @@ h6 {
     height: 40px;
     border-bottom: 1px solid var(--border);
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; /* Align everything to the left by default */
     align-items: center;
     position: fixed;
     top: 0;
@@ -809,11 +809,9 @@ h6 {
 }
 
 .nav-links {
-    flex: 1;
     display: flex;
     gap: 30px;
-    padding-left: 60px;
-    /* Aligned with main-content offset */
+    padding-left: 10px;
 }
 
 .nav-link {
@@ -832,12 +830,13 @@ h6 {
 .status-bar {
     width: 230px;
     height: 100%;
+    margin-left: auto; /* Push to the right edge */
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-right: 40px;
     gap: 20px;
-    border-left: 1px solid var(--border);
+    border-left: none; /* Removed vertical line */
     font-size: 0.75rem;
     color: var(--text-slate);
     white-space: nowrap;
