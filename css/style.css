@@ -123,73 +123,160 @@ h6 {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
-.profile-img-circle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+.profile-img-box {
+    width: 54px;
+    height: 54px;
+    background-color: #222;
+    border-radius: 4px;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
-.profile-img-circle img {
+.profile-img-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
 .profile-info h2 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 700;
     margin: 0;
+    color: var(--text-white);
 }
 
 .profile-info p {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--text-slate);
-    margin: 4px 0 0;
+    margin: 2px 0 0;
+    font-weight: 500;
 }
 
 .bio-text {
-    font-size: 0.9rem;
+    font-size: 14px;
     line-height: 1.6;
     color: var(--text-slate);
-    margin-bottom: 40px;
+    margin-bottom: 35px;
+    font-family: var(--font-body);
 }
 
 .sidebar-stats {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin-bottom: 40px;
+    gap: 18px;
+    margin-bottom: 35px;
 }
 
 .stat-item {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     font-size: 0.85rem;
     color: var(--text-slate);
+    font-family: var(--font-body);
 }
 
 .stat-item i {
     width: 16px;
-    color: var(--text-white);
+    font-size: 14px;
+    color: var(--text-slate);
+}
+
+.download-cv-wrap {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: -30px;
+    margin-right: -30px;
+    padding: 0 30px 25px 30px;
+    border-bottom: 1px solid #252525;
+}
+
+.btn-download {
+    display: flex;
+    width: 100%;
+    background-color: #111111;
+    border: 1px solid #222;
+    text-decoration: none;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.btn-download .btn-text {
+    flex: 1;
+    padding: 12px 15px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-download .btn-icon {
+    width: 45px;
+    background-color: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+}
+
+.btn-download:hover {
+    background-color: #1a1a1a;
+    border-color: #333;
 }
 
 .sidebar-buttons {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-top: 30px;
+}
+
+.btn-schedule {
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    padding: 14px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+.btn-schedule:hover {
+    background-color: #f0f0f0;
+}
+
+.btn-work {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    text-decoration: none;
+    padding: 14px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+.btn-work:hover {
+    background-color: white;
+    color: black;
 }
 
 .sidebar-social-row {
     display: flex;
     gap: 24px;
     margin-top: auto;
-    padding-top: 30px;
+    margin-left: -30px;
+    margin-right: -30px;
+    padding: 30px 30px 0 30px;
     border-top: 1px solid var(--border);
     justify-content: flex-start;
 }
@@ -300,8 +387,7 @@ h6 {
     border-right: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    padding-right: 8px;
+    align-items: center;
     padding-top: 20px;
     color: #6A6A6A;
     font-family: var(--font-body);
