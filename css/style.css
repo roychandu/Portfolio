@@ -525,10 +525,10 @@ h6 {
 }
 
 .about-text-highlighter .hl {
-    color: var(--text-white);
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 2px 6px;
-    border-bottom: 1px solid var(--accent);
+    color: #111111;
+    background-color: #dcdcb4;
+    padding: 0 4px;
+    font-weight: 500;
 }
 
 .about-profile-card {
@@ -645,33 +645,42 @@ h6 {
 }
 
 .service-item-block {
-    margin-bottom: 40px;
+    margin-bottom: 60px;
 }
 
 .service-item-title {
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 30px;
 }
 
 .feature-grid-3col {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px 30px;
+    gap: 20px 40px;
 }
 
 .feature-list-item {
-    display: flex;
-    gap: 10px;
-    padding: 10px;
+    font-family: var(--font-body);
     font-size: 14px;
-    color: var(--text-medium);
-    border: 1px solid transparent;
+    color: var(--text-slate);
+    line-height: 1.6;
+    position: relative;
+    padding-left: 20px;
     transition: var(--transition);
 }
 
+.feature-list-item::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--text-slate);
+}
+
 .feature-list-item:hover {
-    border-color: var(--accent);
+    color: var(--text-white);
 }
 
 /* --- Tech Stack --- */
