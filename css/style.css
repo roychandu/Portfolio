@@ -691,41 +691,61 @@ h6 {
 .tech-grid-6col {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 0;
     border-left: 1px solid var(--border);
     border-top: 1px solid var(--border);
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 .tech-cell {
-    height: 160px;
+    height: 180px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--bg-graphite);
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #121212;
     border-right: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
-    padding: 20px;
     transition: var(--transition);
 }
 
 .tech-cell:hover {
-    background-color: var(--bg-jet);
+    background-color: #1a1a1a;
 }
 
-.tech-label {
-    font-size: 14px;
-    color: var(--text-slate);
+.tech-name {
+    font-family: var(--font-body);
+    font-size: 11px;
     text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    color: var(--text-slate);
+    line-height: 1.2;
 }
 
-.tech-percent {
-    font-size: 32px;
-    color: var(--accent);
-    font-weight: 800;
+.tech-icon-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.tech-icon-box img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    filter: grayscale(0.5) opacity(0.8);
+    transition: var(--transition);
+}
+
+.tech-cell:hover .tech-icon-box img {
+    filter: grayscale(0) opacity(1);
+    transform: scale(1.1);
+}
+
+.tech-percentage {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--text-slate);
+    text-align: right;
 }
 
 /* --- Blog Section --- */
