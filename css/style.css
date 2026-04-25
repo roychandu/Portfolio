@@ -506,72 +506,137 @@ h6 {
 
 .about-layout {
     display: grid;
-    grid-template-columns: 1.5fr 250px;
-    gap: 30px;
+    grid-template-columns: 1fr 30%;
+    gap: 60px;
     align-items: start;
+    margin-top: 40px;
 }
 
 .about-main-content {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 40px;
 }
 
 .about-text-highlighter {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--text-medium);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-slate);
 }
 
 .about-text-highlighter .hl {
-    color: var(--accent);
-    background-color: var(--accent-muted);
-    padding: 0 4px;
+    color: var(--text-white);
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 2px 6px;
+    border-bottom: 1px solid var(--accent);
 }
 
-.profile-card-sticky {
+.about-profile-card {
     position: sticky;
-    top: 50px;
-    width: 250px;
+    top: 100px;
     border: 1px solid var(--border);
-    background-color: var(--bg-jet);
+    background-color: #161616;
+    overflow: hidden;
 }
 
 .profile-img-wrap {
     width: 100%;
-    aspect-ratio: 1;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
+    border-bottom: 1px solid var(--border);
 }
 
 .profile-img-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .profile-footer-social {
-    padding: 16px;
-    border-top: 1px solid var(--border);
+    padding: 20px 24px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 15px;
-    background-color: var(--bg-jet);
+    background-color: #161616;
 }
 
 .profile-footer-social span {
-    font-size: 12px;
+    font-family: var(--font-body);
+    font-size: 13px;
     color: var(--text-slate);
+    letter-spacing: 0.5px;
 }
 
 .social-icons-mini {
     display: flex;
-    gap: 10px;
+    gap: 8px;
 }
 
 .social-icons-mini a {
+    width: 38px;
+    height: 38px;
+    background-color: #252525;
     color: var(--text-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 14px;
+    transition: var(--transition);
+}
+
+.social-icons-mini a:hover {
+    background-color: var(--accent);
+    color: var(--bg-graphite);
+}
+
+/* Experience List */
+.experience-wrap {
+    margin-top: 80px;
+}
+
+.experience-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.experience-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    transition: var(--transition);
+    text-decoration: none;
+    color: inherit;
+}
+
+.experience-item:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+    padding-left: 12px;
+}
+
+.exp-year {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--text-slate);
+    width: 160px;
+    flex-shrink: 0;
+}
+
+.exp-role {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-white);
+    flex: 1;
+}
+
+.exp-company {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-slate);
+    text-align: right;
+    opacity: 0.8;
 }
 
 /* --- Services Section --- */
@@ -963,23 +1028,20 @@ h6 {
     }
 }
 
-.section-title-h1 {
-    font-size: 52px;
-}
-
-.section-title-h2 {
-    font-size: 32px;
-}
-
-.tech-grid-6col {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.feature-grid-3col {
-    grid-template-columns: 1fr;
-}
-
-.about-layout,
-.contact-layout {
-    grid-template-columns: 1fr;
+/* Mobile Overrides */
+@media (max-width: 768px) {
+    .section-title-h1 {
+        font-size: 42px;
+    }
+    
+    .section-title-h2 {
+        font-size: 28px;
+    }
+    
+    .about-layout,
+    .contact-layout,
+    .tech-grid-6col,
+    .feature-grid-3col {
+        grid-template-columns: 1fr;
+    }
 }
