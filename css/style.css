@@ -31,21 +31,17 @@
 
 /* --- Custom Scrollbar (VS Code Style) --- */
 ::-webkit-scrollbar {
-    width: 4px;
-}
-
-::-webkit-scrollbar-track {
+    width: 0px;
     background: transparent;
 }
 
-::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 0;
-    transition: var(--transition);
+html {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.6);
+::-webkit-scrollbar-thumb {
+    background: transparent;
 }
 
 /* --- Reset & Global --- */

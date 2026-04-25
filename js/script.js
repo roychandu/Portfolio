@@ -32,6 +32,49 @@ async function loadSharedComponents() {
     });
 }
 
+// --- Sidebar Indicator Logic ---
+function updateIndicator(activeLink) {
+    const indicator = document.querySelector('.nav-active-indicator');
+    const navList = document.querySelector('.sidebar-nav ul');
+    if (!activeLink || !indicator || !navList) return;
+    
+    const linkTop = activeLink.parentElement.offsetTop;
+    const linkHeight = activeLink.parentElement.offsetHeight;
+    const targetY = linkTop + (linkHeight / 2) - (indicator.offsetHeight / 2);
+    indicator.style.transform = `translateY(${targetY}px)`;
+}
+
+// --- Scroll Spy Logic ---
+function handleScrollSpy() {
+    const scrollY = window.pageYOffset + 150;
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.sidebar-link');
+    let currentSectionId = '';
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            currentSectionId = sectionId;
+        }
+    });
+
+    if (currentSectionId) {
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            const isTarget = href.endsWith(`#${currentSectionId}`);
+            
+            if (isTarget) {
+                link.classList.add('active');
+                updateIndicator(link);
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+}
+
 // --- Line Number Gutter Generation ---
 function updateLineNumbers() {
     const gutter = document.getElementById('line-numbers');
@@ -39,7 +82,7 @@ function updateLineNumbers() {
     
     if (!gutter || !mainContent) return;
     
-    const lineHeight = 24; // Must match CSS line-height
+    const lineHeight = 24; 
     const contentElements = Array.from(mainContent.children).filter(el => el.id !== 'line-numbers');
     if (contentElements.length === 0) return;
     
@@ -135,55 +178,22 @@ function initPageEffects() {
     }, { threshold: 0.1 });
     scrambleElements.forEach(el => scrambleObserver.observe(el));
 
-    // 2. Sidebar Indicator & Scroll Spy
-    const navList = document.querySelector('.sidebar-nav ul');
+    // 2. Sidebar Scroll Links
     const navLinks = document.querySelectorAll('.sidebar-link');
-    const indicator = document.querySelector('.nav-active-indicator');
-    const sections = document.querySelectorAll('section[id]');
-
-    const updateIndicator = (activeLink) => {
-        if (!activeLink || !indicator || !navList) return;
-        const linkTop = activeLink.parentElement.offsetTop;
-        const linkHeight = activeLink.parentElement.offsetHeight;
-        const targetY = linkTop + (linkHeight / 2) - (indicator.offsetHeight / 2);
-        indicator.style.transform = `translateY(${targetY}px)`;
-    };
-
-    const handleScrollSpy = () => {
-        const scrollY = window.pageYOffset + 150;
-        let currentSectionId = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-                currentSectionId = sectionId;
-            }
-        });
-        if (currentSectionId) {
-            navLinks.forEach(link => {
-                const isTarget = link.getAttribute('href') === `#${currentSectionId}`;
-                link.classList.toggle('active', isTarget);
-                if (isTarget) updateIndicator(link);
-            });
-        }
-    };
-
-    // Smooth scroll for sidebar links
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const href = link.getAttribute('href');
-            if (href.startsWith('#')) {
-                e.preventDefault();
-                const targetSection = document.querySelector(href);
+            if (href.includes('#')) {
+                const targetId = '#' + href.split('#')[1];
+                const targetSection = document.querySelector(targetId);
                 if (targetSection) {
+                    e.preventDefault();
                     window.scrollTo({ top: targetSection.offsetTop, behavior: 'smooth' });
                 }
             }
         });
     });
 
-    window.addEventListener('scroll', handleScrollSpy);
     handleScrollSpy();
 
     // 3. Work Grid Toggle
@@ -325,6 +335,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     window.addEventListener('popstate', () => location.reload());
+    window.addEventListener('scroll', handleScrollSpy);
+    window.addEventListener('resize', updateLineNumbers);
+    window.addEventListener('load', updateLineNumbers);
 
     // Custom Cursor
     const cursor = document.querySelector('.custom-cursor');
@@ -352,7 +365,3 @@ document.addEventListener('DOMContentLoaded', async () => {
         updateTime();
     }
 });
-
-// Global Resize Listener
-window.addEventListener('resize', updateLineNumbers);
-window.addEventListener('load', updateLineNumbers);
