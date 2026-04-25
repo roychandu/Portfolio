@@ -194,45 +194,60 @@ function initPageEffects() {
         });
     });
 
-    handleScrollSpy();
+    handleScrollSpy();    // 3. Universal Grid Toggles
+    const toggles = document.querySelectorAll('.view-toggle');
+    toggles.forEach(toggle => {
+        // Find the associated grid (usually the next sibling of the header)
+        const sectionHeader = toggle.closest('.work-section-header');
+        if (!sectionHeader) return;
+        
+        const grid = sectionHeader.nextElementSibling;
+        if (!grid || !grid.classList.contains('work-grid-brutalist')) return;
+        
+        const items = grid.children;
+        const buttons = toggle.querySelectorAll('.toggle-btn');
 
-    // 3. Work Grid Toggle
-    const gridToggle = document.getElementById('work-grid-toggle');
-    const workGrid = document.querySelector('.work-grid-brutalist');
-    const workCards = document.querySelectorAll('.work-card');
-
-    if (gridToggle && workGrid) {
-        const buttons = gridToggle.querySelectorAll('.toggle-btn');
         buttons.forEach(btn => {
             btn.addEventListener('click', () => {
                 if (btn.classList.contains('active')) return;
-                const firstRects = Array.from(workCards).map(card => card.getBoundingClientRect());
+                
+                // FLIP Animation Prep
+                const firstRects = Array.from(items).map(item => item.getBoundingClientRect());
+                
                 buttons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
+                
                 const gridMode = btn.getAttribute('data-grid');
-                workGrid.classList.remove('grid-4', 'grid-6');
-                workGrid.classList.add(gridMode);
+                grid.classList.remove('grid-3', 'grid-4', 'grid-6');
+                grid.classList.add(gridMode);
+                
+                // FLIP Animation Execute
                 requestAnimationFrame(() => {
-                    workCards.forEach((card, i) => {
-                        const lastRect = card.getBoundingClientRect();
+                    Array.from(items).forEach((item, i) => {
+                        const lastRect = item.getBoundingClientRect();
                         const firstRect = firstRects[i];
+                        
                         const dx = firstRect.left - lastRect.left;
                         const dy = firstRect.top - lastRect.top;
                         const dw = firstRect.width / lastRect.width;
                         const dh = firstRect.height / lastRect.height;
-                        card.style.transition = 'none';
-                        card.style.transformOrigin = 'top left';
-                        card.style.transform = `translate(${dx}px, ${dy}px) scale(${dw}, ${dh})`;
+                        
+                        item.style.transition = 'none';
+                        item.style.transformOrigin = 'top left';
+                        item.style.transform = `translate(${dx}px, ${dy}px) scale(${dw}, ${dh})`;
+                        
                         requestAnimationFrame(() => {
-                            card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
-                            card.style.transform = 'none';
+                            item.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s';
+                            item.style.transform = 'none';
                         });
                     });
+                    
+                    // Update line numbers after grid changes height
                     setTimeout(updateLineNumbers, 600);
                 });
             });
         });
-    }
+    });
 
     // 4. Scroll Reveal
     const revealContainers = document.querySelectorAll('.scroll-reveal-sliding');
