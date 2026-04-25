@@ -243,7 +243,8 @@ h6 {
     flex-direction: column;
     gap: 20px;
     position: relative;
-    padding-left: 10px; /* Space for indicator */
+    padding-left: 10px;
+    /* Space for indicator */
 }
 
 .nav-active-indicator {
@@ -338,11 +339,13 @@ h6 {
     top: 0;
     background-color: rgba(31, 31, 31, 0.8);
     backdrop-filter: blur(10px);
-    z-index: 1002; /* Above sidebar-left z-index 1001 */
+    z-index: 1002;
+    /* Above sidebar-left z-index 1001 */
 }
 
 .nav-welcome {
-    width: 350px; /* 320px sidebar + 30px gutter */
+    width: 350px;
+    /* 320px sidebar + 30px gutter */
     height: 100%;
     display: flex;
     align-items: center;
@@ -356,7 +359,8 @@ h6 {
 .nav-links {
     display: flex;
     gap: 30px;
-    padding-left: 30px; /* Alignment with content padding */
+    padding-left: 30px;
+    /* Alignment with content padding */
     height: 100%;
 }
 
@@ -370,7 +374,8 @@ h6 {
     display: flex;
     align-items: center;
     border-bottom: 2px solid transparent;
-    margin-bottom: -1px; /* Align precisely with top-nav border */
+    margin-bottom: -1px;
+    /* Align precisely with top-nav border */
 }
 
 .nav-link:hover,
@@ -735,9 +740,9 @@ h6 {
 .tech-name {
     font-family: var(--font-body);
     font-size: 11px;
-    text-transform: uppercase;
+    text-transform: capitalize;
     letter-spacing: 0.5px;
-    color: var(--text-slate);
+    color: var(--text-white);
     line-height: 1.2;
 }
 
@@ -764,7 +769,7 @@ h6 {
 .tech-percentage {
     font-family: var(--font-body);
     font-size: 11px;
-    color: var(--text-slate);
+    color: var(--text-white);
     text-align: right;
 }
 
@@ -1082,11 +1087,11 @@ h6 {
     .section-title-h1 {
         font-size: 42px;
     }
-    
+
     .section-title-h2 {
         font-size: 28px;
     }
-    
+
     .about-layout,
     .contact-layout,
     .tech-grid-6col,
