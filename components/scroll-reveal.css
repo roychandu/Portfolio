@@ -1,0 +1,61 @@
+/* 
+ * Reusable "Sliding Doors" Scroll Reveal Component
+ */
+
+.scroll-reveal-sliding {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    overflow: visible;
+    margin: 100px 0;
+}
+
+.scroll-reveal-row {
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+}
+
+.scroll-reveal-row.bottom {
+    margin-top: 0;
+}
+
+.reveal-item-left,
+.reveal-item-right {
+    flex: 0 0 auto;
+    will-change: transform;
+    transition: transform 0.1s ease-out;
+    white-space: nowrap;
+}
+
+.reveal-filler {
+    flex: 1;
+    overflow: hidden;
+    will-change: transform;
+    transition: transform 0.1s ease-out;
+    white-space: nowrap;
+}
+
+/* Alignment Utilities */
+.reveal-item-left { text-align: left; }
+.reveal-item-right { text-align: right; }
+.reveal-filler.left { text-align: left; }
+.reveal-filler.right { text-align: right; }
+
+/* Custom Content Styling (Example) */
+.reveal-text-large {
+    font-size: 10vw;
+    font-weight: 800;
+    color: #2B2B2B;
+    line-height: 0.8;
+    text-transform: uppercase;
+}
+
+.reveal-slash {
+    font-size: 4vw;
+    color: #2B2B2B;
+    letter-spacing: -0.2vw;
+    line-height: 0.8;
+    opacity: 0.2;
+}

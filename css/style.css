@@ -110,12 +110,12 @@ h6 {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #0F0F0F;
+    background-color: var(--bg-jet);
     border-right: 1px solid var(--border);
     padding: 40px 30px;
     display: flex;
     flex-direction: column;
-    z-index: 1000;
+    z-index: 1001;
     overflow-y: auto;
 }
 
@@ -202,7 +202,9 @@ h6 {
 
 .sidebar-social-row a:hover {
     color: var(--text-white);
-}.sidebar-right {
+}
+
+.sidebar-right {
     width: 230px;
     height: 100vh;
     position: fixed;
@@ -289,7 +291,7 @@ h6 {
     top: 40px;
     /* Start below top-nav */
     left: 0;
-    width: 40px;
+    width: 30px;
     height: auto;
     /* Managed by JS */
     border-right: 1px solid var(--border);
@@ -311,7 +313,6 @@ h6 {
 }
 
 /* Shift content to the right to make room for gutter */
-.main-content .container-minimal,
 .main-content .hero-section,
 .main-content .work-section,
 .main-content .about-section,
@@ -319,8 +320,9 @@ h6 {
 .main-content .tech-section,
 .main-content .blog-section,
 .main-content .contact-section {
-    padding-left: 40px;
-    /* 40px gutter + 20px offset */
+    padding-left: 60px;
+    padding-right: 30px;
+    /* 30px gutter + 30px gap = 60px total left offset */
 }
 
 /* --- Top Navigation Bar --- */
@@ -331,7 +333,7 @@ h6 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 40px;
+    padding: 0 30px 0 60px;
     position: sticky;
     top: 0;
     background-color: rgba(31, 31, 31, 0.8);
@@ -375,9 +377,8 @@ h6 {
 
 .container-minimal {
     width: 100%;
-    max-width: 1000px;
     margin: 0;
-    padding: 0 40px;
+    padding: 0;
 }
 
 .pre-title {
@@ -501,41 +502,6 @@ h6 {
 /* --- About Section --- */
 .about-section {
     padding: 160px 0 0 0;
-}
-
-.since-2024-wrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 50px;
-}
-
-.since-block {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-}
-
-.year-block {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-end;
-}
-
-.since-text,
-.year-text {
-    font-size: 5rem;
-    font-weight: 800;
-    color: var(--text-white);
-    line-height: 1;
-}
-
-.slash-divider {
-    font-size: 24px;
-    color: var(--border);
-    letter-spacing: -2px;
 }
 
 .about-layout {
@@ -803,7 +769,8 @@ h6 {
     height: 40px;
     border-bottom: 1px solid var(--border);
     display: flex;
-    justify-content: flex-start; /* Align everything to the left by default */
+    justify-content: flex-start;
+    /* Align everything to the left by default */
     align-items: center;
     position: fixed;
     top: 0;
@@ -847,13 +814,15 @@ h6 {
 .status-bar {
     width: 230px;
     height: 100%;
-    margin-left: auto; /* Push to the right edge */
+    margin-left: auto;
+    /* Push to the right edge */
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-right: 40px;
     gap: 20px;
-    border-left: none; /* Removed vertical line */
+    border-left: none;
+    /* Removed vertical line */
     font-size: 0.75rem;
     color: var(--text-slate);
     white-space: nowrap;

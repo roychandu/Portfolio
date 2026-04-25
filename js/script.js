@@ -183,6 +183,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 6. Generic Scroll Reveal Animation (Sliding Doors Component)
+    const revealContainers = document.querySelectorAll('.scroll-reveal-sliding');
+
+    if (revealContainers.length > 0) {
+        const handleRevealScroll = () => {
+            const viewportHeight = window.innerHeight;
+            const scrollPos = window.scrollY;
+
+            revealContainers.forEach(container => {
+                const rect = container.getBoundingClientRect();
+                
+                if (rect.top < viewportHeight && rect.bottom > 0) {
+                    const elementTop = container.offsetTop;
+                    
+                    // Inverted Logic: 
+                    // When scrollPos is low (above element), diff is high -> Spread
+                    // When scrollPos increases (scrolling down), diff decreases -> Close
+                    const speed = parseFloat(container.getAttribute('data-speed')) || 1.2;
+                    const offset = viewportHeight * (parseFloat(container.getAttribute('data-offset')) || 0.5);
+                    
+                    const diff = (elementTop - scrollPos) - (viewportHeight * 0.2);
+                    const movement = Math.max(0, diff * speed);
+
+                    const leftElements = container.querySelectorAll('.reveal-item-left, .reveal-filler.left');
+                    const rightElements = container.querySelectorAll('.reveal-item-right, .reveal-filler.right');
+
+                    leftElements.forEach(el => el.style.transform = `translateX(-${movement}px)`);
+                    rightElements.forEach(el => el.style.transform = `translateX(${movement}px)`);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', handleRevealScroll);
+        handleRevealScroll(); // Initial call
+    }
+
     // 3. Custom Cursor with Hover Effects
     const cursor = document.querySelector('.custom-cursor');
 
