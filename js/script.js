@@ -1,7 +1,62 @@
-/**
- * Chandan Roy - Portfolio Script
- * Exact Match Version
- */
+// --- Component Loader ---
+async function loadSharedComponents() {
+    const components = [
+        { id: '.top-nav', file: 'components/shared/top-nav.html' },
+        { id: '.sidebar-left', file: 'components/shared/sidebar-left.html' },
+        { id: '.main-footer-status', file: 'components/shared/footer.html' }
+    ];
+
+    for (const comp of components) {
+        const el = document.querySelector(comp.id);
+        if (el) {
+            try {
+                const response = await fetch(comp.file);
+                const html = await response.text();
+                el.innerHTML = html;
+            } catch (err) {
+                console.error(`Error loading ${comp.file}:`, err);
+            }
+        }
+    }
+
+    // Set Active Link in Top Nav
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href.includes(currentPath)) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
+// --- Line Number Gutter Generation ---
+function updateLineNumbers() {
+    const gutter = document.getElementById('line-numbers');
+    const mainContent = document.querySelector('.main-content');
+    
+    if (!gutter || !mainContent) return;
+    
+    const lineHeight = 24; // Must match CSS line-height
+    const contentElements = Array.from(mainContent.children).filter(el => el.id !== 'line-numbers');
+    if (contentElements.length === 0) return;
+    
+    const lastElement = contentElements[contentElements.length - 1];
+    const contentBottom = lastElement.offsetTop + lastElement.offsetHeight;
+    const gutterTop = gutter.offsetTop;
+    
+    const totalHeight = contentBottom - gutterTop;
+    const count = Math.max(0, Math.floor(totalHeight / lineHeight));
+    
+    let html = '';
+    for (let i = 1; i <= count; i++) {
+        html += `<span>${i}</span>`;
+    }
+    gutter.innerHTML = html;
+    gutter.style.height = `${totalHeight}px`;
+}
 
 // --- Scramble Text Effect ---
 class ScrambleText {
@@ -13,21 +68,16 @@ class ScrambleText {
 
     setText(newText) {
         const oldText = this.el.innerText;
-        this.el.innerText = ''; // Clear existing text immediately for "invisible start"
-        this.el.classList.add('scramble-active'); // Make element visible now that animation is starting
+        this.el.innerText = ''; 
+        this.el.classList.add('scramble-active'); 
         const length = Math.max(oldText.length, newText.length);
         const promise = new Promise((resolve) => this.resolve = resolve);
         this.queue = [];
         for (let i = 0; i < length; i++) {
             const from = oldText[i] || '';
             const to = newText[i] || '';
-            
-            // Sequential Typewriter Timing: 
-            // i * 1.5 creates the typewriter reveal progression
-            // i * 1.5 + random(12) ensures each character scrambles briefly before settling
             const start = Math.floor(i * 1.2); 
             const end = start + Math.floor(Math.random() * 12);
-            
             this.queue.push({ from, to, start, end });
         }
         cancelAnimationFrame(this.frameRequest);
@@ -51,7 +101,7 @@ class ScrambleText {
                 }
                 output += `<span class="scramble-char">${char}</span>`;
             } else {
-                output += ''; // Do not show 'from' text, keeping it invisible until reveal
+                output += ''; 
             }
         }
         this.el.innerHTML = output;
@@ -68,9 +118,9 @@ class ScrambleText {
     }
 }
 
-// --- Initialize Effects ---
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Scramble Elements on Intersection
+// --- Page Initialization Logic ---
+function initPageEffects() {
+    // 1. Scramble Elements
     const scrambleElements = document.querySelectorAll('[data-scramble]');
     const scrambleObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -83,9 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, { threshold: 0.1 });
-
     scrambleElements.forEach(el => scrambleObserver.observe(el));
 
+    // 2. Sidebar Indicator & Scroll Spy
     const navList = document.querySelector('.sidebar-nav ul');
     const navLinks = document.querySelectorAll('.sidebar-link');
     const indicator = document.querySelector('.nav-active-indicator');
@@ -93,30 +143,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateIndicator = (activeLink) => {
         if (!activeLink || !indicator || !navList) return;
-        
-        // Calculate position relative to the UL container
         const linkTop = activeLink.parentElement.offsetTop;
         const linkHeight = activeLink.parentElement.offsetHeight;
-        
-        // Center the indicator relative to the link
         const targetY = linkTop + (linkHeight / 2) - (indicator.offsetHeight / 2);
         indicator.style.transform = `translateY(${targetY}px)`;
     };
 
     const handleScrollSpy = () => {
-        const scrollY = window.pageYOffset + 150; // Offset for better trigger point
+        const scrollY = window.pageYOffset + 150;
         let currentSectionId = '';
-
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
             const sectionId = section.getAttribute('id');
-
             if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
                 currentSectionId = sectionId;
             }
         });
-
         if (currentSectionId) {
             navLinks.forEach(link => {
                 const isTarget = link.getAttribute('href') === `#${currentSectionId}`;
@@ -129,23 +172,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Smooth scroll for sidebar links
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                window.scrollTo({
-                    top: targetSection.offsetTop,
-                    behavior: 'smooth'
-                });
+            const href = link.getAttribute('href');
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetSection = document.querySelector(href);
+                if (targetSection) {
+                    window.scrollTo({ top: targetSection.offsetTop, behavior: 'smooth' });
+                }
             }
         });
     });
 
     window.addEventListener('scroll', handleScrollSpy);
-    handleScrollSpy(); // Initial call
+    handleScrollSpy();
 
-    // 5. Work Grid Toggle Functionality (FLIP Animation)
+    // 3. Work Grid Toggle
     const gridToggle = document.getElementById('work-grid-toggle');
     const workGrid = document.querySelector('.work-grid-brutalist');
     const workCards = document.querySelectorAll('.work-card');
@@ -155,105 +196,151 @@ document.addEventListener('DOMContentLoaded', () => {
         buttons.forEach(btn => {
             btn.addEventListener('click', () => {
                 if (btn.classList.contains('active')) return;
-
-                // 1. FIRST: Record the current positions
                 const firstRects = Array.from(workCards).map(card => card.getBoundingClientRect());
-
-                // 2. LAST: Update classes
                 buttons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
                 const gridMode = btn.getAttribute('data-grid');
                 workGrid.classList.remove('grid-4', 'grid-6');
                 workGrid.classList.add(gridMode);
-
-                // 3. INVERT & PLAY
                 requestAnimationFrame(() => {
                     workCards.forEach((card, i) => {
                         const lastRect = card.getBoundingClientRect();
                         const firstRect = firstRects[i];
-
                         const dx = firstRect.left - lastRect.left;
                         const dy = firstRect.top - lastRect.top;
                         const dw = firstRect.width / lastRect.width;
                         const dh = firstRect.height / lastRect.height;
-
-                        // Invert
                         card.style.transition = 'none';
                         card.style.transformOrigin = 'top left';
                         card.style.transform = `translate(${dx}px, ${dy}px) scale(${dw}, ${dh})`;
-
-                        // Play
                         requestAnimationFrame(() => {
                             card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
                             card.style.transform = 'none';
                         });
                     });
-
-                    // Recalculate line numbers after a short delay to match final height
-                    setTimeout(() => {
-                        if (typeof updateLineNumbers === 'function') {
-                            updateLineNumbers();
-                        }
-                    }, 600);
+                    setTimeout(updateLineNumbers, 600);
                 });
             });
         });
     }
 
-    // 6. Generic Scroll Reveal Animation (Sliding Doors Component)
+    // 4. Scroll Reveal
     const revealContainers = document.querySelectorAll('.scroll-reveal-sliding');
-
     if (revealContainers.length > 0) {
         const handleRevealScroll = () => {
             const viewportHeight = window.innerHeight;
             const scrollPos = window.scrollY;
-
             revealContainers.forEach(container => {
                 const rect = container.getBoundingClientRect();
-                
                 if (rect.top < viewportHeight && rect.bottom > 0) {
                     const elementTop = container.offsetTop;
-                    
-                    // Inverted Logic: 
-                    // When scrollPos is low (above element), diff is high -> Spread
-                    // When scrollPos increases (scrolling down), diff decreases -> Close
                     const speed = parseFloat(container.getAttribute('data-speed')) || 1.2;
-                    const offset = viewportHeight * (parseFloat(container.getAttribute('data-offset')) || 0.5);
-                    
                     const diff = (elementTop - scrollPos) - (viewportHeight * 0.2);
                     const movement = Math.max(0, diff * speed);
-
                     const leftElements = container.querySelectorAll('.reveal-item-left, .reveal-filler.left');
                     const rightElements = container.querySelectorAll('.reveal-item-right, .reveal-filler.right');
-
                     leftElements.forEach(el => el.style.transform = `translateX(-${movement}px)`);
                     rightElements.forEach(el => el.style.transform = `translateX(${movement}px)`);
                 }
             });
         };
-
         window.addEventListener('scroll', handleRevealScroll);
-        handleRevealScroll(); // Initial call
+        handleRevealScroll();
     }
 
-    // 3. Custom Cursor with Hover Effects
-    const cursor = document.querySelector('.custom-cursor');
+    // 5. Line Numbers Generation
+    updateLineNumbers();
+}
 
+// --- AJAX Navigation Logic ---
+async function navigateTo(url) {
+    const mainContent = document.querySelector('.main-content');
+    const sidebarRight = document.querySelector('.sidebar-right');
+
+    mainContent.classList.add('content-exiting');
+    sidebarRight.classList.add('content-exiting');
+
+    try {
+        const response = await fetch(url);
+        const html = await response.text();
+        const parser = new DOMParser();
+        const newDoc = parser.parseFromString(html, 'text/html');
+
+        setTimeout(() => {
+            const newMain = newDoc.querySelector('.main-content');
+            const newSidebar = newDoc.querySelector('.sidebar-right');
+
+            if (newMain && newSidebar) {
+                mainContent.innerHTML = newMain.innerHTML;
+                sidebarRight.innerHTML = newSidebar.innerHTML;
+                
+                mainContent.classList.remove('content-exiting');
+                sidebarRight.classList.remove('content-exiting');
+                mainContent.classList.add('content-entering');
+                sidebarRight.classList.add('content-entering');
+
+                window.history.pushState({}, '', url);
+                document.title = newDoc.title;
+                
+                const currentPath = url.split('/').pop() || 'index.html';
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href').includes(currentPath));
+                });
+
+                window.scrollTo(0, 0);
+                initPageEffects();
+
+                requestAnimationFrame(() => {
+                    mainContent.classList.remove('content-entering');
+                    sidebarRight.classList.remove('content-entering');
+                });
+            }
+        }, 400); 
+    } catch (err) {
+        console.error('Navigation failed:', err);
+        window.location.href = url; 
+    }
+}
+
+// --- Initialize All ---
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadSharedComponents();
+    initPageEffects();
+
+    // Intercept Navigation
+    document.body.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        const isInternal = href && href.includes('.html') && !href.startsWith('http');
+        if (isInternal) {
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+            const targetPage = href.split('#')[0];
+            if (targetPage !== currentPath && targetPage !== '') {
+                e.preventDefault();
+                navigateTo(href);
+            }
+        }
+    });
+
+    window.addEventListener('popstate', () => location.reload());
+
+    // Custom Cursor
+    const cursor = document.querySelector('.custom-cursor');
     if (cursor) {
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
-
-        const hoverables = document.querySelectorAll('a, button, .work-card, .tech-cell, .sidebar-link, .experience-item, .feature-list-item');
+        const hoverables = document.querySelectorAll('a, button, .work-card, .tech-cell, .sidebar-link');
         hoverables.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
         });
     }
 
-    // 4. Update Time in Header
+    // Update Time
     const timeEl = document.querySelector('.status-bar .status-item:last-child');
     if (timeEl) {
         const updateTime = () => {
@@ -261,57 +348,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const options = { hour: '2-digit', minute: '2-digit', hour12: true };
             timeEl.innerText = now.toLocaleTimeString([], options);
         };
-        setInterval(updateTime, 10000); // Update every 10 seconds
+        setInterval(updateTime, 10000);
         updateTime();
     }
-
-    // 5. Line Number Gutter Generation (VS Code Style)
-    const gutter = document.getElementById('line-numbers');
-    const mainContent = document.querySelector('.main-content');
-    
-    if (gutter && mainContent) {
-        const updateLineNumbers = () => {
-            const lineHeight = 24; // Must match CSS line-height
-            
-            // Calculate height from the top of the gutter to the bottom of the last content element
-            // We exclude the gutter itself from the calculation
-            const contentElements = Array.from(mainContent.children).filter(el => el.id !== 'line-numbers');
-            if (contentElements.length === 0) return;
-            
-            const lastElement = contentElements[contentElements.length - 1];
-            const contentBottom = lastElement.offsetTop + lastElement.offsetHeight;
-            const gutterTop = gutter.offsetTop;
-            
-            const totalHeight = contentBottom - gutterTop;
-            const count = Math.max(0, Math.floor(totalHeight / lineHeight));
-            
-            let html = '';
-            for (let i = 1; i <= count; i++) {
-                html += `<span>${i}</span>`;
-            }
-            gutter.innerHTML = html;
-            
-            // Ensure gutter height matches the calculated range exactly
-            gutter.style.height = `${totalHeight}px`;
-        };
-
-        // Update on load and when images/content might change
-        window.addEventListener('load', updateLineNumbers);
-        updateLineNumbers();
-        
-        if (window.ResizeObserver) {
-            const ro = new ResizeObserver(() => {
-                // Use requestAnimationFrame to avoid "ResizeObserver loop limit exceeded"
-                window.requestAnimationFrame(updateLineNumbers);
-            });
-            ro.observe(mainContent);
-            // Also observe the last element specifically
-            const sections = mainContent.querySelectorAll('section, footer');
-            if (sections.length > 0) {
-                ro.observe(sections[sections.length - 1]);
-            }
-        } else {
-            window.addEventListener('resize', updateLineNumbers);
-        }
-    }
 });
+
+// Global Resize Listener
+window.addEventListener('resize', updateLineNumbers);
+window.addEventListener('load', updateLineNumbers);

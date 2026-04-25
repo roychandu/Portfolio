@@ -58,18 +58,34 @@
 
 html {
     scroll-behavior: smooth;
-    background-color: var(--bg-graphite);
+    overflow-x: hidden;
 }
 
 body {
-    width: 100%;
-    overflow-x: hidden;
+    background-color: var(--bg-jet);
+    color: var(--text-white);
     font-family: var(--font-body);
-    background-color: var(--bg-graphite);
-    color: var(--text-medium);
-    line-height: 1.4;
-    -webkit-font-smoothing: antialiased;
-    display: flex;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* SPA-style Dynamic Content Transitions */
+.main-content, 
+.sidebar-right {
+    opacity: 1;
+    transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: opacity, transform;
+}
+
+.content-exiting {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.content-entering {
+    opacity: 0;
+    transform: translateY(-10px);
 }
 
 h1,
