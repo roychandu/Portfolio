@@ -86,43 +86,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
     scrambleElements.forEach(el => scrambleObserver.observe(el));
 
-    // 2. Scroll Spy for Sidebar Links & Sliding Indicator
-    const sections = document.querySelectorAll('section[id]');
+    const navList = document.querySelector('.sidebar-nav ul');
     const navLinks = document.querySelectorAll('.sidebar-link');
     const indicator = document.querySelector('.nav-active-indicator');
+    const sections = document.querySelectorAll('section[id]');
 
     const updateIndicator = (activeLink) => {
-        if (!activeLink || !indicator) return;
-        const linkRect = activeLink.getBoundingClientRect();
-        const navRect = activeLink.closest('.sidebar-nav').getBoundingClientRect();
-        const topOffset = linkRect.top - navRect.top + (linkRect.height / 2) - 12; // 12 is half of indicator height (24)
-        indicator.style.transform = `translateY(${topOffset}px)`;
+        if (!activeLink || !indicator || !navList) return;
+        
+        // Calculate position relative to the UL container
+        const linkTop = activeLink.parentElement.offsetTop;
+        const linkHeight = activeLink.parentElement.offsetHeight;
+        
+        // Center the indicator relative to the link
+        const targetY = linkTop + (linkHeight / 2) - (indicator.offsetHeight / 2);
+        indicator.style.transform = `translateY(${targetY}px)`;
     };
 
     const handleScrollSpy = () => {
-        const scrollY = window.pageYOffset;
+        const scrollY = window.pageYOffset + 150; // Offset for better trigger point
         let currentSectionId = '';
 
-        sections.forEach(current => {
-            const sectionHeight = current.offsetHeight;
-            const sectionTop = current.offsetTop - 100; // Offset for sticky header
-            const sectionId = current.getAttribute('id');
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
 
-            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
                 currentSectionId = sectionId;
             }
         });
 
         if (currentSectionId) {
             navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentSectionId}`) {
-                    link.classList.add('active');
-                    updateIndicator(link);
-                }
+                const isTarget = link.getAttribute('href') === `#${currentSectionId}`;
+                link.classList.toggle('active', isTarget);
+                if (isTarget) updateIndicator(link);
             });
         }
     };
+
+    // Smooth scroll for sidebar links
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 
     window.addEventListener('scroll', handleScrollSpy);
     handleScrollSpy(); // Initial call
