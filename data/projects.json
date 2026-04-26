@@ -1,0 +1,80 @@
+{
+  "backpackr": {
+    "title": "Backpackr",
+    "shortDescription": "Backpackr is a revolutionary social networking application built with Flutter and Firebase, designed to connect travelers and backpackers in real-time. It eliminates the gap between strangers by enabling users to see nearby travelers with shared interests within a dynamic radius, facilitating instant meetups and authentic travel connections.",
+    "role": "Lead Flutter Developer",
+    "platform": "iOS & Android",
+    "year": "2026",
+    "githubUrl": "#",
+    "heroImage": "assets/project-poster/image%208.png",
+    "overview": {
+      "about": "This is a highly dynamic travel application that focuses on providing a seamless user experience for backpackers and solo travelers. The goal was to consolidate itinerary management, expense tracking, and social networking into a single, cohesive platform.",
+      "approach": "We followed a modular architecture approach to ensure scalability. By using Bloc for state management, we were able to decouple the business logic from the UI, making the app highly performant and easy to maintain. The backend was integrated using Firebase for real-time updates and secure authentication."
+    },
+    "screenshots": [
+      "assets/project-images/Screenshot_1777144941.png",
+      "assets/project-images/Screenshot_1777144944.png",
+      "assets/project-images/Screenshot_1777144946.png",
+      "assets/project-images/Screenshot_1777144956.png",
+      "assets/project-images/Screenshot_1777144960.png",
+      "assets/project-images/Screenshot_1777144965.png"
+    ],
+    "keyFeatures": [
+      "Dynamic Itinerary Planner: Drag-and-drop interface for managing daily travel activities.",
+      "Real-time Expense Tracking: Multi-currency support with automatic conversion and budget alerts.",
+      "Interactive Maps: Custom map integration for destination discovery and navigation.",
+      "Offline Sync: Seamless data persistence for travelers in remote areas with low connectivity.",
+      "Social Networking: A community hub for sharing travel stories and finding travel partners."
+    ],
+    "techUsed": {
+      "core": [
+        "Flutter: Modern UI toolkit for cross-platform app development.",
+        "Dart: Robust typed language for high-performance logic.",
+        "State Management: Bloc architecture for scalable state handling."
+      ],
+      "backend": [
+        "Firebase: Authentication, Cloud Firestore, and Storage.",
+        "Node.js: Custom cloud functions for complex data processing.",
+        "Google Maps API: Location services and route optimization."
+      ]
+    },
+    "results": [
+      { "number": "0$", "info": "Map API costs using custom geospatial math" },
+      { "number": "100%", "info": "Secure architecture with zero exposed key" },
+      { "number": "2x", "info": "Revenue streams via native In-App Purchase" },
+      { "number": "200km", "info": "Real-time radius discovery engine" }
+    ]
+  },
+  "tablepilot": {
+    "title": "TablePilot",
+    "shortDescription": "TablePilot is a professional-grade restaurant management suite designed to streamline operations and enhance the dining experience through atomic transaction integrity.",
+    "role": "Full Stack Developer",
+    "platform": "Web & Mobile",
+    "year": "2025",
+    "githubUrl": "#",
+    "heroImage": "assets/project-thumbnail/tablepilot.png",
+    "overview": {
+      "about": "TablePilot focuses on dual-role architecture for both Users and Owners.",
+      "approach": "Built with high-concurrency modules and AWS Media Pipeline."
+    },
+    "screenshots": [
+      "assets/project-images/tablepilot.png",
+      "assets/project-images/tablepilot.png",
+      "assets/project-images/tablepilot.png",
+      "assets/project-images/tablepilot.png"
+    ],
+    "keyFeatures": [
+      "Dynamic Floor Engine",
+      "Real-time Synchronization",
+      "Atomic Transactions"
+    ],
+    "techUsed": {
+      "core": ["React", "State Machine", "Atomic Transactions"],
+      "backend": ["AWS", "Node.js", "PostgreSQL"]
+    },
+    "results": [
+      { "number": "30%", "info": "Reduction in table turnaround time" },
+      { "number": "15k+", "info": "Active monthly transactions" }
+    ]
+  }
+}

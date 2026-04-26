@@ -62,16 +62,107 @@ function handleScrollSpy() {
 
     if (currentSectionId) {
         navLinks.forEach(link => {
+            link.classList.remove('active');
             const href = link.getAttribute('href');
-            const isTarget = href.endsWith(`#${currentSectionId}`);
-            
-            if (isTarget) {
+            if (href.includes(`#${currentSectionId}`)) {
                 link.classList.add('active');
                 updateIndicator(link);
-            } else {
-                link.classList.remove('active');
             }
         });
+    }
+}
+
+// --- Dynamic Project Data Loader ---
+async function loadProjectDetails() {
+    const isProjectPage = window.location.pathname.includes('work-details.html');
+    if (!isProjectPage) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const projectId = params.get('id');
+    if (!projectId) return;
+
+    console.log('Loading project:', projectId);
+
+    try {
+        const response = await fetch('data/projects.json');
+        const data = await response.json();
+        const project = data[projectId];
+
+        if (!project) {
+            console.error('Project not found in JSON:', projectId);
+            return;
+        }
+
+        // Update Text Fields
+        const fields = ['title', 'shortDescription', 'role', 'platform', 'year'];
+        fields.forEach(field => {
+            const el = document.querySelector(`[data-project-field="${field}"]`);
+            if (el && project[field]) el.innerText = project[field];
+        });
+
+        // Update URLs
+        const githubBtn = document.querySelector('[data-project-field="githubUrl"]');
+        if (githubBtn && project.githubUrl) githubBtn.href = project.githubUrl;
+
+        // Hero Image
+        const heroImg = document.querySelector('[data-project-field="heroImage"]');
+        if (heroImg) {
+            heroImg.src = project.heroImage;
+            heroImg.alt = project.title;
+        }
+
+        // Overview
+        const overviewAbout = document.querySelector('#overview .detail-text-block p');
+        if (overviewAbout) overviewAbout.innerText = project.overview.about;
+
+        // Note: Approach might be the second paragraph
+        const paragraphs = document.querySelectorAll('.detail-text-block p');
+        if (project.overview.approach && paragraphs.length > 1) {
+            paragraphs[1].innerText = project.overview.approach;
+        }
+
+        // Screenshots Grid
+        const screenGrid = document.querySelector('.work-grid-brutalist');
+        if (screenGrid && project.screenshots) {
+            screenGrid.innerHTML = project.screenshots.map(src => `
+                <div class="screenshot-card">
+                    <img src="${src}" alt="App Screen">
+                </div>
+            `).join('');
+        }
+
+        // Features List
+        const featureList = document.querySelector('.feature-bullet-list');
+        if (featureList && project.keyFeatures) {
+            featureList.innerHTML = project.keyFeatures.map(feat => `<li>${feat}</li>`).join('');
+        }
+
+        // Tech Stack
+        const techCols = document.querySelectorAll('.tech-detail-col ul');
+        if (techCols.length >= 2) {
+            techCols[0].innerHTML = project.techUsed.core.map(item => `<li>${item}</li>`).join('');
+            techCols[1].innerHTML = project.techUsed.backend.map(item => `<li>${item}</li>`).join('');
+        }
+
+        // Results
+        const statsGrid = document.querySelector('.stats-grid-brutalist');
+        if (statsGrid && project.results) {
+            statsGrid.innerHTML = project.results.map(stat => `
+                <div class="stat-card">
+                    <div class="stat-number">${stat.number}</div>
+                    <div class="stat-info">${stat.info}</div>
+                </div>
+            `).join('');
+        }
+
+        // Reset Scroll
+        window.scrollTo(0, 0);
+
+        // Force line number update after content injection
+        setTimeout(updateLineNumbers, 100);
+
+    } catch (err) {
+        console.error('Error loading project details:', err);
     }
 }
 
@@ -163,6 +254,7 @@ class ScrambleText {
 
 // --- Page Initialization Logic ---
 function initPageEffects() {
+    loadProjectDetails();
     // 1. Scramble Elements
     const scrambleElements = document.querySelectorAll('[data-scramble]');
     const scrambleObserver = new IntersectionObserver((entries) => {
