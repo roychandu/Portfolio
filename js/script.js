@@ -46,17 +46,16 @@ function updateIndicator(activeLink) {
 
 // --- Scroll Spy Logic ---
 function handleScrollSpy() {
-    const scrollY = window.pageYOffset + 150;
+    const scrollY = window.pageYOffset + 200; // Calibrated offset for top-nav
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.sidebar-link');
     let currentSectionId = '';
 
+    // Find the last section that has passed the scroll threshold
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute('id');
-        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-            currentSectionId = sectionId;
+        if (scrollY >= sectionTop) {
+            currentSectionId = section.getAttribute('id');
         }
     });
 
