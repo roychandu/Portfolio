@@ -387,14 +387,32 @@ async function navigateTo(url) {
             const newMain = newDoc.querySelector('.main-content');
             const newSidebar = newDoc.querySelector('.sidebar-right');
 
-            if (newMain && newSidebar) {
+            if (newMain) {
+                // Update Main Content
                 mainContent.innerHTML = newMain.innerHTML;
-                sidebarRight.innerHTML = newSidebar.innerHTML;
                 
+                // Handle Sidebar Visibility & Layout
+                if (newSidebar) {
+                    sidebarRight.innerHTML = newSidebar.innerHTML;
+                    sidebarRight.style.display = 'flex';
+                    mainContent.classList.remove('no-right-sidebar');
+                } else {
+                    sidebarRight.style.display = 'none';
+                    mainContent.classList.add('no-right-sidebar');
+                }
+                
+                // Update Classes in newDoc as well for next load
+                if (newMain.classList.contains('no-right-sidebar')) {
+                    mainContent.classList.add('no-right-sidebar');
+                } else if (newSidebar) {
+                    mainContent.classList.remove('no-right-sidebar');
+                }
+
                 mainContent.classList.remove('content-exiting');
-                sidebarRight.classList.remove('content-exiting');
+                if (newSidebar) sidebarRight.classList.remove('content-exiting');
+                
                 mainContent.classList.add('content-entering');
-                sidebarRight.classList.add('content-entering');
+                if (newSidebar) sidebarRight.classList.add('content-entering');
 
                 window.history.pushState({}, '', url);
                 document.title = newDoc.title;
@@ -410,7 +428,7 @@ async function navigateTo(url) {
 
                 requestAnimationFrame(() => {
                     mainContent.classList.remove('content-entering');
-                    sidebarRight.classList.remove('content-entering');
+                    if (newSidebar) sidebarRight.classList.remove('content-entering');
                 });
             }
         }, 400); 

@@ -389,6 +389,11 @@ h6 {
     flex-direction: column;
 }
 
+.main-content.no-right-sidebar {
+    margin-right: 0;
+    width: calc(100% - 320px);
+}
+
 /* Line Number Gutter (VS Code Style) */
 .line-numbers-gutter {
     position: absolute;
