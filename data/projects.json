@@ -6,7 +6,8 @@
     "platform": "iOS & Android",
     "year": "2026",
     "githubUrl": "#",
-    "heroImage": "assets/project-poster/image%208.png",
+    "thumbnail": "assets/project-thumbnail/backpackr.png",
+    "project-poster": "assets/project-poster/image 8.png",
     "overview": {
       "about": "This is a highly dynamic travel application that focuses on providing a seamless user experience for backpackers and solo travelers. The goal was to consolidate itinerary management, expense tracking, and social networking into a single, cohesive platform.",
       "approach": "We followed a modular architecture approach to ensure scalability. By using Bloc for state management, we were able to decouple the business logic from the UI, making the app highly performant and easy to maintain. The backend was integrated using Firebase for real-time updates and secure authentication."
@@ -39,10 +40,22 @@
       ]
     },
     "results": [
-      { "number": "0$", "info": "Map API costs using custom geospatial math" },
-      { "number": "100%", "info": "Secure architecture with zero exposed key" },
-      { "number": "2x", "info": "Revenue streams via native In-App Purchase" },
-      { "number": "200km", "info": "Real-time radius discovery engine" }
+      {
+        "number": "0$",
+        "info": "Map API costs using custom geospatial math"
+      },
+      {
+        "number": "100%",
+        "info": "Secure architecture with zero exposed key"
+      },
+      {
+        "number": "2x",
+        "info": "Revenue streams via native In-App Purchase"
+      },
+      {
+        "number": "200km",
+        "info": "Real-time radius discovery engine"
+      }
     ]
   },
   "tablepilot": {
@@ -52,7 +65,8 @@
     "platform": "Web & Mobile",
     "year": "2025",
     "githubUrl": "#",
-    "heroImage": "assets/project-thumbnail/tablepilot.png",
+    "thumbnail": "assets/project-thumbnail/tablepilot.png",
+    "project-poster": "assets/project-poster/image 8.png",
     "overview": {
       "about": "TablePilot focuses on dual-role architecture for both Users and Owners.",
       "approach": "Built with high-concurrency modules and AWS Media Pipeline."
@@ -69,12 +83,38 @@
       "Atomic Transactions"
     ],
     "techUsed": {
-      "core": ["React", "State Machine", "Atomic Transactions"],
-      "backend": ["AWS", "Node.js", "PostgreSQL"]
+      "core": [
+        "React",
+        "State Machine",
+        "Atomic Transactions"
+      ],
+      "backend": [
+        "AWS",
+        "Node.js",
+        "PostgreSQL"
+      ]
     },
     "results": [
-      { "number": "30%", "info": "Reduction in table turnaround time" },
-      { "number": "15k+", "info": "Active monthly transactions" }
+      {
+        "number": "30%",
+        "info": "Reduction in table turnaround time"
+      },
+      {
+        "number": "15k+",
+        "info": "Active monthly transactions"
+      }
     ]
+  },
+  "content-planner": {
+    "title": "Content Planner",
+    "shortDescription": "A comprehensive tool for planning and scheduling social media content across multiple platforms.",
+    "thumbnail": "assets/project-thumbnail/contentplanner.png",
+    "project-poster": "assets/project-poster/image 8.png"
+  },
+  "daily-expense": {
+    "title": "Daily Expense",
+    "shortDescription": "An intuitive expense tracker with real-time analytics and multi-currency support.",
+    "thumbnail": "assets/project-thumbnail/expense.png",
+    "project-poster": "assets/project-poster/image 8.png"
   }
 }

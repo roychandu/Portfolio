@@ -113,6 +113,40 @@ function handleScrollSpy() {
     }
 }
 
+// --- Project Gallery Loader ---
+async function loadProjectGallery() {
+    const workGrid = document.getElementById('work-grid');
+    if (!workGrid) return;
+
+    try {
+        const response = await fetch('data/projects.json');
+        const projects = await response.json();
+        
+        workGrid.innerHTML = ''; // Clear loader
+
+        Object.keys(projects).forEach(id => {
+            const project = projects[id];
+            const card = document.createElement('a');
+            card.href = `work-details.html?id=${id}`;
+            card.className = 'work-card';
+            
+            card.innerHTML = `
+                <div class="card-header">
+                    <h3 class="card-title">${project.title}</h3>
+                    <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+                </div>
+                <div class="card-body">
+                    <img src="${project.thumbnail}" alt="${project.title} Project">
+                </div>
+            `;
+            
+            workGrid.appendChild(card);
+        });
+    } catch (err) {
+        console.error('Error loading project gallery:', err);
+    }
+}
+
 // --- Dynamic Project Data Loader ---
 async function loadProjectDetails() {
     const isProjectPage = window.location.pathname.includes('work-details.html');
@@ -148,7 +182,7 @@ async function loadProjectDetails() {
         // Hero Image
         const heroImg = document.querySelector('[data-project-field="heroImage"]');
         if (heroImg) {
-            heroImg.src = project.heroImage;
+            heroImg.src = project['project-poster'];
             heroImg.alt = project.title;
         }
 
@@ -502,6 +536,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadSharedComponents();
     initPageEffects();
     initRoleRotation();
+    loadProjectGallery();
 
     // Intercept Navigation
     document.body.addEventListener('click', (e) => {
