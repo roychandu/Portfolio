@@ -1,5 +1,13 @@
+// --- Base Path Helper (works locally AND on GitHub Pages subdirectory) ---
+function getBasePath() {
+    const path = window.location.pathname;
+    // Find the last '/' to get the directory of the current page
+    return path.substring(0, path.lastIndexOf('/') + 1);
+}
+
 // --- Component Loader ---
 async function loadSharedComponents() {
+    const base = getBasePath();
     const components = [
         { id: '.top-nav', file: 'components/shared/top-nav.html' },
         { id: '.sidebar-left', file: 'components/shared/sidebar-left.html' },
@@ -10,7 +18,7 @@ async function loadSharedComponents() {
         const el = document.querySelector(comp.id);
         if (el) {
             try {
-                const response = await fetch(comp.file);
+                const response = await fetch(base + comp.file);
                 const html = await response.text();
                 el.innerHTML = html;
             } catch (err) {
@@ -119,7 +127,7 @@ async function loadProjectGallery() {
     if (!workGrid) return;
 
     try {
-        const response = await fetch('data/projects.json');
+        const response = await fetch(getBasePath() + 'data/projects.json');
         const projects = await response.json();
         
         workGrid.innerHTML = ''; // Clear loader
@@ -159,7 +167,7 @@ async function loadProjectDetails() {
     console.log('Loading project:', projectId);
 
     try {
-        const response = await fetch('data/projects.json');
+        const response = await fetch(getBasePath() + 'data/projects.json');
         const data = await response.json();
         const project = data[projectId];
 
