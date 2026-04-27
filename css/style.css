@@ -1151,7 +1151,7 @@ h6 {
 
 .social-icons-footer a {
     color: var(--text-slate);
-    font-size: 1rem;
+    font-size: 1.4rem;
     transition: var(--transition);
 }
 
