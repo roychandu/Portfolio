@@ -340,29 +340,47 @@ function initPageEffects() {
         });
     });
 
-    // 4. Scroll Reveal
+    // 4. Scroll Reveal & Parallax Triggers
     const revealContainers = document.querySelectorAll('.scroll-reveal-sliding');
-    if (revealContainers.length > 0) {
-        const handleRevealScroll = () => {
-            const viewportHeight = window.innerHeight;
-            const scrollPos = window.scrollY;
-            revealContainers.forEach(container => {
-                const rect = container.getBoundingClientRect();
-                if (rect.top < viewportHeight && rect.bottom > 0) {
-                    const elementTop = container.offsetTop;
-                    const speed = parseFloat(container.getAttribute('data-speed')) || 1.2;
-                    const diff = (elementTop - scrollPos) - (viewportHeight * 0.2);
-                    const movement = Math.max(0, diff * speed);
-                    const leftElements = container.querySelectorAll('.reveal-item-left, .reveal-filler.left');
-                    const rightElements = container.querySelectorAll('.reveal-item-right, .reveal-filler.right');
-                    leftElements.forEach(el => el.style.transform = `translateX(-${movement}px)`);
-                    rightElements.forEach(el => el.style.transform = `translateX(${movement}px)`);
+    const aboutCard = document.querySelector('.about-profile-card');
+    
+    const handleRevealScroll = () => {
+        const viewportHeight = window.innerHeight;
+        const scrollPos = window.scrollY;
+
+        // Sliding Doors Effect
+        revealContainers.forEach(container => {
+            const rect = container.getBoundingClientRect();
+            if (rect.top < viewportHeight && rect.bottom > 0) {
+                const elementTop = container.offsetTop;
+                const speed = parseFloat(container.getAttribute('data-speed')) || 1.2;
+                const diff = (elementTop - scrollPos) - (viewportHeight * 0.2);
+                const movement = Math.max(0, diff * speed);
+                const leftElements = container.querySelectorAll('.reveal-item-left, .reveal-filler.left');
+                const rightElements = container.querySelectorAll('.reveal-item-right, .reveal-filler.right');
+                leftElements.forEach(el => el.style.transform = `translateX(-${movement}px)`);
+                rightElements.forEach(el => el.style.transform = `translateX(${movement}px)`);
+            }
+        });
+
+        // About Card Parallax Scroll Trigger
+        if (aboutCard) {
+            const rect = aboutCard.getBoundingClientRect();
+            const parent = aboutCard.closest('.about-layout');
+            if (parent) {
+                const parentRect = parent.getBoundingClientRect();
+                if (parentRect.top < viewportHeight && parentRect.bottom > 0) {
+                    // Subtle parallax when sticky
+                    const speed = 0.05;
+                    const movement = (parentRect.top) * speed;
+                    aboutCard.style.transform = `translateY(${movement}px)`;
                 }
-            });
-        };
-        window.addEventListener('scroll', handleRevealScroll);
-        handleRevealScroll();
-    }
+            }
+        }
+    };
+    
+    window.addEventListener('scroll', handleRevealScroll);
+    handleRevealScroll();
 
     // 5. Line Numbers Generation
     updateLineNumbers();
