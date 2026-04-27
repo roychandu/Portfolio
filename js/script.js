@@ -32,6 +32,48 @@ async function loadSharedComponents() {
     });
 }
 
+// --- Role Typewriter Logic ---
+function initRoleRotation() {
+    const roles = [
+        "Flutter & App Developer",
+        "Cross-platform Mobile App & Web Developer"
+    ];
+    let roleIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    let typeSpeed = 100;
+    const roleEl = document.getElementById('rotating-role');
+    
+    if (!roleEl) return;
+
+    function type() {
+        const currentRole = roles[roleIdx];
+        
+        if (isDeleting) {
+            roleEl.innerText = currentRole.substring(0, charIdx - 1);
+            charIdx--;
+            typeSpeed = 50;
+        } else {
+            roleEl.innerText = currentRole.substring(0, charIdx + 1);
+            charIdx++;
+            typeSpeed = 100;
+        }
+
+        if (!isDeleting && charIdx === currentRole.length) {
+            isDeleting = true;
+            typeSpeed = 2000; // Pause at end
+        } else if (isDeleting && charIdx === 0) {
+            isDeleting = false;
+            roleIdx = (roleIdx + 1) % roles.length;
+            typeSpeed = 500; // Pause before next
+        }
+
+        setTimeout(type, typeSpeed);
+    }
+
+    type();
+}
+
 // --- Sidebar Indicator Logic ---
 function updateIndicator(activeLink) {
     const indicator = document.querySelector('.nav-active-indicator');
@@ -459,6 +501,7 @@ async function navigateTo(url) {
 document.addEventListener('DOMContentLoaded', async () => {
     await loadSharedComponents();
     initPageEffects();
+    initRoleRotation();
 
     // Intercept Navigation
     document.body.addEventListener('click', (e) => {
