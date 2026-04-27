@@ -46,6 +46,7 @@
                 <li><a href="#key-features" class="sidebar-link">Key Features</a></li>
                 <li><a href="#tech-used" class="sidebar-link">Technology Used</a></li>
                 <li><a href="#results" class="sidebar-link">Result & Stats</a></li>
+                <li><a href="#project-video" class="sidebar-link">Project Video</a></li>
                 <li><a href="#see-more" class="sidebar-link">See more</a></li>
             </ul>
         </nav>
@@ -61,10 +62,16 @@
         <!-- Project Hero -->
         <section id="about-project" class="project-detail-hero">
             <div class="container-minimal">
-                <a href="work.html" class="back-link">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>Back to all works</span>
-                </a>
+                <div class="project-header-actions">
+                    <a href="work.html" class="back-link">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back to all works</span>
+                    </a>
+                    <a href="#project-video" class="video-shortcut-badge">
+                        <i class="fas fa-play"></i>
+                        <span>Watch Video Overview</span>
+                    </a>
+                </div>
 
                 <h1 class="detail-title" data-project-field="title">Loading Project...</h1>
 
@@ -213,6 +220,23 @@
                     <div class="stat-card">
                         <div class="stat-number">...</div>
                         <div class="stat-info">Loading project impact and results...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Video Overview -->
+        <section id="project-video" class="project-detail-section">
+            <div class="container-minimal">
+                <div class="detail-section-header">
+                    <div class="pre-title" data-scramble="Video Overview">Video Overview</div>
+                </div>
+                
+                <div class="video-player-container">
+                    <div class="video-wrapper">
+                        <video controls poster="" data-project-field="videoUrl">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
             </div>

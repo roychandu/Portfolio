@@ -186,6 +186,14 @@ async function loadProjectDetails() {
             heroImg.alt = project.title;
         }
 
+        // Project Video
+        const videoEl = document.querySelector('[data-project-field="videoUrl"]');
+        if (videoEl && project.videoUrl) {
+            videoEl.src = project.videoUrl;
+            // Optionally set the poster image for the video
+            videoEl.poster = project['project-poster'];
+        }
+
         // Overview
         const overviewAbout = document.querySelector('#overview .detail-text-block p');
         if (overviewAbout) overviewAbout.innerText = project.overview.about;
@@ -538,7 +546,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initRoleRotation();
     loadProjectGallery();
 
-    // Intercept Navigation
+    // Intercept Page Navigation
     document.body.addEventListener('click', (e) => {
         const link = e.target.closest('a');
         if (!link) return;
@@ -550,6 +558,28 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (targetPage !== currentPath && targetPage !== '') {
                 e.preventDefault();
                 navigateTo(href);
+            }
+        }
+    });
+
+    // Smooth Scroll for Anchor Links
+    document.body.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#') && href.length > 1) {
+            const targetId = href.substring(1);
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+                e.preventDefault();
+                const headerOffset = 80;
+                const elementPosition = targetEl.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
             }
         }
     });

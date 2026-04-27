@@ -7,6 +7,7 @@
     "year": "2026",
     "githubUrl": "#",
     "thumbnail": "assets/project-thumbnail/backpackr.png",
+    "videoUrl": "assets/project-videos/backpackr.mp4",
     "project-poster": "assets/project-poster/image 8.png",
     "overview": {
       "about": "This is a highly dynamic travel application that focuses on providing a seamless user experience for backpackers and solo travelers. The goal was to consolidate itinerary management, expense tracking, and social networking into a single, cohesive platform.",
@@ -40,22 +41,10 @@
       ]
     },
     "results": [
-      {
-        "number": "0$",
-        "info": "Map API costs using custom geospatial math"
-      },
-      {
-        "number": "100%",
-        "info": "Secure architecture with zero exposed key"
-      },
-      {
-        "number": "2x",
-        "info": "Revenue streams via native In-App Purchase"
-      },
-      {
-        "number": "200km",
-        "info": "Real-time radius discovery engine"
-      }
+      { "number": "0$", "info": "Map API costs using custom geospatial math" },
+      { "number": "100%", "info": "Secure architecture with zero exposed key" },
+      { "number": "2x", "info": "Revenue streams via native In-App Purchase" },
+      { "number": "200km", "info": "Real-time radius discovery engine" }
     ]
   },
   "tablepilot": {
@@ -66,6 +55,7 @@
     "year": "2025",
     "githubUrl": "#",
     "thumbnail": "assets/project-thumbnail/tablepilot.png",
+    "videoUrl": "assets/project-videos/tablepilot.mp4",
     "project-poster": "assets/project-poster/image 8.png",
     "overview": {
       "about": "TablePilot focuses on dual-role architecture for both Users and Owners.",
@@ -83,38 +73,33 @@
       "Atomic Transactions"
     ],
     "techUsed": {
-      "core": [
-        "React",
-        "State Machine",
-        "Atomic Transactions"
-      ],
-      "backend": [
-        "AWS",
-        "Node.js",
-        "PostgreSQL"
-      ]
+      "core": ["React", "State Machine", "Atomic Transactions"],
+      "backend": ["AWS", "Node.js", "PostgreSQL"]
     },
     "results": [
-      {
-        "number": "30%",
-        "info": "Reduction in table turnaround time"
-      },
-      {
-        "number": "15k+",
-        "info": "Active monthly transactions"
-      }
+      { "number": "30%", "info": "Reduction in table turnaround time" },
+      { "number": "15k+", "info": "Active monthly transactions" }
     ]
   },
   "content-planner": {
     "title": "Content Planner",
     "shortDescription": "A comprehensive tool for planning and scheduling social media content across multiple platforms.",
     "thumbnail": "assets/project-thumbnail/contentplanner.png",
+    "videoUrl": "assets/project-videos/contentplanner.mp4",
     "project-poster": "assets/project-poster/image 8.png"
   },
   "daily-expense": {
     "title": "Daily Expense",
     "shortDescription": "An intuitive expense tracker with real-time analytics and multi-currency support.",
     "thumbnail": "assets/project-thumbnail/expense.png",
+    "videoUrl": "assets/project-videos/expense.mp4",
+    "project-poster": "assets/project-poster/image 8.png"
+  },
+  "fitness-pro": {
+    "title": "Fitness Pro",
+    "shortDescription": "Personalized workout tracking and health monitoring app built for cross-platform performance.",
+    "thumbnail": "assets/project-thumbnail/fitness.png",
+    "videoUrl": "assets/project-videos/fitness.mp4",
     "project-poster": "assets/project-poster/image 8.png"
   }
 }
