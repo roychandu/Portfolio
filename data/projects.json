@@ -41,10 +41,22 @@
       ]
     },
     "results": [
-      { "number": "0$", "info": "Map API costs using custom geospatial math" },
-      { "number": "100%", "info": "Secure architecture with zero exposed key" },
-      { "number": "2x", "info": "Revenue streams via native In-App Purchase" },
-      { "number": "200km", "info": "Real-time radius discovery engine" }
+      {
+        "number": "0$",
+        "info": "Map API costs using custom geospatial math"
+      },
+      {
+        "number": "100%",
+        "info": "Secure architecture with zero exposed key"
+      },
+      {
+        "number": "2x",
+        "info": "Revenue streams via native In-App Purchase"
+      },
+      {
+        "number": "200km",
+        "info": "Real-time radius discovery engine"
+      }
     ]
   },
   "tablepilot": {
@@ -73,33 +85,1159 @@
       "Atomic Transactions"
     ],
     "techUsed": {
-      "core": ["React", "State Machine", "Atomic Transactions"],
-      "backend": ["AWS", "Node.js", "PostgreSQL"]
+      "core": [
+        "React",
+        "State Machine",
+        "Atomic Transactions"
+      ],
+      "backend": [
+        "AWS",
+        "Node.js",
+        "PostgreSQL"
+      ]
     },
     "results": [
-      { "number": "30%", "info": "Reduction in table turnaround time" },
-      { "number": "15k+", "info": "Active monthly transactions" }
+      {
+        "number": "30%",
+        "info": "Reduction in table turnaround time"
+      },
+      {
+        "number": "15k+",
+        "info": "Active monthly transactions"
+      }
     ]
   },
   "content-planner": {
     "title": "Content Planner",
-    "shortDescription": "A comprehensive tool for planning and scheduling social media content across multiple platforms.",
+    "shortDescription": "A content planning and scheduling tool designed to organize publishing calendars, campaign pipelines, and repeatable social media workflows from one place.",
+    "role": "App Developer",
+    "platform": "Mobile",
+    "year": "2025",
+    "githubUrl": "#",
     "thumbnail": "assets/project-thumbnail/contentplanner.png",
-    "videoUrl": "assets/project-videos/contentplanner.mp4",
-    "project-poster": "assets/project-poster/image 8.png"
+    "videoUrl": "",
+    "project-poster": "assets/project-thumbnail/contentplanner.png",
+    "overview": {
+      "about": "Content Planner was built to simplify how creators and teams schedule, organize, and monitor content tasks across multiple publishing channels.",
+      "approach": "The product focused on clarity in planning flows, quick data entry, and simple timeline visibility so recurring publishing work could be handled with less friction."
+    },
+    "screenshots": [
+      "assets/project-thumbnail/contentplanner.png"
+    ],
+    "keyFeatures": [
+      "Calendar-driven content scheduling workflows.",
+      "Organized planning for multi-platform publishing tasks.",
+      "Simple task segmentation by campaign or content category.",
+      "Mobile-first content management interactions.",
+      "Repeatable workflows for consistent publishing cadence."
+    ],
+    "techUsed": {
+      "core": [
+        "Flutter: Cross-platform client-side application development.",
+        "Dart: App logic and screen behavior management.",
+        "Structured UI flows: Planning, tracking, and scheduling screens."
+      ],
+      "backend": [
+        "API-based data sync: Content and schedule state management.",
+        "Remote persistence: Timeline and task storage workflows.",
+        "Notification-ready architecture: Reminder and follow-up support."
+      ]
+    },
+    "results": [
+      {
+        "number": "Plan",
+        "info": "Centralized content planning and scheduling workflow."
+      },
+      {
+        "number": "Mobile",
+        "info": "Quick access to publishing tasks from a mobile interface."
+      },
+      {
+        "number": "Flow",
+        "info": "Structured campaign organization for repeatable execution."
+      },
+      {
+        "number": "Simple",
+        "info": "Reduced friction for day-to-day publishing management."
+      }
+    ]
   },
   "daily-expense": {
     "title": "Daily Expense",
-    "shortDescription": "An intuitive expense tracker with real-time analytics and multi-currency support.",
+    "shortDescription": "A daily expense tracking app built to help users record spending, monitor trends, and keep routine finances organized through a simple mobile workflow.",
+    "role": "App Developer",
+    "platform": "Mobile",
+    "year": "2025",
+    "githubUrl": "#",
     "thumbnail": "assets/project-thumbnail/expense.png",
-    "videoUrl": "assets/project-videos/expense.mp4",
-    "project-poster": "assets/project-poster/image 8.png"
+    "videoUrl": "",
+    "project-poster": "assets/project-thumbnail/expense.png",
+    "overview": {
+      "about": "Daily Expense was created as a lightweight personal finance tool for capturing transactions, understanding spending behavior, and maintaining consistent budget awareness.",
+      "approach": "The application prioritized clean data entry, readable summaries, and straightforward expense categorization so users could manage personal finances without friction."
+    },
+    "screenshots": [
+      "assets/project-thumbnail/expense.png"
+    ],
+    "keyFeatures": [
+      "Fast expense entry for routine financial tracking.",
+      "Category-based spending organization.",
+      "Readable summaries and budget awareness views.",
+      "Mobile-first interactions for on-the-go updates.",
+      "Simple workflow for repeated daily usage."
+    ],
+    "techUsed": {
+      "core": [
+        "Flutter: Cross-platform mobile interface development.",
+        "Dart: Client-side business logic for expense handling.",
+        "Analytics-oriented UI: Summary and category visibility."
+      ],
+      "backend": [
+        "Local or remote persistence flows: Secure transaction storage.",
+        "API-ready architecture: Expandable sync and backup handling.",
+        "Data aggregation logic: Spending summary generation."
+      ]
+    },
+    "results": [
+      {
+        "number": "Track",
+        "info": "Consistent capture of routine user spending activity."
+      },
+      {
+        "number": "Budget",
+        "info": "Clearer visibility into expense categories and trends."
+      },
+      {
+        "number": "Mobile",
+        "info": "Quick personal finance updates from a simple app flow."
+      },
+      {
+        "number": "Daily",
+        "info": "Designed for repeat usage with low interaction overhead."
+      }
+    ]
   },
   "fitness-pro": {
     "title": "Fitness Pro",
-    "shortDescription": "Personalized workout tracking and health monitoring app built for cross-platform performance.",
+    "shortDescription": "A personalized fitness tracking app focused on workouts, health progress, and routine monitoring through a mobile-first training experience.",
+    "role": "App Developer",
+    "platform": "Mobile",
+    "year": "2025",
+    "githubUrl": "#",
     "thumbnail": "assets/project-thumbnail/fitness.png",
-    "videoUrl": "assets/project-videos/fitness.mp4",
-    "project-poster": "assets/project-poster/image 8.png"
+    "videoUrl": "",
+    "project-poster": "assets/project-thumbnail/fitness.png",
+    "overview": {
+      "about": "Fitness Pro was built to give users a structured place to manage workout activity, monitor fitness progress, and stay engaged with health goals over time.",
+      "approach": "The app centered on intuitive workout flows, clean progress presentation, and repeatable tracking interactions that support daily or weekly fitness habits."
+    },
+    "screenshots": [
+      "assets/project-thumbnail/fitness.png"
+    ],
+    "keyFeatures": [
+      "Workout tracking and health-oriented progress monitoring.",
+      "Structured screens for routine-based fitness activity.",
+      "Mobile-friendly interaction patterns for repeat engagement.",
+      "Simple progress visibility for consistency and follow-through.",
+      "Goal-focused layout for personal health workflows."
+    ],
+    "techUsed": {
+      "core": [
+        "Flutter: Cross-platform fitness application delivery.",
+        "Dart: Client-side state and activity logic.",
+        "User-centric UI: Progress and workout visibility."
+      ],
+      "backend": [
+        "API-based data handling: Progress and user record sync.",
+        "Remote state persistence: Workout history retention.",
+        "Expandable service layer: Health and engagement integrations."
+      ]
+    },
+    "results": [
+      {
+        "number": "Track",
+        "info": "Workout and activity logging in a mobile-first flow."
+      },
+      {
+        "number": "Goals",
+        "info": "Structured support for habit-building and progress review."
+      },
+      {
+        "number": "Mobile",
+        "info": "Quick training updates and performance visibility."
+      },
+      {
+        "number": "Focus",
+        "info": "Built around clarity, consistency, and repeated use."
+      }
+    ]
+  },
+  "recipe": {
+    "title": "Recipe Studio",
+    "shortDescription": "A recipe discovery and meal inspiration app designed to make cooking ideas, browsing flows, and saved recipe exploration easier on mobile devices.",
+    "role": "App Developer",
+    "platform": "Mobile",
+    "year": "2025",
+    "githubUrl": "#",
+    "thumbnail": "assets/project-thumbnail/recipe.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-thumbnail/recipe.png",
+    "overview": {
+      "about": "Recipe Studio was designed as a mobile recipe exploration experience where users can discover meal ideas, browse curated content, and interact with food inspiration in a simple visual layout.",
+      "approach": "The product emphasized clean discovery patterns, readable content presentation, and low-friction browsing so users can move quickly from inspiration to recipe detail."
+    },
+    "screenshots": [
+      "assets/project-thumbnail/recipe.png"
+    ],
+    "keyFeatures": [
+      "Recipe browsing and meal discovery flows.",
+      "Visual-first mobile layout for food content.",
+      "Organized content presentation for easier navigation.",
+      "Detail-focused viewing experience for cooking ideas.",
+      "Simple interaction model for regular content exploration."
+    ],
+    "techUsed": {
+      "core": [
+        "Flutter: Cross-platform mobile app development.",
+        "Dart: Client-side app logic and flow management.",
+        "Content-focused UI: Discovery and detail view layouts."
+      ],
+      "backend": [
+        "API-driven content delivery: Recipe and category handling.",
+        "Remote media support: Image and content asset loading.",
+        "Scalable data structure: Expandable content organization."
+      ]
+    },
+    "results": [
+      {
+        "number": "Discover",
+        "info": "Mobile-first recipe and meal inspiration browsing."
+      },
+      {
+        "number": "Visual",
+        "info": "Image-oriented presentation for better content engagement."
+      },
+      {
+        "number": "Simple",
+        "info": "Low-friction browsing from discovery to recipe detail."
+      },
+      {
+        "number": "Content",
+        "info": "Structured recipe organization for easier exploration."
+      }
+    ]
+  },
+  "bharat-news-first": {
+    "title": "Bharat News First",
+    "shortDescription": "Bharat News First is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
+    "role": "FlutterFlow Developer & API Integrator",
+    "platform": "Android",
+    "year": "2025",
+    "githubUrl": "https://play.google.com/store/apps/details?id=com.mycompany.bharatnewsfirst&hl=en_IN",
+    "thumbnail": "assets/project-thumbnail/bharat news first thumbnail.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-poster/bharat-news-first-poster.png",
+    "overview": {
+      "about": "Bharat News First was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
+      "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
+    },
+    "screenshots": [
+      "assets/project-images/bharat-news-first01.png",
+      "assets/project-images/bharat-news-first02.png",
+      "assets/project-images/bharat-news-first03.png",
+      "assets/project-images/bharat-news-first04.png",
+      "assets/project-images/bharat-news-first05.png"
+    ],
+    "keyFeatures": [
+      "FlutterFlow-built Android news experience with fast iteration and clean UI flows.",
+      "WordPress REST API integration for articles, categories, banners, and media content.",
+      "Custom API endpoints added for app-specific feed shaping and backend workflows.",
+      "Mobile reading flow with category navigation, story listings, and article detail screens.",
+      "Publisher-controlled content updates delivered from the WordPress side."
+    ],
+    "techUsed": {
+      "core": [
+        "FlutterFlow: Rapid mobile UI development and screen orchestration.",
+        "Flutter and Dart: Generated application layer for Android delivery.",
+        "Structured mobile layouts: Feed, category, and article detail interfaces."
+      ],
+      "backend": [
+        "WordPress REST API: Article, category, image, and content delivery.",
+        "Custom APIs: Extra endpoints for app-specific logic and data shaping.",
+        "Remote media handling: News asset synchronization and live publishing support."
+      ]
+    },
+    "results": [
+      {
+        "number": "FlutterFlow",
+        "info": "Production news app delivered with a fast visual development workflow."
+      },
+      {
+        "number": "WP REST",
+        "info": "WordPress-driven publishing connected directly to the mobile app."
+      },
+      {
+        "number": "Custom API",
+        "info": "Additional backend endpoints added for app-specific data handling."
+      },
+      {
+        "number": "Android",
+        "info": "Live mobile news reading experience tailored for readers."
+      }
+    ]
+  },
+  "cyber-youth-news": {
+    "title": "Cyber Youth News",
+    "shortDescription": "Cyber Youth News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
+    "role": "FlutterFlow Developer & API Integrator",
+    "platform": "Android",
+    "year": "2025",
+    "githubUrl": "https://play.google.com/store/apps/details?id=com.mycompany.cyberyouthnews&hl=en_IN",
+    "thumbnail": "assets/project-thumbnail/cyber youth news thumbnail.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-poster/cyber youth news poster.png",
+    "overview": {
+      "about": "Cyber Youth News was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
+      "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
+    },
+    "screenshots": [
+      "assets/project-images/cyber-youth01.png",
+      "assets/project-images/cyber-youth02.png",
+      "assets/project-images/cyber-youth03.png",
+      "assets/project-images/cyber-youth04.png",
+      "assets/project-images/cyber-youth05.png"
+    ],
+    "keyFeatures": [
+      "FlutterFlow-built Android news experience with fast iteration and clean UI flows.",
+      "WordPress REST API integration for articles, categories, banners, and media content.",
+      "Custom API endpoints added for app-specific feed shaping and backend workflows.",
+      "Mobile reading flow with category navigation, story listings, and article detail screens.",
+      "Publisher-controlled content updates delivered from the WordPress side."
+    ],
+    "techUsed": {
+      "core": [
+        "FlutterFlow: Rapid mobile UI development and screen orchestration.",
+        "Flutter and Dart: Generated application layer for Android delivery.",
+        "Structured mobile layouts: Feed, category, and article detail interfaces."
+      ],
+      "backend": [
+        "WordPress REST API: Article, category, image, and content delivery.",
+        "Custom APIs: Extra endpoints for app-specific logic and data shaping.",
+        "Remote media handling: News asset synchronization and live publishing support."
+      ]
+    },
+    "results": [
+      {
+        "number": "FlutterFlow",
+        "info": "Production news app delivered with a fast visual development workflow."
+      },
+      {
+        "number": "WP REST",
+        "info": "WordPress-driven publishing connected directly to the mobile app."
+      },
+      {
+        "number": "Custom API",
+        "info": "Additional backend endpoints added for app-specific data handling."
+      },
+      {
+        "number": "Android",
+        "info": "Live mobile news reading experience tailored for readers."
+      }
+    ]
+  },
+  "dev-bhoomi-dialogue": {
+    "title": "Dev Bhoomi Dialogue",
+    "shortDescription": "Dev Bhoomi Dialogue is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
+    "role": "FlutterFlow Developer & API Integrator",
+    "platform": "Android",
+    "year": "2025",
+    "githubUrl": "https://play.google.com/store/apps/details?id=com.mycompany.devbhomidialogue&hl=en_IN",
+    "thumbnail": "assets/project-thumbnail/devbhoomi dialogue news thumbnail.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-poster/devbhoomi dialogue poster.png",
+    "overview": {
+      "about": "Dev Bhoomi Dialogue was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
+      "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
+    },
+    "screenshots": [
+      "assets/project-images/devbhoomi-dialogue01.png",
+      "assets/project-images/devbhoomi-dialogue02.png",
+      "assets/project-images/devbhoomi-dialogue03.png",
+      "assets/project-images/devbhoomi-dialogue04.png",
+      "assets/project-images/devbhoomi-dialogue05.png",
+      "assets/project-images/devbhoomi-dialogue06.png",
+      "assets/project-images/devbhoomi-dialogue07.png"
+    ],
+    "keyFeatures": [
+      "FlutterFlow-built Android news experience with fast iteration and clean UI flows.",
+      "WordPress REST API integration for articles, categories, banners, and media content.",
+      "Custom API endpoints added for app-specific feed shaping and backend workflows.",
+      "Mobile reading flow with category navigation, story listings, and article detail screens.",
+      "Publisher-controlled content updates delivered from the WordPress side."
+    ],
+    "techUsed": {
+      "core": [
+        "FlutterFlow: Rapid mobile UI development and screen orchestration.",
+        "Flutter and Dart: Generated application layer for Android delivery.",
+        "Structured mobile layouts: Feed, category, and article detail interfaces."
+      ],
+      "backend": [
+        "WordPress REST API: Article, category, image, and content delivery.",
+        "Custom APIs: Extra endpoints for app-specific logic and data shaping.",
+        "Remote media handling: News asset synchronization and live publishing support."
+      ]
+    },
+    "results": [
+      {
+        "number": "FlutterFlow",
+        "info": "Production news app delivered with a fast visual development workflow."
+      },
+      {
+        "number": "WP REST",
+        "info": "WordPress-driven publishing connected directly to the mobile app."
+      },
+      {
+        "number": "Custom API",
+        "info": "Additional backend endpoints added for app-specific data handling."
+      },
+      {
+        "number": "Android",
+        "info": "Live mobile news reading experience tailored for readers."
+      }
+    ]
+  },
+  "devbhoomi-media-news": {
+    "title": "Devbhoomi Media News",
+    "shortDescription": "Devbhoomi Media News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
+    "role": "FlutterFlow Developer & API Integrator",
+    "platform": "Android",
+    "year": "2025",
+    "githubUrl": "https://play.google.com/store/apps/details?id=com.mycompany.devbhoomimedianews&hl=en_IN",
+    "thumbnail": "assets/project-thumbnail/devbhoomi media news thumbnail.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-poster/devbhoomi media news poster.png",
+    "overview": {
+      "about": "Devbhoomi Media News was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
+      "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
+    },
+    "screenshots": [
+      "assets/project-images/dev-bhoomi-media01.png",
+      "assets/project-images/dev-bhoomi-media02.png",
+      "assets/project-images/dev-bhoomi-media03.png",
+      "assets/project-images/dev-bhoomi-media04.png",
+      "assets/project-images/dev-bhoomi-media05.png",
+      "assets/project-images/dev-bhoomi-media06.png",
+      "assets/project-images/dev-bhoomi-media07.png",
+      "assets/project-images/dev-bhoomi-media08.png",
+      "assets/project-images/dev-bhoomi-media09.png"
+    ],
+    "keyFeatures": [
+      "FlutterFlow-built Android news experience with fast iteration and clean UI flows.",
+      "WordPress REST API integration for articles, categories, banners, and media content.",
+      "Custom API endpoints added for app-specific feed shaping and backend workflows.",
+      "Mobile reading flow with category navigation, story listings, and article detail screens.",
+      "Publisher-controlled content updates delivered from the WordPress side."
+    ],
+    "techUsed": {
+      "core": [
+        "FlutterFlow: Rapid mobile UI development and screen orchestration.",
+        "Flutter and Dart: Generated application layer for Android delivery.",
+        "Structured mobile layouts: Feed, category, and article detail interfaces."
+      ],
+      "backend": [
+        "WordPress REST API: Article, category, image, and content delivery.",
+        "Custom APIs: Extra endpoints for app-specific logic and data shaping.",
+        "Remote media handling: News asset synchronization and live publishing support."
+      ]
+    },
+    "results": [
+      {
+        "number": "FlutterFlow",
+        "info": "Production news app delivered with a fast visual development workflow."
+      },
+      {
+        "number": "WP REST",
+        "info": "WordPress-driven publishing connected directly to the mobile app."
+      },
+      {
+        "number": "Custom API",
+        "info": "Additional backend endpoints added for app-specific data handling."
+      },
+      {
+        "number": "Android",
+        "info": "Live mobile news reading experience tailored for readers."
+      }
+    ]
+  },
+  "headlines247-news": {
+    "title": "Headlines247 News",
+    "shortDescription": "Headlines247 News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
+    "role": "FlutterFlow Developer & API Integrator",
+    "platform": "Android",
+    "year": "2025",
+    "githubUrl": "https://play.google.com/store/apps/details?id=com.mycompany.Headlines247&hl=en_IN",
+    "thumbnail": "assets/project-thumbnail/headlines 247 news thumbnail.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-images/headlines01.png",
+    "overview": {
+      "about": "Headlines247 News was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
+      "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
+    },
+    "screenshots": [
+      "assets/project-images/headlines01.png",
+      "assets/project-images/headlines02.png",
+      "assets/project-images/headlines03.png",
+      "assets/project-images/headlines04.png",
+      "assets/project-images/headlines05.png",
+      "assets/project-images/headlines06.png"
+    ],
+    "keyFeatures": [
+      "FlutterFlow-built Android news experience with fast iteration and clean UI flows.",
+      "WordPress REST API integration for articles, categories, banners, and media content.",
+      "Custom API endpoints added for app-specific feed shaping and backend workflows.",
+      "Mobile reading flow with category navigation, story listings, and article detail screens.",
+      "Publisher-controlled content updates delivered from the WordPress side."
+    ],
+    "techUsed": {
+      "core": [
+        "FlutterFlow: Rapid mobile UI development and screen orchestration.",
+        "Flutter and Dart: Generated application layer for Android delivery.",
+        "Structured mobile layouts: Feed, category, and article detail interfaces."
+      ],
+      "backend": [
+        "WordPress REST API: Article, category, image, and content delivery.",
+        "Custom APIs: Extra endpoints for app-specific logic and data shaping.",
+        "Remote media handling: News asset synchronization and live publishing support."
+      ]
+    },
+    "results": [
+      {
+        "number": "FlutterFlow",
+        "info": "Production news app delivered with a fast visual development workflow."
+      },
+      {
+        "number": "WP REST",
+        "info": "WordPress-driven publishing connected directly to the mobile app."
+      },
+      {
+        "number": "Custom API",
+        "info": "Additional backend endpoints added for app-specific data handling."
+      },
+      {
+        "number": "Android",
+        "info": "Live mobile news reading experience tailored for readers."
+      }
+    ]
+  },
+  "hill-mail-news": {
+    "title": "Hill Mail News",
+    "shortDescription": "Hill Mail News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
+    "role": "FlutterFlow Developer & API Integrator",
+    "platform": "Android",
+    "year": "2025",
+    "githubUrl": "https://play.google.com/store/apps/details?id=com.mycompany.hillmail&hl=en_IN",
+    "thumbnail": "assets/project-thumbnail/hill mail news thumbnail.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-images/hill-mail01.png",
+    "overview": {
+      "about": "Hill Mail News was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
+      "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
+    },
+    "screenshots": [
+      "assets/project-images/hill-mail01.png",
+      "assets/project-images/hill-mail02.png",
+      "assets/project-images/hill-mail03.png",
+      "assets/project-images/hill-mail04.png",
+      "assets/project-images/hill-mail05.png",
+      "assets/project-images/hill-mail06.png"
+    ],
+    "keyFeatures": [
+      "FlutterFlow-built Android news experience with fast iteration and clean UI flows.",
+      "WordPress REST API integration for articles, categories, banners, and media content.",
+      "Custom API endpoints added for app-specific feed shaping and backend workflows.",
+      "Mobile reading flow with category navigation, story listings, and article detail screens.",
+      "Publisher-controlled content updates delivered from the WordPress side."
+    ],
+    "techUsed": {
+      "core": [
+        "FlutterFlow: Rapid mobile UI development and screen orchestration.",
+        "Flutter and Dart: Generated application layer for Android delivery.",
+        "Structured mobile layouts: Feed, category, and article detail interfaces."
+      ],
+      "backend": [
+        "WordPress REST API: Article, category, image, and content delivery.",
+        "Custom APIs: Extra endpoints for app-specific logic and data shaping.",
+        "Remote media handling: News asset synchronization and live publishing support."
+      ]
+    },
+    "results": [
+      {
+        "number": "FlutterFlow",
+        "info": "Production news app delivered with a fast visual development workflow."
+      },
+      {
+        "number": "WP REST",
+        "info": "WordPress-driven publishing connected directly to the mobile app."
+      },
+      {
+        "number": "Custom API",
+        "info": "Additional backend endpoints added for app-specific data handling."
+      },
+      {
+        "number": "Android",
+        "info": "Live mobile news reading experience tailored for readers."
+      }
+    ]
+  },
+  "hnn-24x7-news": {
+    "title": "HNN 24x7 News",
+    "shortDescription": "HNN 24x7 News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
+    "role": "FlutterFlow Developer & API Integrator",
+    "platform": "Android",
+    "year": "2025",
+    "githubUrl": "https://play.google.com/store/apps/details?id=com.mycompany.devbhomidialogue&hl=en_IN",
+    "thumbnail": "assets/project-thumbnail/hnn 24x7 news thumbnail.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-images/hnn01.png",
+    "overview": {
+      "about": "HNN 24x7 News was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
+      "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
+    },
+    "screenshots": [
+      "assets/project-images/hnn01.png",
+      "assets/project-images/hnn02.png",
+      "assets/project-images/hnn03.png",
+      "assets/project-images/hnn04.png",
+      "assets/project-images/hnn05.png",
+      "assets/project-images/hnn06.png",
+      "assets/project-images/hnn07.png",
+      "assets/project-images/hnn08.png",
+      "assets/project-images/hnn09.png"
+    ],
+    "keyFeatures": [
+      "FlutterFlow-built Android news experience with fast iteration and clean UI flows.",
+      "WordPress REST API integration for articles, categories, banners, and media content.",
+      "Custom API endpoints added for app-specific feed shaping and backend workflows.",
+      "Mobile reading flow with category navigation, story listings, and article detail screens.",
+      "Publisher-controlled content updates delivered from the WordPress side."
+    ],
+    "techUsed": {
+      "core": [
+        "FlutterFlow: Rapid mobile UI development and screen orchestration.",
+        "Flutter and Dart: Generated application layer for Android delivery.",
+        "Structured mobile layouts: Feed, category, and article detail interfaces."
+      ],
+      "backend": [
+        "WordPress REST API: Article, category, image, and content delivery.",
+        "Custom APIs: Extra endpoints for app-specific logic and data shaping.",
+        "Remote media handling: News asset synchronization and live publishing support."
+      ]
+    },
+    "results": [
+      {
+        "number": "FlutterFlow",
+        "info": "Production news app delivered with a fast visual development workflow."
+      },
+      {
+        "number": "WP REST",
+        "info": "WordPress-driven publishing connected directly to the mobile app."
+      },
+      {
+        "number": "Custom API",
+        "info": "Additional backend endpoints added for app-specific data handling."
+      },
+      {
+        "number": "Android",
+        "info": "Live mobile news reading experience tailored for readers."
+      }
+    ]
+  },
+  "india-7-live-news": {
+    "title": "India 7 Live News",
+    "shortDescription": "India 7 Live News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
+    "role": "FlutterFlow Developer & API Integrator",
+    "platform": "Android",
+    "year": "2025",
+    "githubUrl": "https://play.google.com/store/apps/details?id=com.mycompany.india7live&hl=en_IN",
+    "thumbnail": "assets/project-thumbnail/India 7 live news thumbnail.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-images/india7live01.png",
+    "overview": {
+      "about": "India 7 Live News was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
+      "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
+    },
+    "screenshots": [
+      "assets/project-images/india7live01.png",
+      "assets/project-images/india7live02.png",
+      "assets/project-images/india7live03.png",
+      "assets/project-images/india7live04.png",
+      "assets/project-images/india7live05.png",
+      "assets/project-images/india7live06.png",
+      "assets/project-images/india7live07.png"
+    ],
+    "keyFeatures": [
+      "FlutterFlow-built Android news experience with fast iteration and clean UI flows.",
+      "WordPress REST API integration for articles, categories, banners, and media content.",
+      "Custom API endpoints added for app-specific feed shaping and backend workflows.",
+      "Mobile reading flow with category navigation, story listings, and article detail screens.",
+      "Publisher-controlled content updates delivered from the WordPress side."
+    ],
+    "techUsed": {
+      "core": [
+        "FlutterFlow: Rapid mobile UI development and screen orchestration.",
+        "Flutter and Dart: Generated application layer for Android delivery.",
+        "Structured mobile layouts: Feed, category, and article detail interfaces."
+      ],
+      "backend": [
+        "WordPress REST API: Article, category, image, and content delivery.",
+        "Custom APIs: Extra endpoints for app-specific logic and data shaping.",
+        "Remote media handling: News asset synchronization and live publishing support."
+      ]
+    },
+    "results": [
+      {
+        "number": "FlutterFlow",
+        "info": "Production news app delivered with a fast visual development workflow."
+      },
+      {
+        "number": "WP REST",
+        "info": "WordPress-driven publishing connected directly to the mobile app."
+      },
+      {
+        "number": "Custom API",
+        "info": "Additional backend endpoints added for app-specific data handling."
+      },
+      {
+        "number": "Android",
+        "info": "Live mobile news reading experience tailored for readers."
+      }
+    ]
+  },
+  "khabar-inbox-news": {
+    "title": "Khabar Inbox News",
+    "shortDescription": "Khabar Inbox News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
+    "role": "FlutterFlow Developer & API Integrator",
+    "platform": "Android",
+    "year": "2025",
+    "githubUrl": "https://play.google.com/store/apps/details?id=com.mycompany.khabarinbox&hl=en_IN",
+    "thumbnail": "assets/project-thumbnail/khabar inbox news thumbnail.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-images/khabar inbox news01.webp",
+    "overview": {
+      "about": "Khabar Inbox News was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
+      "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
+    },
+    "screenshots": [
+      "assets/project-images/khabar inbox news01.webp",
+      "assets/project-images/khabar inbox news02.webp",
+      "assets/project-images/khabar inbox news03.webp",
+      "assets/project-images/khabar inbox news04.webp"
+    ],
+    "keyFeatures": [
+      "FlutterFlow-built Android news experience with fast iteration and clean UI flows.",
+      "WordPress REST API integration for articles, categories, banners, and media content.",
+      "Custom API endpoints added for app-specific feed shaping and backend workflows.",
+      "Mobile reading flow with category navigation, story listings, and article detail screens.",
+      "Publisher-controlled content updates delivered from the WordPress side."
+    ],
+    "techUsed": {
+      "core": [
+        "FlutterFlow: Rapid mobile UI development and screen orchestration.",
+        "Flutter and Dart: Generated application layer for Android delivery.",
+        "Structured mobile layouts: Feed, category, and article detail interfaces."
+      ],
+      "backend": [
+        "WordPress REST API: Article, category, image, and content delivery.",
+        "Custom APIs: Extra endpoints for app-specific logic and data shaping.",
+        "Remote media handling: News asset synchronization and live publishing support."
+      ]
+    },
+    "results": [
+      {
+        "number": "FlutterFlow",
+        "info": "Production news app delivered with a fast visual development workflow."
+      },
+      {
+        "number": "WP REST",
+        "info": "WordPress-driven publishing connected directly to the mobile app."
+      },
+      {
+        "number": "Custom API",
+        "info": "Additional backend endpoints added for app-specific data handling."
+      },
+      {
+        "number": "Android",
+        "info": "Live mobile news reading experience tailored for readers."
+      }
+    ]
+  },
+  "khoji-narad-news": {
+    "title": "Khoji Narad News",
+    "shortDescription": "Khoji Narad News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
+    "role": "FlutterFlow Developer & API Integrator",
+    "platform": "Android",
+    "year": "2025",
+    "githubUrl": "https://play.google.com/store/apps/details?id=com.khojinaradnews&hl=en_IN",
+    "thumbnail": "assets/project-thumbnail/khoji narad news thumbnail.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-images/khoji narad01.png",
+    "overview": {
+      "about": "Khoji Narad News was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
+      "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
+    },
+    "screenshots": [
+      "assets/project-images/khoji narad01.png",
+      "assets/project-images/khoji narad02.png",
+      "assets/project-images/khoji narad03.png",
+      "assets/project-images/khoji narad04.png",
+      "assets/project-images/khoji narad05.png",
+      "assets/project-images/khoji narad06.png",
+      "assets/project-images/khoji narad07.png"
+    ],
+    "keyFeatures": [
+      "FlutterFlow-built Android news experience with fast iteration and clean UI flows.",
+      "WordPress REST API integration for articles, categories, banners, and media content.",
+      "Custom API endpoints added for app-specific feed shaping and backend workflows.",
+      "Mobile reading flow with category navigation, story listings, and article detail screens.",
+      "Publisher-controlled content updates delivered from the WordPress side."
+    ],
+    "techUsed": {
+      "core": [
+        "FlutterFlow: Rapid mobile UI development and screen orchestration.",
+        "Flutter and Dart: Generated application layer for Android delivery.",
+        "Structured mobile layouts: Feed, category, and article detail interfaces."
+      ],
+      "backend": [
+        "WordPress REST API: Article, category, image, and content delivery.",
+        "Custom APIs: Extra endpoints for app-specific logic and data shaping.",
+        "Remote media handling: News asset synchronization and live publishing support."
+      ]
+    },
+    "results": [
+      {
+        "number": "FlutterFlow",
+        "info": "Production news app delivered with a fast visual development workflow."
+      },
+      {
+        "number": "WP REST",
+        "info": "WordPress-driven publishing connected directly to the mobile app."
+      },
+      {
+        "number": "Custom API",
+        "info": "Additional backend endpoints added for app-specific data handling."
+      },
+      {
+        "number": "Android",
+        "info": "Live mobile news reading experience tailored for readers."
+      }
+    ]
+  },
+  "narad-post-news": {
+    "title": "Narad Post News",
+    "shortDescription": "Narad Post News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
+    "role": "FlutterFlow Developer & API Integrator",
+    "platform": "Android",
+    "year": "2025",
+    "githubUrl": "https://play.google.com/store/apps/details?id=com.mycompany.naradpostnews&hl=en_IN",
+    "thumbnail": "assets/project-thumbnail/narad post news thumbnail.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-images/narad post01.png",
+    "overview": {
+      "about": "Narad Post News was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
+      "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
+    },
+    "screenshots": [
+      "assets/project-images/narad post01.png",
+      "assets/project-images/narad post02.png",
+      "assets/project-images/narad post03.png",
+      "assets/project-images/narad post04.png",
+      "assets/project-images/narad post05.png",
+      "assets/project-images/narad post06.png",
+      "assets/project-images/narad post07.png",
+      "assets/project-images/narad post08.png"
+    ],
+    "keyFeatures": [
+      "FlutterFlow-built Android news experience with fast iteration and clean UI flows.",
+      "WordPress REST API integration for articles, categories, banners, and media content.",
+      "Custom API endpoints added for app-specific feed shaping and backend workflows.",
+      "Mobile reading flow with category navigation, story listings, and article detail screens.",
+      "Publisher-controlled content updates delivered from the WordPress side."
+    ],
+    "techUsed": {
+      "core": [
+        "FlutterFlow: Rapid mobile UI development and screen orchestration.",
+        "Flutter and Dart: Generated application layer for Android delivery.",
+        "Structured mobile layouts: Feed, category, and article detail interfaces."
+      ],
+      "backend": [
+        "WordPress REST API: Article, category, image, and content delivery.",
+        "Custom APIs: Extra endpoints for app-specific logic and data shaping.",
+        "Remote media handling: News asset synchronization and live publishing support."
+      ]
+    },
+    "results": [
+      {
+        "number": "FlutterFlow",
+        "info": "Production news app delivered with a fast visual development workflow."
+      },
+      {
+        "number": "WP REST",
+        "info": "WordPress-driven publishing connected directly to the mobile app."
+      },
+      {
+        "number": "Custom API",
+        "info": "Additional backend endpoints added for app-specific data handling."
+      },
+      {
+        "number": "Android",
+        "info": "Live mobile news reading experience tailored for readers."
+      }
+    ]
+  },
+  "news-bulletin-live": {
+    "title": "News Bulletin Live",
+    "shortDescription": "News Bulletin Live is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
+    "role": "FlutterFlow Developer & API Integrator",
+    "platform": "Android",
+    "year": "2025",
+    "githubUrl": "https://play.google.com/store/apps/details?id=com.mycompany.newsbulletinlive&hl=en_IN",
+    "thumbnail": "assets/project-thumbnail/news bulletin line thumbnail.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-images/news bulletin live 01.png",
+    "overview": {
+      "about": "News Bulletin Live was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
+      "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
+    },
+    "screenshots": [
+      "assets/project-images/news bulletin live 01.png",
+      "assets/project-images/news bulletin live 02.png",
+      "assets/project-images/news bulletin live 03.png",
+      "assets/project-images/news bulletin live 04.png",
+      "assets/project-images/news bulletin live 05.png",
+      "assets/project-images/news bulletin live 06.png",
+      "assets/project-images/news bulletin live 07.png"
+    ],
+    "keyFeatures": [
+      "FlutterFlow-built Android news experience with fast iteration and clean UI flows.",
+      "WordPress REST API integration for articles, categories, banners, and media content.",
+      "Custom API endpoints added for app-specific feed shaping and backend workflows.",
+      "Mobile reading flow with category navigation, story listings, and article detail screens.",
+      "Publisher-controlled content updates delivered from the WordPress side."
+    ],
+    "techUsed": {
+      "core": [
+        "FlutterFlow: Rapid mobile UI development and screen orchestration.",
+        "Flutter and Dart: Generated application layer for Android delivery.",
+        "Structured mobile layouts: Feed, category, and article detail interfaces."
+      ],
+      "backend": [
+        "WordPress REST API: Article, category, image, and content delivery.",
+        "Custom APIs: Extra endpoints for app-specific logic and data shaping.",
+        "Remote media handling: News asset synchronization and live publishing support."
+      ]
+    },
+    "results": [
+      {
+        "number": "FlutterFlow",
+        "info": "Production news app delivered with a fast visual development workflow."
+      },
+      {
+        "number": "WP REST",
+        "info": "WordPress-driven publishing connected directly to the mobile app."
+      },
+      {
+        "number": "Custom API",
+        "info": "Additional backend endpoints added for app-specific data handling."
+      },
+      {
+        "number": "Android",
+        "info": "Live mobile news reading experience tailored for readers."
+      }
+    ]
+  },
+  "news-in-hand": {
+    "title": "News In Hand",
+    "shortDescription": "News In Hand is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
+    "role": "FlutterFlow Developer & API Integrator",
+    "platform": "Android",
+    "year": "2025",
+    "githubUrl": "https://play.google.com/store/apps/details?id=com.mycompany.newsinhand&hl=en_IN",
+    "thumbnail": "assets/project-thumbnail/News in hand thumbnail.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-images/News inhand01.png",
+    "overview": {
+      "about": "News In Hand was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
+      "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
+    },
+    "screenshots": [
+      "assets/project-images/News inhand01.png",
+      "assets/project-images/News inhand02.png",
+      "assets/project-images/News inhand03.png",
+      "assets/project-images/News inhand04.png",
+      "assets/project-images/News inhand05.png",
+      "assets/project-images/News inhand06.png",
+      "assets/project-images/News inhand07.png",
+      "assets/project-images/News inhand08.png"
+    ],
+    "keyFeatures": [
+      "FlutterFlow-built Android news experience with fast iteration and clean UI flows.",
+      "WordPress REST API integration for articles, categories, banners, and media content.",
+      "Custom API endpoints added for app-specific feed shaping and backend workflows.",
+      "Mobile reading flow with category navigation, story listings, and article detail screens.",
+      "Publisher-controlled content updates delivered from the WordPress side."
+    ],
+    "techUsed": {
+      "core": [
+        "FlutterFlow: Rapid mobile UI development and screen orchestration.",
+        "Flutter and Dart: Generated application layer for Android delivery.",
+        "Structured mobile layouts: Feed, category, and article detail interfaces."
+      ],
+      "backend": [
+        "WordPress REST API: Article, category, image, and content delivery.",
+        "Custom APIs: Extra endpoints for app-specific logic and data shaping.",
+        "Remote media handling: News asset synchronization and live publishing support."
+      ]
+    },
+    "results": [
+      {
+        "number": "FlutterFlow",
+        "info": "Production news app delivered with a fast visual development workflow."
+      },
+      {
+        "number": "WP REST",
+        "info": "WordPress-driven publishing connected directly to the mobile app."
+      },
+      {
+        "number": "Custom API",
+        "info": "Additional backend endpoints added for app-specific data handling."
+      },
+      {
+        "number": "Android",
+        "info": "Live mobile news reading experience tailored for readers."
+      }
+    ]
+  },
+  "tehelka-india-news": {
+    "title": "Tehelka India News",
+    "shortDescription": "Tehelka India News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
+    "role": "FlutterFlow Developer & API Integrator",
+    "platform": "Android",
+    "year": "2025",
+    "githubUrl": "https://play.google.com/store/apps/details?id=com.techyardlabs.tehelkaindianews&hl=en_IN",
+    "thumbnail": "assets/project-thumbnail/tehelka india news thumbnail.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-images/tehelka india news 01.png",
+    "overview": {
+      "about": "Tehelka India News was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
+      "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
+    },
+    "screenshots": [
+      "assets/project-images/tehelka india news 01.png",
+      "assets/project-images/tehelka india news 02.png",
+      "assets/project-images/tehelka india news 03.png",
+      "assets/project-images/tehelka india news 04.png",
+      "assets/project-images/tehelka india news 05.png",
+      "assets/project-images/tehelka india news 06.png",
+      "assets/project-images/tehelka india news 07.png",
+      "assets/project-images/tehelka india news 08.png"
+    ],
+    "keyFeatures": [
+      "FlutterFlow-built Android news experience with fast iteration and clean UI flows.",
+      "WordPress REST API integration for articles, categories, banners, and media content.",
+      "Custom API endpoints added for app-specific feed shaping and backend workflows.",
+      "Mobile reading flow with category navigation, story listings, and article detail screens.",
+      "Publisher-controlled content updates delivered from the WordPress side."
+    ],
+    "techUsed": {
+      "core": [
+        "FlutterFlow: Rapid mobile UI development and screen orchestration.",
+        "Flutter and Dart: Generated application layer for Android delivery.",
+        "Structured mobile layouts: Feed, category, and article detail interfaces."
+      ],
+      "backend": [
+        "WordPress REST API: Article, category, image, and content delivery.",
+        "Custom APIs: Extra endpoints for app-specific logic and data shaping.",
+        "Remote media handling: News asset synchronization and live publishing support."
+      ]
+    },
+    "results": [
+      {
+        "number": "FlutterFlow",
+        "info": "Production news app delivered with a fast visual development workflow."
+      },
+      {
+        "number": "WP REST",
+        "info": "WordPress-driven publishing connected directly to the mobile app."
+      },
+      {
+        "number": "Custom API",
+        "info": "Additional backend endpoints added for app-specific data handling."
+      },
+      {
+        "number": "Android",
+        "info": "Live mobile news reading experience tailored for readers."
+      }
+    ]
+  },
+  "the-hill-india-news": {
+    "title": "The Hill India News",
+    "shortDescription": "The Hill India News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
+    "role": "FlutterFlow Developer & API Integrator",
+    "platform": "Android",
+    "year": "2025",
+    "githubUrl": "https://play.google.com/store/apps/details?id=com.mycompany.TheHillIndia&hl=en_IN",
+    "thumbnail": "assets/project-thumbnail/the hill india news thumbnail.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-images/the hill india 01.png",
+    "overview": {
+      "about": "The Hill India News was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
+      "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
+    },
+    "screenshots": [
+      "assets/project-images/the hill india 01.png",
+      "assets/project-images/the hill india 02.png",
+      "assets/project-images/the hill india 03.png",
+      "assets/project-images/the hill india 04.png",
+      "assets/project-images/the hill india 05.png",
+      "assets/project-images/the hill india 06.png",
+      "assets/project-images/the hill india 07.png"
+    ],
+    "keyFeatures": [
+      "FlutterFlow-built Android news experience with fast iteration and clean UI flows.",
+      "WordPress REST API integration for articles, categories, banners, and media content.",
+      "Custom API endpoints added for app-specific feed shaping and backend workflows.",
+      "Mobile reading flow with category navigation, story listings, and article detail screens.",
+      "Publisher-controlled content updates delivered from the WordPress side."
+    ],
+    "techUsed": {
+      "core": [
+        "FlutterFlow: Rapid mobile UI development and screen orchestration.",
+        "Flutter and Dart: Generated application layer for Android delivery.",
+        "Structured mobile layouts: Feed, category, and article detail interfaces."
+      ],
+      "backend": [
+        "WordPress REST API: Article, category, image, and content delivery.",
+        "Custom APIs: Extra endpoints for app-specific logic and data shaping.",
+        "Remote media handling: News asset synchronization and live publishing support."
+      ]
+    },
+    "results": [
+      {
+        "number": "FlutterFlow",
+        "info": "Production news app delivered with a fast visual development workflow."
+      },
+      {
+        "number": "WP REST",
+        "info": "WordPress-driven publishing connected directly to the mobile app."
+      },
+      {
+        "number": "Custom API",
+        "info": "Additional backend endpoints added for app-specific data handling."
+      },
+      {
+        "number": "Android",
+        "info": "Live mobile news reading experience tailored for readers."
+      }
+    ]
   }
 }

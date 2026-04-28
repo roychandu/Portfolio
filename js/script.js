@@ -129,11 +129,15 @@ async function loadProjectGallery() {
     try {
         const response = await fetch(getBasePath() + 'data/projects.json');
         const projects = await response.json();
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const projectEntries = Object.entries(projects);
+        const visibleProjects = currentPage === 'index.html'
+            ? projectEntries.slice(0, 6)
+            : projectEntries;
         
         workGrid.innerHTML = ''; // Clear loader
 
-        Object.keys(projects).forEach(id => {
-            const project = projects[id];
+        visibleProjects.forEach(([id, project]) => {
             const card = document.createElement('a');
             card.href = `work-details.html?id=${id}`;
             card.className = 'work-card';
@@ -188,7 +192,19 @@ async function loadProjectDetails() {
 
         // Update URLs
         const githubBtn = document.querySelector('[data-project-field="githubUrl"]');
-        if (githubBtn && project.githubUrl) githubBtn.href = project.githubUrl;
+        const githubBtnWrap = githubBtn ? githubBtn.closest('.meta-cta') : null;
+        if (githubBtn) {
+            githubBtn.href = project.githubUrl || '#';
+            if (project.githubUrl && project.githubUrl !== '#') {
+                githubBtn.target = '_blank';
+                githubBtn.rel = 'noopener noreferrer';
+                if (githubBtnWrap) githubBtnWrap.style.display = '';
+            } else {
+                githubBtn.removeAttribute('target');
+                githubBtn.removeAttribute('rel');
+                if (githubBtnWrap) githubBtnWrap.style.display = 'none';
+            }
+        }
 
         // Hero Image
         const heroImg = document.querySelector('[data-project-field="heroImage"]');
@@ -199,10 +215,18 @@ async function loadProjectDetails() {
 
         // Project Video
         const videoEl = document.querySelector('[data-project-field="videoUrl"]');
-        if (videoEl && project.videoUrl) {
-            videoEl.src = project.videoUrl;
-            // Optionally set the poster image for the video
-            videoEl.poster = project['project-poster'];
+        const videoSection = document.getElementById('project-video');
+        if (videoEl) {
+            if (project.videoUrl) {
+                videoEl.src = project.videoUrl;
+                videoEl.poster = project['project-poster'];
+                if (videoSection) videoSection.style.display = '';
+            } else {
+                videoEl.removeAttribute('src');
+                videoEl.removeAttribute('poster');
+                videoEl.load();
+                if (videoSection) videoSection.style.display = 'none';
+            }
         }
 
         // Overview
