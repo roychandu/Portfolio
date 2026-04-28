@@ -534,6 +534,8 @@ async function navigateTo(url) {
 
                 window.scrollTo(0, 0);
                 initPageEffects();
+                loadProjectGallery();
+                loadProjectDetails();
 
                 requestAnimationFrame(() => {
                     mainContent.classList.remove('content-entering');
