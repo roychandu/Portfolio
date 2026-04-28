@@ -150,6 +150,9 @@ async function loadProjectGallery() {
             
             workGrid.appendChild(card);
         });
+
+        // Force line number update after dynamic content loads
+        setTimeout(updateLineNumbers, 100);
     } catch (err) {
         console.error('Error loading project gallery:', err);
     }
@@ -598,6 +601,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.addEventListener('scroll', handleScrollSpy);
     window.addEventListener('resize', updateLineNumbers);
     window.addEventListener('load', updateLineNumbers);
+
+    // Auto-update line numbers when content height changes (e.g. images load, dynamic data injected)
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+        const resizeObserver = new ResizeObserver(() => {
+            updateLineNumbers();
+        });
+        resizeObserver.observe(mainContent);
+    }
 
     // Custom Cursor
     const cursor = document.querySelector('.custom-cursor');
