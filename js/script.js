@@ -190,20 +190,31 @@ async function loadProjectDetails() {
             if (el && project[field]) el.innerText = project[field];
         });
 
-        // Update URLs
-        const githubBtn = document.querySelector('[data-project-field="githubUrl"]');
-        const githubBtnWrap = githubBtn ? githubBtn.closest('.meta-cta') : null;
-        if (githubBtn) {
-            githubBtn.href = project.githubUrl || '#';
-            if (project.githubUrl && project.githubUrl !== '#') {
-                githubBtn.target = '_blank';
-                githubBtn.rel = 'noopener noreferrer';
-                if (githubBtnWrap) githubBtnWrap.style.display = '';
-            } else {
-                githubBtn.removeAttribute('target');
-                githubBtn.removeAttribute('rel');
-                if (githubBtnWrap) githubBtnWrap.style.display = 'none';
+        // Update URLs (Live Link & GitHub Link)
+        const linkFields = ['liveLink', 'githubUrl'];
+        linkFields.forEach(field => {
+            const btn = document.querySelector(`[data-project-field="${field}"]`);
+            if (btn) {
+                const url = project[field];
+                if (url && url !== '#') {
+                    btn.href = url;
+                    btn.target = '_blank';
+                    btn.rel = 'noopener noreferrer';
+                    btn.style.display = 'inline-flex';
+                } else {
+                    btn.href = '#';
+                    btn.removeAttribute('target');
+                    btn.removeAttribute('rel');
+                    btn.style.display = 'none';
+                }
             }
+        });
+
+        // Hide meta-cta container if no links exist
+        const metaCta = document.querySelector('.meta-cta');
+        if (metaCta) {
+            const hasLinks = linkFields.some(field => project[field] && project[field] !== '#');
+            metaCta.style.display = hasLinks ? '' : 'none';
         }
 
         // Hero Image
