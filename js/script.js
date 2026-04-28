@@ -129,6 +129,23 @@ async function loadProjectGallery() {
     try {
         const response = await fetch(getBasePath() + 'data/projects.json');
         const projects = await response.json();
+        const totalProjectCount = Object.keys(projects).length;
+        
+        // Update counts in headers
+        const featuredHeader = document.getElementById('featured-work-header');
+        if (featuredHeader) {
+            const text = `Featured work (${totalProjectCount})`;
+            featuredHeader.innerText = text;
+            featuredHeader.setAttribute('data-scramble', text);
+        }
+        
+        const allProjectsHeader = document.getElementById('all-projects-header');
+        if (allProjectsHeader) {
+            const text = `All Projects (${totalProjectCount})`;
+            allProjectsHeader.innerText = text;
+            allProjectsHeader.setAttribute('data-scramble', text);
+        }
+
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
         const projectEntries = Object.entries(projects);
         const visibleProjects = currentPage === 'index.html'
