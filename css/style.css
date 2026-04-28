@@ -576,6 +576,7 @@ h6 {
 /* --- Hero Section --- */
 .hero-section {
     padding: 60px 0 0 0;
+    overflow: hidden;
 }
 
 .hero-description {
@@ -588,6 +589,7 @@ h6 {
 /* --- Work Section --- */
 .work-section {
     padding: 160px 0 0 0;
+    overflow: hidden;
 }
 
 .work-section-header {
@@ -662,7 +664,6 @@ h6 {
 /* --- About Section --- */
 .about-section {
     padding: 160px 0 0 0;
-    overflow: hidden;
 }
 
 .about-layout {
