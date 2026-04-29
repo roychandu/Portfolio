@@ -353,6 +353,9 @@ async function loadProjectDetails() {
             `).join('');
         }
 
+        // Load Random Projects for "See More"
+        loadRandomProjects(projectId, data);
+
         // Reset Scroll
         window.scrollTo(0, 0);
 
@@ -362,6 +365,34 @@ async function loadProjectDetails() {
     } catch (err) {
         console.error('Error loading project details:', err);
     }
+}
+
+// --- Random Projects Loader for "See More" ---
+function loadRandomProjects(currentId, projects) {
+    const grid = document.getElementById('see-more-grid');
+    if (!grid) return;
+
+    // Filter out current project and shuffle
+    const entries = Object.entries(projects).filter(([id]) => id !== currentId);
+    const shuffled = entries.sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, 2);
+
+    grid.innerHTML = '';
+    selected.forEach(([id, project]) => {
+        const card = document.createElement('a');
+        card.href = `work-details.html?id=${id}`;
+        card.className = 'work-card';
+        card.innerHTML = `
+            <div class="card-header">
+                <h3 class="card-title">${project.title}</h3>
+                <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </div>
+            <div class="card-body">
+                <img src="${project.thumbnail}" alt="${project.title}">
+            </div>
+        `;
+        grid.appendChild(card);
+    });
 }
 
 // --- Line Number Gutter Generation ---
