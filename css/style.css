@@ -64,6 +64,7 @@ body {
     font-family: var(--font-body);
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 
 /* SPA-style Dynamic Content Transitions */
@@ -664,7 +665,6 @@ h6 {
 /* --- About Section --- */
 .about-section {
     padding: 160px 0 0 0;
-    overflow: hidden;
 }
 
 .about-layout {
