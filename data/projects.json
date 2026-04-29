@@ -165,180 +165,12 @@
       }
     ]
   },
-  "daily-expense": {
-    "title": "Daily Expense",
-    "shortDescription": "A daily expense tracking app built to help users record spending, monitor trends, and keep routine finances organized through a simple mobile workflow.",
-    "role": "App Developer",
-    "platform": "Mobile",
-    "year": "2025",
-    "githubUrl": "#",
-    "liveLink": "#",
-    "thumbnail": "assets/project-thumbnail/expense.png",
-    "videoUrl": "",
-    "project-poster": "assets/project-thumbnail/expense.png",
-    "overview": {
-      "about": "Daily Expense was created as a lightweight personal finance tool for capturing transactions, understanding spending behavior, and maintaining consistent budget awareness.",
-      "approach": "The application prioritized clean data entry, readable summaries, and straightforward expense categorization so users could manage personal finances without friction."
-    },
-    "screenshots": [
-      "assets/project-thumbnail/expense.png"
-    ],
-    "keyFeatures": [
-      "Fast expense entry for routine financial tracking.",
-      "Category-based spending organization.",
-      "Readable summaries and budget awareness views.",
-      "Mobile-first interactions for on-the-go updates.",
-      "Simple workflow for repeated daily usage."
-    ],
-    "techUsed": {
-      "core": [
-        "Flutter: Cross-platform mobile interface development.",
-        "Dart: Client-side business logic for expense handling.",
-        "Analytics-oriented UI: Summary and category visibility."
-      ],
-      "backend": [
-        "Local or remote persistence flows: Secure transaction storage.",
-        "API-ready architecture: Expandable sync and backup handling.",
-        "Data aggregation logic: Spending summary generation."
-      ]
-    },
-    "results": [
-      {
-        "number": "Track",
-        "info": "Consistent capture of routine user spending activity."
-      },
-      {
-        "number": "Budget",
-        "info": "Clearer visibility into expense categories and trends."
-      },
-      {
-        "number": "Mobile",
-        "info": "Quick personal finance updates from a simple app flow."
-      },
-      {
-        "number": "Daily",
-        "info": "Designed for repeat usage with low interaction overhead."
-      }
-    ]
-  },
-  "fitness-pro": {
-    "title": "Fitness Pro",
-    "shortDescription": "A personalized fitness tracking app focused on workouts, health progress, and routine monitoring through a mobile-first training experience.",
-    "role": "App Developer",
-    "platform": "Mobile",
-    "year": "2025",
-    "githubUrl": "#",
-    "liveLink": "#",
-    "thumbnail": "assets/project-thumbnail/fitness.png",
-    "videoUrl": "",
-    "project-poster": "assets/project-thumbnail/fitness.png",
-    "overview": {
-      "about": "Fitness Pro was built to give users a structured place to manage workout activity, monitor fitness progress, and stay engaged with health goals over time.",
-      "approach": "The app centered on intuitive workout flows, clean progress presentation, and repeatable tracking interactions that support daily or weekly fitness habits."
-    },
-    "screenshots": [
-      "assets/project-thumbnail/fitness.png"
-    ],
-    "keyFeatures": [
-      "Workout tracking and health-oriented progress monitoring.",
-      "Structured screens for routine-based fitness activity.",
-      "Mobile-friendly interaction patterns for repeat engagement.",
-      "Simple progress visibility for consistency and follow-through.",
-      "Goal-focused layout for personal health workflows."
-    ],
-    "techUsed": {
-      "core": [
-        "Flutter: Cross-platform fitness application delivery.",
-        "Dart: Client-side state and activity logic.",
-        "User-centric UI: Progress and workout visibility."
-      ],
-      "backend": [
-        "API-based data handling: Progress and user record sync.",
-        "Remote state persistence: Workout history retention.",
-        "Expandable service layer: Health and engagement integrations."
-      ]
-    },
-    "results": [
-      {
-        "number": "Track",
-        "info": "Workout and activity logging in a mobile-first flow."
-      },
-      {
-        "number": "Goals",
-        "info": "Structured support for habit-building and progress review."
-      },
-      {
-        "number": "Mobile",
-        "info": "Quick training updates and performance visibility."
-      },
-      {
-        "number": "Focus",
-        "info": "Built around clarity, consistency, and repeated use."
-      }
-    ]
-  },
-  "recipe": {
-    "title": "Recipe Studio",
-    "shortDescription": "A recipe discovery and meal inspiration app designed to make cooking ideas, browsing flows, and saved recipe exploration easier on mobile devices.",
-    "role": "App Developer",
-    "platform": "Mobile",
-    "year": "2025",
-    "githubUrl": "#",
-    "liveLink": "#",
-    "thumbnail": "assets/project-thumbnail/recipe.png",
-    "videoUrl": "",
-    "project-poster": "assets/project-thumbnail/recipe.png",
-    "overview": {
-      "about": "Recipe Studio was designed as a mobile recipe exploration experience where users can discover meal ideas, browse curated content, and interact with food inspiration in a simple visual layout.",
-      "approach": "The product emphasized clean discovery patterns, readable content presentation, and low-friction browsing so users can move quickly from inspiration to recipe detail."
-    },
-    "screenshots": [
-      "assets/project-thumbnail/recipe.png"
-    ],
-    "keyFeatures": [
-      "Recipe browsing and meal discovery flows.",
-      "Visual-first mobile layout for food content.",
-      "Organized content presentation for easier navigation.",
-      "Detail-focused viewing experience for cooking ideas.",
-      "Simple interaction model for regular content exploration."
-    ],
-    "techUsed": {
-      "core": [
-        "Flutter: Cross-platform mobile app development.",
-        "Dart: Client-side app logic and flow management.",
-        "Content-focused UI: Discovery and detail view layouts."
-      ],
-      "backend": [
-        "API-driven content delivery: Recipe and category handling.",
-        "Remote media support: Image and content asset loading.",
-        "Scalable data structure: Expandable content organization."
-      ]
-    },
-    "results": [
-      {
-        "number": "Discover",
-        "info": "Mobile-first recipe and meal inspiration browsing."
-      },
-      {
-        "number": "Visual",
-        "info": "Image-oriented presentation for better content engagement."
-      },
-      {
-        "number": "Simple",
-        "info": "Low-friction browsing from discovery to recipe detail."
-      },
-      {
-        "number": "Content",
-        "info": "Structured recipe organization for easier exploration."
-      }
-    ]
-  },
   "bharat-news-first": {
     "title": "Bharat News First",
     "shortDescription": "Bharat News First is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
     "role": "FlutterFlow Developer & API Integrator",
     "platform": "Android",
-    "year": "2025",
+    "year": "2024",
     "githubUrl": "#",
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.bharatnewsfirst&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/bharat news first thumbnail.png",
@@ -398,7 +230,7 @@
     "shortDescription": "Cyber Youth News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
     "role": "FlutterFlow Developer & API Integrator",
     "platform": "Android",
-    "year": "2025",
+    "year": "2024",
     "githubUrl": "#",
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.cyberyouthnews&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/cyber youth news thumbnail.png",
@@ -458,7 +290,7 @@
     "shortDescription": "Dev Bhoomi Dialogue is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
     "role": "FlutterFlow Developer & API Integrator",
     "platform": "Android",
-    "year": "2025",
+    "year": "2024",
     "githubUrl": "#",
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.devbhomidialogue&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/devbhoomi dialogue news thumbnail.png",
@@ -520,7 +352,7 @@
     "shortDescription": "Devbhoomi Media News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
     "role": "FlutterFlow Developer & API Integrator",
     "platform": "Android",
-    "year": "2025",
+    "year": "2024",
     "githubUrl": "#",
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.devbhoomimedianews&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/devbhoomi media news thumbnail.png",
@@ -584,7 +416,7 @@
     "shortDescription": "Headlines247 News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
     "role": "FlutterFlow Developer & API Integrator",
     "platform": "Android",
-    "year": "2025",
+    "year": "2024",
     "githubUrl": "#",
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.Headlines247&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/headlines 247 news thumbnail.png",
@@ -645,7 +477,7 @@
     "shortDescription": "Hill Mail News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
     "role": "FlutterFlow Developer & API Integrator",
     "platform": "Android",
-    "year": "2025",
+    "year": "2024",
     "githubUrl": "#",
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.hillmail&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/hill mail news thumbnail.png",
@@ -706,7 +538,7 @@
     "shortDescription": "HNN 24x7 News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
     "role": "FlutterFlow Developer & API Integrator",
     "platform": "Android",
-    "year": "2025",
+    "year": "2024",
     "githubUrl": "#",
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.devbhomidialogue&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/hnn 24x7 news thumbnail.png",
@@ -770,7 +602,7 @@
     "shortDescription": "India 7 Live News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
     "role": "FlutterFlow Developer & API Integrator",
     "platform": "Android",
-    "year": "2025",
+    "year": "2024",
     "githubUrl": "#",
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.india7live&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/India 7 live news thumbnail.png",
@@ -832,7 +664,7 @@
     "shortDescription": "Khabar Inbox News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
     "role": "FlutterFlow Developer & API Integrator",
     "platform": "Android",
-    "year": "2025",
+    "year": "2024",
     "githubUrl": "#",
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.khabarinbox&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/khabar inbox news thumbnail.png",
@@ -891,7 +723,7 @@
     "shortDescription": "Khoji Narad News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
     "role": "FlutterFlow Developer & API Integrator",
     "platform": "Android",
-    "year": "2025",
+    "year": "2024",
     "githubUrl": "#",
     "liveLink": "https://play.google.com/store/apps/details?id=com.khojinaradnews&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/khoji narad news thumbnail.png",
@@ -953,7 +785,7 @@
     "shortDescription": "Narad Post News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
     "role": "FlutterFlow Developer & API Integrator",
     "platform": "Android",
-    "year": "2025",
+    "year": "2024",
     "githubUrl": "#",
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.naradpostnews&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/narad post news thumbnail.png",
@@ -1016,7 +848,7 @@
     "shortDescription": "News Bulletin Live is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
     "role": "FlutterFlow Developer & API Integrator",
     "platform": "Android",
-    "year": "2025",
+    "year": "2024",
     "githubUrl": "#",
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.newsbulletinlive&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/news bulletin line thumbnail.png",
@@ -1078,7 +910,7 @@
     "shortDescription": "News In Hand is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
     "role": "FlutterFlow Developer & API Integrator",
     "platform": "Android",
-    "year": "2025",
+    "year": "2024",
     "githubUrl": "#",
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.newsinhand&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/News in hand thumbnail.png",
@@ -1141,7 +973,7 @@
     "shortDescription": "Tehelka India News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
     "role": "FlutterFlow Developer & API Integrator",
     "platform": "Android",
-    "year": "2025",
+    "year": "2024",
     "githubUrl": "#",
     "liveLink": "https://play.google.com/store/apps/details?id=com.techyardlabs.tehelkaindianews&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/tehelka india news thumbnail.png",
@@ -1204,7 +1036,7 @@
     "shortDescription": "The Hill India News is a FlutterFlow-based Android news application built to deliver breaking updates, category-wise coverage, and publisher-managed content using WordPress REST API integrations and custom APIs.",
     "role": "FlutterFlow Developer & API Integrator",
     "platform": "Android",
-    "year": "2025",
+    "year": "2024",
     "githubUrl": "#",
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.TheHillIndia&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/the hill india news thumbnail.png",

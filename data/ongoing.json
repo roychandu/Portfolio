@@ -1,0 +1,8 @@
+{
+  "daily-expense": {
+    "title": "Daily Expense",
+    "status": "DEVELOPMENT",
+    "description": "A daily expense tracking app built to help users record spending and monitor routine finances.",
+    "thumbnail": "assets/project-thumbnail/expense.png"
+  }
+}

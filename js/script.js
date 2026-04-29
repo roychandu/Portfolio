@@ -51,12 +51,12 @@ function initRoleRotation() {
     let isDeleting = false;
     let typeSpeed = 100;
     const roleEl = document.getElementById('rotating-role');
-    
+
     if (!roleEl) return;
 
     function type() {
         const currentRole = roles[roleIdx];
-        
+
         if (isDeleting) {
             roleEl.innerText = currentRole.substring(0, charIdx - 1);
             charIdx--;
@@ -87,7 +87,7 @@ function updateIndicator(activeLink) {
     const indicator = document.querySelector('.nav-active-indicator');
     const navList = document.querySelector('.sidebar-nav ul');
     if (!activeLink || !indicator || !navList) return;
-    
+
     const linkTop = activeLink.parentElement.offsetTop;
     const linkHeight = activeLink.parentElement.offsetHeight;
     const targetY = linkTop + (linkHeight / 2) - (indicator.offsetHeight / 2);
@@ -129,8 +129,15 @@ async function loadProjectGallery() {
     try {
         const response = await fetch(getBasePath() + 'data/projects.json');
         const projects = await response.json();
-        const totalProjectCount = Object.keys(projects).length;
-        
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const projectEntries = Object.entries(projects);
+        const visibleProjects = currentPage === 'index.html'
+            ? projectEntries.slice(0, 6)
+            : projectEntries;
+
+        const totalProjectCount = projectEntries.length;
+        const visibleCount = visibleProjects.length;
+
         // Update counts in headers
         const featuredHeader = document.getElementById('featured-work-header');
         if (featuredHeader) {
@@ -138,7 +145,7 @@ async function loadProjectGallery() {
             featuredHeader.innerText = text;
             featuredHeader.setAttribute('data-scramble', text);
         }
-        
+
         const allProjectsHeader = document.getElementById('all-projects-header');
         if (allProjectsHeader) {
             const text = `All Projects (${totalProjectCount})`;
@@ -146,19 +153,13 @@ async function loadProjectGallery() {
             allProjectsHeader.setAttribute('data-scramble', text);
         }
 
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        const projectEntries = Object.entries(projects);
-        const visibleProjects = currentPage === 'index.html'
-            ? projectEntries.slice(0, 6)
-            : projectEntries;
-        
         workGrid.innerHTML = ''; // Clear loader
 
         visibleProjects.forEach(([id, project]) => {
             const card = document.createElement('a');
             card.href = `work-details.html?id=${id}`;
             card.className = 'work-card';
-            
+
             card.innerHTML = `
                 <div class="card-header">
                     <h3 class="card-title">${project.title}</h3>
@@ -168,7 +169,7 @@ async function loadProjectGallery() {
                     <img src="${project.thumbnail}" alt="${project.title} Project">
                 </div>
             `;
-            
+
             workGrid.appendChild(card);
         });
 
@@ -176,6 +177,42 @@ async function loadProjectGallery() {
         setTimeout(updateLineNumbers, 100);
     } catch (err) {
         console.error('Error loading project gallery:', err);
+    }
+}
+
+// --- Ongoing Projects Loader ---
+async function loadOngoingProjects() {
+    const ongoingGrid = document.getElementById('ongoing-grid');
+    if (!ongoingGrid) return;
+
+    try {
+        const response = await fetch(getBasePath() + 'data/ongoing.json');
+        const ongoing = await response.json();
+
+        ongoingGrid.innerHTML = '';
+
+        Object.entries(ongoing).forEach(([id, project]) => {
+            const card = document.createElement('div');
+            card.className = 'work-card';
+
+            card.innerHTML = `
+                <div class="card-header">
+                    <h3 class="card-title">${project.title}</h3>
+                    <div class="card-arrow"><i class="fas fa-clock"></i></div>
+                </div>
+                <div class="card-body" style="position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #1a1a1a;">
+                    <img src="${project.thumbnail}" alt="${project.title} Ongoing" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.4;">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));">
+                        <span style="color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 12px; text-transform: uppercase; border: 1px solid var(--accent); padding: 3px 10px; background: rgba(0,0,0,0.3);">${project.status}</span>
+                        <p style="font-size: 13px; color: #eee; line-height: 1.5; margin: 0; font-family: 'IBM Plex Mono', monospace; max-width: 90%; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">${project.description}</p>
+                    </div>
+                </div>
+            `;
+
+            ongoingGrid.appendChild(card);
+        });
+    } catch (err) {
+        console.error('Error loading ongoing projects:', err);
     }
 }
 
@@ -316,20 +353,20 @@ async function loadProjectDetails() {
 function updateLineNumbers() {
     const gutter = document.getElementById('line-numbers');
     const mainContent = document.querySelector('.main-content');
-    
+
     if (!gutter || !mainContent) return;
-    
-    const lineHeight = 24; 
+
+    const lineHeight = 24;
     const contentElements = Array.from(mainContent.children).filter(el => el.id !== 'line-numbers');
     if (contentElements.length === 0) return;
-    
+
     const lastElement = contentElements[contentElements.length - 1];
     const contentBottom = lastElement.offsetTop + lastElement.offsetHeight;
     const gutterTop = gutter.offsetTop;
-    
+
     const totalHeight = contentBottom - gutterTop;
     const count = Math.max(0, Math.floor(totalHeight / lineHeight));
-    
+
     let html = '';
     for (let i = 1; i <= count; i++) {
         html += `<span>${i}</span>`;
@@ -348,15 +385,15 @@ class ScrambleText {
 
     setText(newText) {
         const oldText = this.el.innerText;
-        this.el.innerText = ''; 
-        this.el.classList.add('scramble-active'); 
+        this.el.innerText = '';
+        this.el.classList.add('scramble-active');
         const length = Math.max(oldText.length, newText.length);
         const promise = new Promise((resolve) => this.resolve = resolve);
         this.queue = [];
         for (let i = 0; i < length; i++) {
             const from = oldText[i] || '';
             const to = newText[i] || '';
-            const start = Math.floor(i * 1.2); 
+            const start = Math.floor(i * 1.2);
             const end = start + Math.floor(Math.random() * 12);
             this.queue.push({ from, to, start, end });
         }
@@ -381,7 +418,7 @@ class ScrambleText {
                 }
                 output += `<span class="scramble-char">${char}</span>`;
             } else {
-                output += ''; 
+                output += '';
             }
         }
         this.el.innerHTML = output;
@@ -438,48 +475,48 @@ function initPageEffects() {
         // Find the associated grid (usually the next sibling of the header)
         const sectionHeader = toggle.closest('.work-section-header');
         if (!sectionHeader) return;
-        
+
         const grid = sectionHeader.nextElementSibling;
         if (!grid || !grid.classList.contains('work-grid-brutalist')) return;
-        
+
         const items = grid.children;
         const buttons = toggle.querySelectorAll('.toggle-btn');
 
         buttons.forEach(btn => {
             btn.addEventListener('click', () => {
                 if (btn.classList.contains('active')) return;
-                
+
                 // FLIP Animation Prep
                 const firstRects = Array.from(items).map(item => item.getBoundingClientRect());
-                
+
                 buttons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                
+
                 const gridMode = btn.getAttribute('data-grid');
                 grid.classList.remove('grid-3', 'grid-4', 'grid-6');
                 grid.classList.add(gridMode);
-                
+
                 // FLIP Animation Execute
                 requestAnimationFrame(() => {
                     Array.from(items).forEach((item, i) => {
                         const lastRect = item.getBoundingClientRect();
                         const firstRect = firstRects[i];
-                        
+
                         const dx = firstRect.left - lastRect.left;
                         const dy = firstRect.top - lastRect.top;
                         const dw = firstRect.width / lastRect.width;
                         const dh = firstRect.height / lastRect.height;
-                        
+
                         item.style.transition = 'none';
                         item.style.transformOrigin = 'top left';
                         item.style.transform = `translate(${dx}px, ${dy}px) scale(${dw}, ${dh})`;
-                        
+
                         requestAnimationFrame(() => {
                             item.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s';
                             item.style.transform = 'none';
                         });
                     });
-                    
+
                     // Update line numbers after grid changes height
                     setTimeout(updateLineNumbers, 600);
                 });
@@ -490,7 +527,7 @@ function initPageEffects() {
     // 4. Scroll Reveal & Parallax Triggers
     const revealContainers = document.querySelectorAll('.scroll-reveal-sliding');
     const aboutCard = document.querySelector('.about-profile-card');
-    
+
     const handleRevealScroll = () => {
         const viewportHeight = window.innerHeight;
         const scrollPos = window.scrollY;
@@ -525,7 +562,7 @@ function initPageEffects() {
             }
         }
     };
-    
+
     window.addEventListener('scroll', handleRevealScroll);
     handleRevealScroll();
 
@@ -554,7 +591,7 @@ async function navigateTo(url) {
             if (newMain) {
                 // Update Main Content
                 mainContent.innerHTML = newMain.innerHTML;
-                
+
                 // Handle Sidebar Visibility & Layout
                 if (newSidebar) {
                     sidebarRight.innerHTML = newSidebar.innerHTML;
@@ -564,7 +601,7 @@ async function navigateTo(url) {
                     sidebarRight.style.display = 'none';
                     mainContent.classList.add('no-right-sidebar');
                 }
-                
+
                 // Update Classes in newDoc as well for next load
                 if (newMain.classList.contains('no-right-sidebar')) {
                     mainContent.classList.add('no-right-sidebar');
@@ -574,13 +611,13 @@ async function navigateTo(url) {
 
                 mainContent.classList.remove('content-exiting');
                 if (newSidebar) sidebarRight.classList.remove('content-exiting');
-                
+
                 mainContent.classList.add('content-entering');
                 if (newSidebar) sidebarRight.classList.add('content-entering');
 
                 window.history.pushState({}, '', url);
                 document.title = newDoc.title;
-                
+
                 const currentPath = url.split('/').pop() || 'index.html';
                 const navLinks = document.querySelectorAll('.nav-link');
                 navLinks.forEach(link => {
@@ -588,8 +625,9 @@ async function navigateTo(url) {
                 });
 
                 window.scrollTo(0, 0);
-                initPageEffects();
                 loadProjectGallery();
+                loadOngoingProjects();
+                initPageEffects();
                 loadProjectDetails();
 
                 requestAnimationFrame(() => {
@@ -597,19 +635,20 @@ async function navigateTo(url) {
                     if (newSidebar) sidebarRight.classList.remove('content-entering');
                 });
             }
-        }, 400); 
+        }, 400);
     } catch (err) {
         console.error('Navigation failed:', err);
-        window.location.href = url; 
+        window.location.href = url;
     }
 }
 
 // --- Initialize All ---
 document.addEventListener('DOMContentLoaded', async () => {
     await loadSharedComponents();
+    await loadProjectGallery();
+    await loadOngoingProjects();
     initPageEffects();
     initRoleRotation();
-    loadProjectGallery();
 
     // Intercept Page Navigation
     document.body.addEventListener('click', (e) => {
