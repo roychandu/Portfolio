@@ -97,7 +97,9 @@ function updateIndicator(activeLink) {
 // --- Scroll Spy Logic ---
 function handleScrollSpy() {
     const scrollY = window.pageYOffset + 200; // Calibrated offset for top-nav
-    const sections = document.querySelectorAll('section[id]');
+    const sections = Array.from(document.querySelectorAll('section[id]'))
+        .filter(section => section.style.display !== 'none');
+    
     const navLinks = document.querySelectorAll('.sidebar-link');
     let currentSectionId = '';
 
@@ -111,6 +113,12 @@ function handleScrollSpy() {
 
     if (currentSectionId) {
         navLinks.forEach(link => {
+            // Only update indicator for links that are actually visible
+            if (link.parentElement.style.display === 'none') {
+                link.classList.remove('active');
+                return;
+            }
+            
             link.classList.remove('active');
             const href = link.getAttribute('href');
             if (href.includes(`#${currentSectionId}`)) {
@@ -281,16 +289,23 @@ async function loadProjectDetails() {
         // Project Video
         const videoEl = document.querySelector('[data-project-field="videoUrl"]');
         const videoSection = document.getElementById('project-video');
+        const videoSidebarLink = document.querySelector('.sidebar-link[href="#project-video"]');
+        const videoBadge = document.querySelector('.video-shortcut-badge');
+
         if (videoEl) {
             if (project.videoUrl) {
                 videoEl.src = project.videoUrl;
                 videoEl.poster = project['project-poster'];
                 if (videoSection) videoSection.style.display = '';
+                if (videoSidebarLink) videoSidebarLink.parentElement.style.display = '';
+                if (videoBadge) videoBadge.style.display = 'inline-flex';
             } else {
                 videoEl.removeAttribute('src');
                 videoEl.removeAttribute('poster');
                 videoEl.load();
                 if (videoSection) videoSection.style.display = 'none';
+                if (videoSidebarLink) videoSidebarLink.parentElement.style.display = 'none';
+                if (videoBadge) videoBadge.style.display = 'none';
             }
         }
 
