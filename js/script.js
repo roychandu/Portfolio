@@ -132,38 +132,65 @@ function handleScrollSpy() {
 // --- Project Gallery Loader ---
 async function loadProjectGallery() {
     const workGrid = document.getElementById('work-grid');
+    const newsAppsGrid = document.getElementById('news-apps-grid');
     if (!workGrid) return;
 
     try {
         const response = await fetch(getBasePath() + 'data/projects.json');
         const projects = await response.json();
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        const projectEntries = Object.entries(projects);
-        const visibleProjects = currentPage === 'index.html'
-            ? projectEntries.slice(0, 6)
-            : projectEntries;
+        
+        // Define IDs to be simplified into the list view (only for work.html)
+        const news10kIds = [
+            'india-7-live-news', 'khoji-narad-news', 'narad-post-news', 'tehelka-india-news'
+        ];
 
-        const totalProjectCount = projectEntries.length;
-        const visibleCount = visibleProjects.length;
+        // Other news projects to exclude from work.html to avoid duplication
+        const excludeNewsIds = [
+            'dev-bhoomi-dialogue', 'devbhoomi-media-news', 'headlines247-news', 'hill-mail-news',
+            'hnn-24x7-news', 'khabar-inbox-news', 'news-bulletin-live', 'news-in-hand', 'the-hill-india-news'
+        ];
+
+        const projectEntries = Object.entries(projects);
+
+        // Filter projects to define the "curated" pool (excluding hidden news apps)
+        const curatedEntries = projectEntries.filter(([id]) => !news10kIds.includes(id) && !excludeNewsIds.includes(id));
+        const news10kEntries = projectEntries.filter(([id]) => news10kIds.includes(id));
+        const otherNewsEntries = projectEntries.filter(([id]) => excludeNewsIds.includes(id));
+
+        // The total count of projects we want to acknowledge in the portfolio
+        const displayCount = curatedEntries.length + news10kEntries.length + otherNewsEntries.length;
+
+        let mainProjects = [];
+        let newsProjects = [];
+
+        if (currentPage === 'work.html') {
+            mainProjects = curatedEntries;
+            newsProjects = news10kEntries;
+        } else if (currentPage === 'index.html') {
+            mainProjects = curatedEntries.slice(0, 6);
+        } else {
+            mainProjects = curatedEntries;
+        }
 
         // Update counts in headers
         const featuredHeader = document.getElementById('featured-work-header');
         if (featuredHeader) {
-            const text = `Featured work (${totalProjectCount})`;
+            const text = `Featured work (${displayCount})`;
             featuredHeader.innerText = text;
             featuredHeader.setAttribute('data-scramble', text);
         }
 
         const allProjectsHeader = document.getElementById('all-projects-header');
         if (allProjectsHeader) {
-            const text = `All Projects (${totalProjectCount})`;
+            const text = `All Projects (${displayCount})`;
             allProjectsHeader.innerText = text;
             allProjectsHeader.setAttribute('data-scramble', text);
         }
 
-        workGrid.innerHTML = ''; // Clear loader
-
-        visibleProjects.forEach(([id, project]) => {
+        // Render Main Grid
+        workGrid.innerHTML = ''; 
+        mainProjects.forEach(([id, project]) => {
             const card = document.createElement('a');
             card.href = `work-details.html?id=${id}`;
             card.className = 'work-card';
@@ -177,9 +204,34 @@ async function loadProjectGallery() {
                     <img src="${project.thumbnail}" alt="${project.title} Project">
                 </div>
             `;
-
             workGrid.appendChild(card);
         });
+
+        // Render Simplified News Apps List (Only on work.html)
+        if (newsAppsGrid && newsProjects.length > 0) {
+            newsAppsGrid.innerHTML = '';
+            newsProjects.forEach(([id, project]) => {
+                const item = document.createElement('div');
+                item.className = 'news-app-item';
+                item.innerHTML = `
+                    <div class="news-app-info">
+                        <span class="news-app-title">${project.title}</span>
+                        <span class="news-app-meta">FlutterFlow • Android • 10k+ Downloads</span>
+                    </div>
+                    <a href="${project.liveLink}" target="_blank" class="news-app-link">
+                        <span>View on Play Store</span>
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                `;
+                newsAppsGrid.appendChild(item);
+            });
+        }
+
+        // Render Names-only for the rest of news projects (Only on work.html)
+        const otherNewsNamesGrid = document.getElementById('other-news-names');
+        if (otherNewsNamesGrid && otherNewsEntries.length > 0) {
+            otherNewsNamesGrid.innerHTML = otherNewsEntries.map(([id, project]) => project.title).join(' • ');
+        }
 
         // Force line number update after dynamic content loads
         setTimeout(updateLineNumbers, 100);

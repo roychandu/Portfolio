@@ -647,6 +647,65 @@ h6 {
     grid-template-columns: repeat(6, 1fr);
 }
 
+/* --- News Apps Simplified List --- */
+.news-apps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.news-app-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background: var(--bg-graphite);
+    border: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.news-app-item:hover {
+    border-color: var(--accent);
+    background: #252525;
+}
+
+.news-app-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.news-app-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-white);
+}
+
+.news-app-meta {
+    font-size: 12px;
+    color: var(--text-slate);
+    font-family: var(--font-body);
+}
+
+.news-app-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border: 1px solid var(--accent-muted);
+    transition: var(--transition);
+}
+
+.news-app-link:hover {
+    background: var(--accent);
+    color: var(--bg-jet);
+}
+
 .work-cta-wrap {
     display: flex;
     flex-direction: column;
