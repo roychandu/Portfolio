@@ -362,13 +362,27 @@ async function loadProjectDetails() {
         }
 
         // Overview
-        const overviewAbout = document.querySelector('#overview .detail-text-block p');
-        if (overviewAbout) overviewAbout.innerText = project.overview.about;
+        const detailTextBlock = document.querySelector('#overview .detail-text-block');
+        if (detailTextBlock && project.overview.about) {
+            // Support for HTML content in about section
+            let aboutHtml = project.overview.about;
+            
+            // Bold labels before colon in lists within the about section
+            aboutHtml = aboutHtml.replace(/<li>(.*?):/g, '<li><strong>$1:</strong>');
+            
+            detailTextBlock.innerHTML = aboutHtml;
+        }
 
-        // Note: Approach might be the second paragraph
-        const paragraphs = document.querySelectorAll('.detail-text-block p');
-        if (project.overview.approach && paragraphs.length > 1) {
-            paragraphs[1].innerText = project.overview.approach;
+        // Note: Approach might be moved or hidden if about is comprehensive
+        const approachBlock = document.getElementById('approach');
+        if (approachBlock) {
+            if (project.overview.approach) {
+                approachBlock.style.display = '';
+                const approachText = approachBlock.querySelector('p');
+                if (approachText) approachText.innerText = project.overview.approach;
+            } else {
+                approachBlock.style.display = 'none';
+            }
         }
 
         // Screenshots Grid
@@ -384,7 +398,34 @@ async function loadProjectDetails() {
         // Features List
         const featureList = document.querySelector('.feature-bullet-list');
         if (featureList && project.keyFeatures) {
-            featureList.innerHTML = project.keyFeatures.map(feat => {
+            featureList.innerHTML = project.keyFeatures.map((feat, index) => {
+                // Support for nested object structure (Numbered list with bullets inside)
+                if (typeof feat === 'object' && feat.title) {
+                    const items = feat.items || [];
+                    const itemsHtml = items.map(item => {
+                        const colonIndex = item.indexOf(':');
+                        if (colonIndex !== -1) {
+                            const label = item.substring(0, colonIndex);
+                            const description = item.substring(colonIndex);
+                            return `<li><strong>${label}</strong>${description}</li>`;
+                        }
+                        return `<li>${item}</li>`;
+                    }).join('');
+                    
+                    return `
+                        <li class="nested-feature-item">
+                            <div class="feature-main-row">
+                                <span class="feature-number">${index + 1}.</span>
+                                <strong>${feat.title}</strong>
+                            </div>
+                            <ul class="nested-bullet-list">
+                                ${itemsHtml}
+                            </ul>
+                        </li>
+                    `;
+                }
+
+                // Standard string handling with bold labels
                 const colonIndex = feat.indexOf(':');
                 if (colonIndex !== -1) {
                     const label = feat.substring(0, colonIndex);

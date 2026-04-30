@@ -64,18 +64,18 @@
   },
   "tablepilot": {
     "title": "TablePilot",
-    "shortDescription": "TablePilot is a professional-grade restaurant management suite designed to streamline operations and enhance the dining experience through atomic transaction integrity.",
-    "role": "Full Stack Developer",
-    "platform": "Web & Mobile",
-    "year": "2025",
+    "shortDescription": "Built with Flutter and Firebase, TablePilot is a scalable B2B2C ecosystem that automates front-of-house management through a dynamic floor engine and real-time synchronization. It eliminates operational bottlenecks by pairing a conflict-free, token-based design architecture with atomic transaction integrity across 13+ high-concurrency modules.",
+    "role": "Lead Flutter Developer",
+    "platform": "iOS & Android",
+    "year": "2026",
     "githubUrl": "https://github.com/roychandu/TablePilot",
     "liveLink": "#",
     "thumbnail": "assets/project-thumbnail/tablepilot.png",
     "videoUrl": "assets/project-videos/tablepilot.mp4",
     "project-poster": "assets/project-poster/image 8.png",
     "overview": {
-      "about": "TablePilot focuses on dual-role architecture for both Users and Owners.",
-      "approach": "Built with high-concurrency modules and AWS Media Pipeline."
+      "about": "TablePilot is a sophisticated, high-fidelity restaurant management solution designed to streamline the daily chaos of hospitality operations. It transforms how restaurants handle reservations, table turnover, inventory, and staff coordination through a data-driven, cross-platform interface. Developed as a high-performance B2B2C ecosystem, the application serves as a unified command center that synchronizes front-of-house staff with real-time customer data to eliminate operational friction.<br><br><h3>The Dual-Core Ecosystem</h3><p>The architecture is split into two distinct, high-fidelity interfaces that share a unified real-time backend:</p><ul><li>The Operator Command Center (Owner/Admin): A powerful administrative suite that gives restaurant owners full autonomy. It features a sophisticated CRUD Dashboard for managing menu items and dynamic marketing offers, an AWS S3-powered media pipeline for high-resolution asset management, and a Revenue Analytics engine that generates professional PDF financial reports.</li><li>The Guest Marketplace (Customer): A frictionless ordering and booking experience. Guests can navigate an interactive Live Floor Plan to select their preferred seating, manage complex orders through a reactive Cart System, and access a Live Offers Marketplace powered by a custom tiered-discount calculation engine.</li></ul>",
+      "approach": "We utilized a modular Flutter architecture to ensure code reusability across platforms while maintaining native performance. The state management was handled using a robust combination of Provider and a custom state machine to manage the complex transitions of a restaurant's lifecycle."
     },
     "screenshots": [
       "assets/project-images/tablepilot.png",
@@ -84,20 +84,56 @@
       "assets/project-images/tablepilot.png"
     ],
     "keyFeatures": [
-      "Dynamic Floor Engine",
-      "Real-time Synchronization",
-      "Atomic Transactions"
+      {
+        "title": "Operational Command (Staff & Owner)",
+        "items": [
+          "Dynamic Floor Management: A live, interactive bird's-eye view of the restaurant layout with real-time table state tracking (Available, Occupied, Reserved, Cleaning).",
+          "0-Conflict State Machine: Enterprise-grade logic that eliminates redundant seating and race conditions across multiple staff devices simultaneously.",
+          "Advanced Revenue Analytics: A comprehensive reporting engine that visualizes earnings, reservation trends, and order volumes with professional PDF export capabilities.",
+          "Unified Staff Dashboard: Centralized coordination of takeaway orders, table assignments, and live service status.",
+          "The Offer Management Dashboard gives restaurant owners absolute autonomy over their marketing strategy, transforming the app from a simple menu into a powerful sales-driving engine."
+        ]
+      },
+      {
+        "title": " Guest Experience (Customer)",
+        "items": [
+          "Digital Menu & Smart Cart: A high-fidelity browsing experience with persistent cart logic, item customization notes, and reactive price calculations.",
+          "Interactive Table Booking: Allows guests to view the actual floor plan and select their preferred table in real-time, backed by atomic transaction integrity.",
+          "Smart Offers Marketplace: A tiered discovery engine for localized deals (BOGO, Percentage OFF, Fixed Discounts) that applies savings automatically during checkout.",
+          "Live Order Tracking: Real-time visibility into order lifecycles (Pending -> Preparing -> Ready) to reduce guest anxiety and improve service flow."
+        ]
+      },
+      {
+        "title": "Administrative Mastery (Owner Dashboard)",
+        "items": [
+          "Full-Spectrum CRUD Suite: Total autonomy over the digital menu, staff profiles, and marketing campaigns with instant global updates.",
+          "AWS Media Pipeline: Integrated high-speed image upload system with localized pre-compression to ensure beautiful visuals without sacrificing performance.",
+          "Marketing Orchestration: Schedule and target promotional offers to specific categories or menu items with surgical precision."
+        ]
+      },
+      {
+        "title": "Engineering Excellence (Core Architecture)",
+        "items": [
+          "Monetization Hub: Fully integrated In-App Purchases (IAP) for 'Premium' feature unlocking and virtual trophy consumables.",
+          "Cross-Platform Performance: Optimized codebase delivering 60FPS fluid animations and sub-150ms data synchronization across iOS, Android, and Web."
+        ]
+      }
     ],
     "techUsed": {
       "core": [
-        "React",
-        "State Machine",
-        "Atomic Transactions"
+        "Flutter & Dart: Developed a high-performance, unified codebase delivering a premium 60FPS user experience across iOS, Android, and Web platforms.",
+        "Hybrid State Management: Utilized a strategic combination of Provider for global architectural states (Monetization, Theming) and specialized Service Layers for low-latency reactive data streams.",
+        "Universal Token-Design Engine: Engineered a custom UI layer using 40+ runtime-evaluated design tokens (Indigo & Slate palette) to ensure 100% visual consistency and seamless Dark Mode transitions across 13+ operational modules."
       ],
       "backend": [
-        "AWS",
-        "Node.js",
-        "PostgreSQL"
+        "Firebase Realtime Database: Orchestrated a high-speed, live synchronization engine for table states and order flows, achieving sub-100ms latency to eliminate operational bottlenecks.",
+        "Firebase Authentication: Implemented a secure, multi-role (Owner, Staff, Guest) authentication framework supporting Apple, Google, and traditional Email sign-in protocols.",
+        "Firebase App Check: Integrated enterprise-grade security to verify app integrity and prevent unauthorized access to backend API endpoints and user data.",
+        "AWS S3 (Amazon Web Services): Managed large-scale media hosting for menu assets and promotional banners using a secure, REST-based AWS module.",
+        "Pre-Transmission Compression Engine: Built a custom Dart utility to perform byte-level image normalization and compression on the client-side before AWS upload, optimizing cloud storage costs and load performance.",
+        "PDF Generation Engine: Leveraged the PDF and path_provider libraries to build a professional reporting suite that converts raw JSON telemetry into downloadable, shareable business analytics reports.",
+        "In-App Purchase (IAP) Framework: Integrated StoreKit and Google Play Billing APIs for premium feature monetization, including secure receipt verification and non-consumable membership handling.",
+        "Offer Logic Utility: Engineered a specialized OfferHelper math engine to accurately calculate complex, tiered discount models (BOGO, Percentage, and Fixed AED) entirely on the client-side."
       ]
     },
     "results": [
