@@ -374,7 +374,7 @@ async function loadProjectDetails() {
         }
 
         // Note: Approach might be moved or hidden if about is comprehensive
-        const approachBlock = document.getElementById('approach');
+        const approachBlock = document.getElementById('approach-section');
         if (approachBlock) {
             if (project.overview.approach) {
                 approachBlock.style.display = '';
