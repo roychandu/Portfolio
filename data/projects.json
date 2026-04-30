@@ -11,8 +11,8 @@
     "videoUrl": "assets/project-videos/backpackr.mp4",
     "project-poster": "assets/project-poster/image 8.png",
     "overview": {
-      "about": "This is a highly dynamic travel application that focuses on providing a seamless user experience for backpackers and solo travelers. The goal was to consolidate itinerary management, expense tracking, and social networking into a single, cohesive platform.",
-      "approach": "We followed a modular architecture approach to ensure scalability. By using Bloc for state management, we were able to decouple the business logic from the UI, making the app highly performant and easy to maintain. The backend was integrated using Firebase for real-time updates and secure authentication."
+      "about": "This is a dynamic social discovery platform tailored for travelers, backpackers, and digital nomads. The project focused on creating an interactive, real-time networking experience that makes discovering and connecting with nearby adventurers seamless and secure. We analyzed location-based networking trends, traveler pain points, and technical constraints to build an app that relies on precise proximity detection while maintaining high standards of data privacy.",
+      "approach": "We follow a scalable, performance-driven development process that transforms complex social mechanics into intuitive digital journeys. Every technical decision in this project was approached with security, speed, and cross-platform consistency in mind. We began by solving the challenge of tracking users accurately without relying on expensive, heavy mapping APIs. Through architectural research and backend integrations, we defined a clear, mathematically driven direction that ensures a lightweight and stable core application."
     },
     "screenshots": [
       "assets/project-images/Screenshot_1777144941.png",
@@ -23,22 +23,24 @@
       "assets/project-images/Screenshot_1777144965.png"
     ],
     "keyFeatures": [
-      "Dynamic Itinerary Planner: Drag-and-drop interface for managing daily travel activities.",
-      "Real-time Expense Tracking: Multi-currency support with automatic conversion and budget alerts.",
-      "Interactive Maps: Custom map integration for destination discovery and navigation.",
-      "Offline Sync: Seamless data persistence for travelers in remote areas with low connectivity.",
-      "Social Networking: A community hub for sharing travel stories and finding travel partners."
+      "Proximity-Based Discovery: Implemented a custom mathematical algorithm (Haversine formula) to accurately detect and display other travelers within a 200km radius without relying on expensive third-party mapping APIs.",
+      "Backend & Cloud Integration: Powered by a robust Firebase architecture for real-time data sync and secure Google Cloud/AWS integrations for seamless media uploads.",
+      "Monetization Engine: Fully integrated native In-App Purchases (IAP) supporting both consumable items (Trophies) and lifetime premium memberships.",
+      "Enterprise-Grade Security: Re-architected the application's configuration management to use a unified, secure environment variable system, completely abstracting sensitive native keys (Android/iOS) from version control.",
+      "Cross-Platform Delivery: A unified, high-performance Flutter codebase flawlessly deployed natively on both iOS and Android mobile platforms."
     ],
     "techUsed": {
       "core": [
-        "Flutter: Modern UI toolkit for cross-platform app development.",
-        "Dart: Robust typed language for high-performance logic.",
-        "State Management: Bloc architecture for scalable state handling."
+        "Flutter & Dart: Built a single unified, high-performance codebase for cross-platform deployment on iOS and Android.",
+        "State Management: Hybrid architecture adopting Provider (for core feature access like purchases) and GetX (for reactive state, dynamic routing, and fast UI updates)."
       ],
       "backend": [
-        "Firebase: Authentication, Cloud Firestore, and Storage.",
-        "Node.js: Custom cloud functions for complex data processing.",
-        "Google Maps API: Location services and route optimization."
+        "Firebase Authentication: Secure, frictionless user logins (Email, Google, and Apple Sign-In).",
+        "Firebase Realtime Database: High-speed, low-latency syncing for user profiles and live chat/messaging between travelers.",
+        "Firebase App Check: Prevents unauthorized backend access and ensures only your verified app can make requests.",
+        "AWS (Amazon Web Services): Managed large-scale media hosting (profile pictures and travel content) using secure REST API endpoints linked to native environment variables.",
+        "Geolocator & Geocoding: High-accuracy background and foreground GPS coordinate extraction.",
+        "Custom Dart Math: Engineered a custom geospatial proximity engine utilizing the Haversine formula to calculate the 200km matching radius entirely client-side."
       ]
     },
     "results": [

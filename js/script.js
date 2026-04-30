@@ -384,14 +384,32 @@ async function loadProjectDetails() {
         // Features List
         const featureList = document.querySelector('.feature-bullet-list');
         if (featureList && project.keyFeatures) {
-            featureList.innerHTML = project.keyFeatures.map(feat => `<li>${feat}</li>`).join('');
+            featureList.innerHTML = project.keyFeatures.map(feat => {
+                const colonIndex = feat.indexOf(':');
+                if (colonIndex !== -1) {
+                    const label = feat.substring(0, colonIndex);
+                    const description = feat.substring(colonIndex);
+                    return `<li><strong>${label}</strong>${description}</li>`;
+                }
+                return `<li>${feat}</li>`;
+            }).join('');
         }
 
         // Tech Stack
         const techCols = document.querySelectorAll('.tech-detail-col ul');
         if (techCols.length >= 2) {
-            techCols[0].innerHTML = project.techUsed.core.map(item => `<li>${item}</li>`).join('');
-            techCols[1].innerHTML = project.techUsed.backend.map(item => `<li>${item}</li>`).join('');
+            const formatItem = (item) => {
+                const colonIndex = item.indexOf(':');
+                if (colonIndex !== -1) {
+                    const label = item.substring(0, colonIndex);
+                    const description = item.substring(colonIndex);
+                    return `<li><strong>${label}</strong>${description}</li>`;
+                }
+                return `<li>${item}</li>`;
+            };
+
+            techCols[0].innerHTML = project.techUsed.core.map(formatItem).join('');
+            techCols[1].innerHTML = project.techUsed.backend.map(formatItem).join('');
         }
 
         // Results
@@ -407,6 +425,9 @@ async function loadProjectDetails() {
 
         // Load Random Projects for "See More"
         loadRandomProjects(projectId, data);
+
+        // Initialize Counter Animation for Stats
+        initCounterAnimation();
 
         // Reset Scroll
         window.scrollTo(0, 0);
@@ -445,6 +466,50 @@ function loadRandomProjects(currentId, projects) {
         `;
         grid.appendChild(card);
     });
+}
+
+// --- Number Counter Animation ---
+function initCounterAnimation() {
+    const counters = document.querySelectorAll('.stat-number');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                const valueStr = target.innerText;
+                const match = valueStr.match(/(\d+)/);
+                if (!match) return;
+
+                const targetValue = parseInt(match[0]);
+                const suffix = valueStr.substring(valueStr.indexOf(match[0]) + match[0].length);
+                const prefix = valueStr.substring(0, valueStr.indexOf(match[0]));
+
+                let duration = 2000; // 2 seconds
+                const startTime = performance.now();
+
+                function update(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+
+                    // Easing (easeOutExpo)
+                    const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                    const currentCount = Math.floor(easeProgress * targetValue);
+
+                    target.innerText = prefix + currentCount + suffix;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    } else {
+                        target.innerText = valueStr; // Final exact value
+                    }
+                }
+
+                requestAnimationFrame(update);
+                observer.unobserve(target); // Only animate once
+            }
+        });
+    }, { threshold: 0.1 });
+
+    counters.forEach(counter => observer.observe(counter));
 }
 
 // --- Line Number Gutter Generation ---
