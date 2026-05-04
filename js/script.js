@@ -863,6 +863,16 @@ async function navigateTo(url) {
 function updateActiveNavLink() {
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll('.nav-link');
+    const projectInfoLink = document.getElementById('project-info-link');
+
+    // Show/Hide project.info link only on work-details page
+    if (projectInfoLink) {
+        if (currentPath.includes('work-details.html')) {
+            projectInfoLink.style.display = 'flex';
+        } else {
+            projectInfoLink.style.display = 'none';
+        }
+    }
     
     navLinks.forEach(link => {
         const href = link.getAttribute('href');
