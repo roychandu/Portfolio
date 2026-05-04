@@ -376,29 +376,33 @@
                     </div>
 
                     <form id="contact-form" class="contact-form-grid">
+                        <!-- Web3Forms Configuration -->
+                        <input type="hidden" name="access_key" value="3b9cf586-10a0-4fad-9e44-831f34f46e66">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
                         <div class="form-field">
                             <label>First name <span class="required-star">*</span></label>
-                            <input type="text" id="first-name" class="input-brutalist" placeholder="John" required>
+                            <input type="text" id="first-name" name="first_name" class="input-brutalist" placeholder="John" required>
                             <span class="error-msg" id="first-name-error"></span>
                         </div>
                         <div class="form-field">
                             <label>Last name <span class="required-star">*</span></label>
-                            <input type="text" id="last-name" class="input-brutalist" placeholder="Doe" required>
+                            <input type="text" id="last-name" name="last_name" class="input-brutalist" placeholder="Doe" required>
                             <span class="error-msg" id="last-name-error"></span>
                         </div>
                         <div class="form-field form-full-width">
                             <label>Email address <span class="required-star">*</span></label>
-                            <input type="email" id="email" class="input-brutalist" placeholder="john@example.com" required>
+                            <input type="email" id="email" name="email" class="input-brutalist" placeholder="john@example.com" required>
                             <span class="error-msg" id="email-error"></span>
                         </div>
                         <div class="form-field form-full-width">
                             <label>Subject <span class="required-star">*</span></label>
-                            <input type="text" id="subject" class="input-brutalist" placeholder="Project Inquiry" required>
+                            <input type="text" id="subject" name="subject" class="input-brutalist" placeholder="Project Inquiry" required>
                             <span class="error-msg" id="subject-error"></span>
                         </div>
                         <div class="form-field form-full-width">
                             <label>Message</label>
-                            <textarea id="message" class="input-brutalist" rows="4"
+                            <textarea id="message" name="message" class="input-brutalist" rows="4"
                                 placeholder="Tell me about your project..."></textarea>
                         </div>
                         <div class="form-full-width">

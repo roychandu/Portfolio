@@ -848,12 +848,12 @@ async function navigateTo(url) {
 
 // --- Initialize All ---
 document.addEventListener('DOMContentLoaded', async () => {
+    initContactForm();
     await loadSharedComponents();
     await loadProjectGallery();
     await loadOngoingProjects();
     initPageEffects();
     initRoleRotation();
-    initContactForm();
 
     // Intercept Page Navigation
     document.body.addEventListener('click', (e) => {
@@ -997,18 +997,60 @@ document.addEventListener('DOMContentLoaded', async () => {
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
                 
-                // Simulate API call
-                setTimeout(() => {
-                    submitBtn.innerHTML = 'Sent! <i class="fas fa-check"></i>';
-                    submitBtn.style.backgroundColor = '#27ae60'; // Success green
+                // Real Web3Forms API call
+                const formData = new FormData(form);
+                const object = Object.fromEntries(formData);
+                
+                // Create a clean object for the email body
+                const cleanData = {
+                    access_key: object.access_key,
+                    from_name: `${object.first_name} ${object.last_name}`,
+                    subject: object.subject,
+                    Name: `${object.first_name} ${object.last_name}`,
+                    "Message Subject": object.subject,
+                    Message: object.message,
+                    Email: object.email
+                };
+                
+                const json = JSON.stringify(cleanData);
+
+                console.log("Submitting form data:", object);
+
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                })
+                .then(async (response) => {
+                    let result = await response.json();
+                    console.log("API Response:", result);
                     
-                    setTimeout(() => {
+                    if (response.status == 200) {
+                        submitBtn.innerHTML = 'Sent! <i class="fas fa-check"></i>';
+                        submitBtn.style.backgroundColor = '#27ae60'; // Success green
                         form.reset();
+                    } else {
+                        submitBtn.innerHTML = 'Error! <i class="fas fa-times"></i>';
+                        submitBtn.style.backgroundColor = '#e74c3c'; // Error red
+                        alert("Submission Failed: " + (result.message || "Unknown error"));
+                    }
+                })
+                .catch(error => {
+                    console.error("Submission Error:", error);
+                    submitBtn.innerHTML = 'Failed <i class="fas fa-exclamation-triangle"></i>';
+                    submitBtn.style.backgroundColor = '#e74c3c';
+                    alert("Network Error: Please check your connection.");
+                })
+                .finally(() => {
+                    setTimeout(() => {
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = originalText;
                         submitBtn.style.backgroundColor = '';
-                    }, 3000);
-                }, 1500);
+                    }, 5000);
+                });
             }
         });
     }
