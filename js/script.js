@@ -926,58 +926,70 @@ document.addEventListener('DOMContentLoaded', async () => {
         const form = document.getElementById('contact-form');
         if (!form) return;
 
+        const inputs = [
+            { id: 'first-name', label: 'First name' },
+            { id: 'last-name', label: 'Last name' },
+            { id: 'email', label: 'Email' },
+            { id: 'subject', label: 'Subject' }
+        ];
+
+        // Helper to show error
+        const showError = (id, msg) => {
+            const errorEl = document.getElementById(`${id}-error`);
+            const inputEl = document.getElementById(id);
+            if (errorEl) errorEl.innerText = msg;
+            if (inputEl) inputEl.classList.add('invalid');
+            return false;
+        };
+
+        // Helper to clear error
+        const clearError = (id) => {
+            const errorEl = document.getElementById(`${id}-error`);
+            const inputEl = document.getElementById(id);
+            if (errorEl) errorEl.innerText = '';
+            if (inputEl) inputEl.classList.remove('invalid');
+            return true;
+        };
+
+        // Single field validator
+        const validateField = (id, value) => {
+            if (id === 'first-name' || id === 'last-name') {
+                if (!value) return showError(id, `${id === 'first-name' ? 'First' : 'Last'} name is required`);
+                if (/\d/.test(value)) return showError(id, 'Name cannot contain numbers');
+                if (/[^a-zA-Z\s]/.test(value)) return showError(id, 'Name cannot contain symbols');
+            }
+            if (id === 'email') {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!value) return showError(id, 'Email address is required');
+                if (!emailRegex.test(value)) return showError(id, 'Invalid email format');
+            }
+            if (id === 'subject') {
+                if (!value) return showError(id, 'Subject is required');
+            }
+            return clearError(id);
+        };
+
+        // Add inline listeners
+        inputs.forEach(input => {
+            const el = document.getElementById(input.id);
+            if (!el) return;
+
+            el.addEventListener('input', () => validateField(input.id, el.value.trim()));
+            el.addEventListener('blur', () => validateField(input.id, el.value.trim()));
+        });
+
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            let isValid = true;
-            
-            // Reset errors
-            form.querySelectorAll('.error-msg').forEach(el => el.innerText = '');
-            form.querySelectorAll('.input-brutalist').forEach(el => el.classList.remove('invalid'));
+            let formIsValid = true;
+            inputs.forEach(input => {
+                const el = document.getElementById(input.id);
+                if (!validateField(input.id, el.value.trim())) {
+                    formIsValid = false;
+                }
+            });
 
-            // Helper to show error
-            const showError = (id, msg) => {
-                const errorEl = document.getElementById(`${id}-error`);
-                const inputEl = document.getElementById(id);
-                if (errorEl) errorEl.innerText = msg;
-                if (inputEl) inputEl.classList.add('invalid');
-                isValid = false;
-            };
-
-            // Get values
-            const firstName = document.getElementById('first-name').value.trim();
-            const lastName = document.getElementById('last-name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const subject = document.getElementById('subject').value.trim();
-
-            // Validate First Name (No numbers)
-            if (!firstName) {
-                showError('first-name', 'First name is required');
-            } else if (/\d/.test(firstName)) {
-                showError('first-name', 'Name cannot contain numbers');
-            }
-
-            // Validate Last Name (No numbers)
-            if (!lastName) {
-                showError('last-name', 'Last name is required');
-            } else if (/\d/.test(lastName)) {
-                showError('last-name', 'Name cannot contain numbers');
-            }
-
-            // Validate Email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!email) {
-                showError('email', 'Email address is required');
-            } else if (!emailRegex.test(email)) {
-                showError('email', 'Invalid email format');
-            }
-
-            // Validate Subject
-            if (!subject) {
-                showError('subject', 'Subject is required');
-            }
-
-            if (isValid) {
+            if (formIsValid) {
                 // Show success animation or alert
                 const submitBtn = form.querySelector('button[type="submit"]');
                 const originalText = submitBtn.innerHTML;
