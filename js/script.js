@@ -822,13 +822,26 @@ async function navigateTo(url) {
                 window.history.pushState({}, '', url);
                 document.title = newDoc.title;
 
-                const currentPath = url.split('/').pop() || 'index.html';
-                const navLinks = document.querySelectorAll('.nav-link');
-                navLinks.forEach(link => {
-                    link.classList.toggle('active', link.getAttribute('href').includes(currentPath));
-                });
+                updateActiveNavLink();
 
-                window.scrollTo(0, 0);
+                // Handle hash scroll after navigation
+                if (url.includes('#')) {
+                    const targetId = url.split('#')[1];
+                    setTimeout(() => {
+                        const targetEl = document.getElementById(targetId);
+                        if (targetEl) {
+                            const headerOffset = 80;
+                            const elementPosition = targetEl.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }, 100);
+                } else {
+                    window.scrollTo(0, 0);
+                }
                 loadProjectGallery();
                 loadOngoingProjects();
                 initPageEffects();
@@ -846,6 +859,27 @@ async function navigateTo(url) {
     }
 }
 
+// --- Navigation Utilities ---
+function updateActiveNavLink() {
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+
+        // Extract the page name (e.g., 'index.html' from 'index.html#home')
+        const targetPage = href.split('#')[0] || 'index.html';
+        
+        // Match if targetPage is currentPath, or if both are effectively index.html
+        const isMatch = targetPage === currentPath || 
+                        (targetPage === 'index.html' && currentPath === '') ||
+                        (targetPage === '' && currentPath === 'index.html');
+        
+        link.classList.toggle('active', isMatch);
+    });
+}
+
 // --- Initialize All ---
 document.addEventListener('DOMContentLoaded', async () => {
     initContactForm();
@@ -854,6 +888,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadOngoingProjects();
     initPageEffects();
     initRoleRotation();
+    updateActiveNavLink();
 
     // Intercept Page Navigation
     document.body.addEventListener('click', (e) => {
@@ -875,9 +910,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.body.addEventListener('click', (e) => {
         const link = e.target.closest('a');
         if (!link) return;
-        const href = link.getAttribute('href');
-        if (href && href.startsWith('#') && href.length > 1) {
-            const targetId = href.substring(1);
+        let href = link.getAttribute('href');
+        if (!href) return;
+
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        
+        // Handle both "#target" and "index.html#target" when on index.html
+        const isAnchorOnCurrentPage = href.startsWith('#') || 
+                                     (href.startsWith(currentPath + '#') && href.length > currentPath.length + 1) ||
+                                     (currentPath === 'index.html' && href.startsWith('index.html#'));
+
+        if (isAnchorOnCurrentPage) {
+            const targetId = href.split('#')[1];
             const targetEl = document.getElementById(targetId);
             if (targetEl) {
                 e.preventDefault();
