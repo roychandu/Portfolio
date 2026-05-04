@@ -891,7 +891,7 @@
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.newsbulletinlive&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/news bulletin line thumbnail.png",
     "videoUrl": "",
-    "project-poster": "assets/project-images/news bulletin live 01.png",
+    "project-poster": "assets/project-poster/News Bulletin Live poster.png",
     "overview": {
       "about": "News Bulletin Live was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
       "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
