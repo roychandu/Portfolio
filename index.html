@@ -375,26 +375,30 @@
                         <h2 class="section-title-h2">Let’s Work Together</h2>
                     </div>
 
-                    <form class="contact-form-grid">
+                    <form id="contact-form" class="contact-form-grid">
                         <div class="form-field">
                             <label>First name <span class="required-star">*</span></label>
-                            <input type="text" class="input-brutalist" placeholder="John">
+                            <input type="text" id="first-name" class="input-brutalist" placeholder="John" required>
+                            <span class="error-msg" id="first-name-error"></span>
                         </div>
                         <div class="form-field">
                             <label>Last name <span class="required-star">*</span></label>
-                            <input type="text" class="input-brutalist" placeholder="Doe">
+                            <input type="text" id="last-name" class="input-brutalist" placeholder="Doe" required>
+                            <span class="error-msg" id="last-name-error"></span>
                         </div>
                         <div class="form-field form-full-width">
                             <label>Email address <span class="required-star">*</span></label>
-                            <input type="email" class="input-brutalist" placeholder="john@example.com">
+                            <input type="email" id="email" class="input-brutalist" placeholder="john@example.com" required>
+                            <span class="error-msg" id="email-error"></span>
                         </div>
                         <div class="form-field form-full-width">
                             <label>Subject <span class="required-star">*</span></label>
-                            <input type="text" class="input-brutalist" placeholder="Project Inquiry">
+                            <input type="text" id="subject" class="input-brutalist" placeholder="Project Inquiry" required>
+                            <span class="error-msg" id="subject-error"></span>
                         </div>
                         <div class="form-field form-full-width">
                             <label>Message</label>
-                            <textarea class="input-brutalist" rows="4"
+                            <textarea id="message" class="input-brutalist" rows="4"
                                 placeholder="Tell me about your project..."></textarea>
                         </div>
                         <div class="form-full-width">

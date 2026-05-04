@@ -1075,6 +1075,19 @@ h6 {
     border-color: var(--accent);
 }
 
+.input-brutalist.invalid {
+    border-color: #ff4d4d;
+}
+
+.error-msg {
+    color: #ff4d4d;
+    font-size: 11px;
+    margin-top: 4px;
+    min-height: 14px;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+}
+
 /* --- Scramble Animation Utilities --- */
 [data-scramble] {
     opacity: 0;

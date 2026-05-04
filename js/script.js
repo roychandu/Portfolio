@@ -853,6 +853,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadOngoingProjects();
     initPageEffects();
     initRoleRotation();
+    initContactForm();
 
     // Intercept Page Navigation
     document.body.addEventListener('click', (e) => {
@@ -915,8 +916,88 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
         const hoverables = document.querySelectorAll('a, button, .work-card, .tech-cell, .sidebar-link');
         hoverables.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+    }
+
+    // --- Contact Form Validation ---
+    function initContactForm() {
+        const form = document.getElementById('contact-form');
+        if (!form) return;
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            let isValid = true;
+            
+            // Reset errors
+            form.querySelectorAll('.error-msg').forEach(el => el.innerText = '');
+            form.querySelectorAll('.input-brutalist').forEach(el => el.classList.remove('invalid'));
+
+            // Helper to show error
+            const showError = (id, msg) => {
+                const errorEl = document.getElementById(`${id}-error`);
+                const inputEl = document.getElementById(id);
+                if (errorEl) errorEl.innerText = msg;
+                if (inputEl) inputEl.classList.add('invalid');
+                isValid = false;
+            };
+
+            // Get values
+            const firstName = document.getElementById('first-name').value.trim();
+            const lastName = document.getElementById('last-name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+
+            // Validate First Name (No numbers)
+            if (!firstName) {
+                showError('first-name', 'First name is required');
+            } else if (/\d/.test(firstName)) {
+                showError('first-name', 'Name cannot contain numbers');
+            }
+
+            // Validate Last Name (No numbers)
+            if (!lastName) {
+                showError('last-name', 'Last name is required');
+            } else if (/\d/.test(lastName)) {
+                showError('last-name', 'Name cannot contain numbers');
+            }
+
+            // Validate Email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email) {
+                showError('email', 'Email address is required');
+            } else if (!emailRegex.test(email)) {
+                showError('email', 'Invalid email format');
+            }
+
+            // Validate Subject
+            if (!subject) {
+                showError('subject', 'Subject is required');
+            }
+
+            if (isValid) {
+                // Show success animation or alert
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+                
+                // Simulate API call
+                setTimeout(() => {
+                    submitBtn.innerHTML = 'Sent! <i class="fas fa-check"></i>';
+                    submitBtn.style.backgroundColor = '#27ae60'; // Success green
+                    
+                    setTimeout(() => {
+                        form.reset();
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.style.backgroundColor = '';
+                    }, 3000);
+                }, 1500);
+            }
         });
     }
 
