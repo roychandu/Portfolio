@@ -459,7 +459,7 @@
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.Headlines247&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/headlines 247 news thumbnail.png",
     "videoUrl": "",
-    "project-poster": "assets/project-images/headlines01.png",
+    "project-poster": "assets/project-poster/headlines247-news poster.png",
     "overview": {
       "about": "Headlines247 News was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
       "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
@@ -766,7 +766,7 @@
     "liveLink": "https://play.google.com/store/apps/details?id=com.khojinaradnews&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/khoji narad news thumbnail.png",
     "videoUrl": "",
-    "project-poster": "assets/project-images/khoji narad01.png",
+    "project-poster": "assets/project-poster/khoji-narad-news-poster.png",
     "overview": {
       "about": "Khoji Narad News was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
       "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
@@ -1079,7 +1079,7 @@
     "liveLink": "https://play.google.com/store/apps/details?id=com.mycompany.TheHillIndia&hl=en_IN",
     "thumbnail": "assets/project-thumbnail/the hill india news thumbnail.png",
     "videoUrl": "",
-    "project-poster": "assets/project-images/the hill india 01.png",
+    "project-poster": "assets/project-poster/The Hill India news poster.png",
     "overview": {
       "about": "The Hill India News was built as a mobile-first news platform for readers who need timely stories, category browsing, and clean article detail views inside a lightweight Android app.",
       "approach": "The app was produced in FlutterFlow to speed up UI delivery and iteration. WordPress REST API powers article, category, and media fetching, while additional custom APIs were created for app-specific content handling and backend workflows."
