@@ -214,10 +214,10 @@ async function loadProjectGallery() {
                 const item = document.createElement('div');
                 item.className = 'news-app-item';
                 item.innerHTML = `
-                    <div class="news-app-info">
+                    <a href="work-details.html?id=${id}" class="news-app-info">
                         <span class="news-app-title">${project.title}</span>
                         <span class="news-app-meta">FlutterFlow • Android • 10k+ Downloads</span>
-                    </div>
+                    </a>
                     <a href="${project.liveLink}" target="_blank" class="news-app-link">
                         <span>View on Play Store</span>
                         <i class="fas fa-external-link-alt"></i>
@@ -230,7 +230,9 @@ async function loadProjectGallery() {
         // Render Names-only for the rest of news projects (Only on work.html)
         const otherNewsNamesGrid = document.getElementById('other-news-names');
         if (otherNewsNamesGrid && otherNewsEntries.length > 0) {
-            otherNewsNamesGrid.innerHTML = otherNewsEntries.map(([id, project]) => project.title).join(' • ');
+            otherNewsNamesGrid.innerHTML = otherNewsEntries
+                .map(([id, project]) => `<a href="work-details.html?id=${id}" class="news-name-link">${project.title}</a>`)
+                .join(' <span class="separator">•</span> ');
         }
 
         // Force line number update after dynamic content loads
