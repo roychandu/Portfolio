@@ -306,8 +306,8 @@ async function loadProjectDetails() {
             if (el && project[field]) el.innerText = project[field];
         });
 
-        // Update URLs (Live Link & GitHub Link)
-        const linkFields = ['liveLink', 'githubUrl'];
+        // Update URLs (Live Link, Apple Store Link & GitHub Link)
+        const linkFields = ['liveLink', 'appleStoreLink', 'githubUrl'];
         linkFields.forEach(field => {
             const btn = document.querySelector(`[data-project-field="${field}"]`);
             if (btn) {
