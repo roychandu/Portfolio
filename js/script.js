@@ -829,9 +829,8 @@ function initPageEffects() {
         revealContainers.forEach(container => {
             const rect = container.getBoundingClientRect();
             if (rect.top < viewportHeight && rect.bottom > 0) {
-                const elementTop = container.offsetTop;
                 const speed = parseFloat(container.getAttribute('data-speed')) || 1.2;
-                const diff = (elementTop - scrollPos) - (viewportHeight * 0.2);
+                const diff = rect.top - (viewportHeight * 0.2);
                 const movement = Math.max(0, diff * speed);
                 const leftElements = container.querySelectorAll('.reveal-item-left, .reveal-filler.left');
                 const rightElements = container.querySelectorAll('.reveal-item-right, .reveal-filler.right');
