@@ -27,6 +27,9 @@
 
     /* Transitions */
     --transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    --footer-bottom-offset: 0px;
+    --footer-left-offset: 0px;
+    --footer-visual-width: auto;
 }
 
 /* --- Custom Scrollbar (VS Code Style) --- */
@@ -1254,9 +1257,10 @@ h6 {
 /* --- Sticky Footer Status Bar --- */
 .main-footer-status {
     position: fixed;
-    bottom: 0;
+    bottom: var(--footer-bottom-offset);
     left: 320px;
-    width: calc(100% - 320px);
+    right: 0;
+    width: auto;
     height: 35px;
     background-color: rgba(24, 24, 24, 0.95);
     backdrop-filter: blur(10px);
@@ -1267,7 +1271,9 @@ h6 {
     align-items: center;
     font-size: 0.75rem;
     color: var(--text-slate);
-    z-index: 1100;
+    z-index: 1200;
+    opacity: 1;
+    visibility: visible;
 }
 
 .delivered-status {
@@ -1328,7 +1334,8 @@ h6 {
 
     .main-footer-status {
         left: 0;
-        width: 100%;
+        right: 0;
+        width: auto;
     }
 
     .work-grid-brutalist.grid-3,
@@ -1343,6 +1350,46 @@ h6 {
 
 /* Mobile Overrides */
 @media (max-width: 768px) {
+    body {
+        padding-bottom: calc(52px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .main-content {
+        padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .main-footer-status {
+        left: var(--footer-left-offset);
+        right: auto;
+        width: var(--footer-visual-width);
+        max-width: 100vw;
+        min-height: 44px;
+        height: auto;
+        bottom: calc(var(--footer-bottom-offset) + env(safe-area-inset-bottom, 0px));
+        padding: 8px 14px;
+        gap: 14px;
+        font-size: 0.68rem;
+        line-height: 1.25;
+    }
+
+    .delivered-status {
+        flex: 1 1 auto;
+        min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .social-icons-footer {
+        flex-shrink: 0;
+        gap: 14px;
+    }
+
+    .social-icons-footer a {
+        font-size: 1.12rem;
+        line-height: 1;
+    }
+
     .section-title-h1 {
         font-size: 42px;
     }

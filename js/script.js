@@ -6,21 +6,75 @@ function getBasePath() {
 }
 
 // --- Component Loader ---
+function createFooterShell() {
+    const footer = document.createElement('footer');
+    footer.className = 'main-footer-status';
+
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+        document.body.insertBefore(footer, mainContent);
+    } else {
+        document.body.appendChild(footer);
+    }
+
+    return footer;
+}
+
+function syncFooterViewportOffset() {
+    const footer = document.querySelector('.main-footer-status');
+    if (!footer) return;
+
+    const visualViewport = window.visualViewport;
+    if (!visualViewport || window.innerWidth > 768) {
+        document.documentElement.style.setProperty('--footer-bottom-offset', '0px');
+        document.documentElement.style.setProperty('--footer-left-offset', '0px');
+        document.documentElement.style.setProperty('--footer-visual-width', 'auto');
+        return;
+    }
+
+    const offset = Math.max(0, window.innerHeight - visualViewport.height - visualViewport.offsetTop);
+    document.documentElement.style.setProperty('--footer-bottom-offset', `${offset}px`);
+    document.documentElement.style.setProperty('--footer-left-offset', `${visualViewport.offsetLeft}px`);
+    document.documentElement.style.setProperty('--footer-visual-width', `${visualViewport.width}px`);
+}
+
+function initFooterViewportOffset() {
+    syncFooterViewportOffset();
+
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', syncFooterViewportOffset);
+        window.visualViewport.addEventListener('scroll', syncFooterViewportOffset);
+    }
+
+    window.addEventListener('resize', syncFooterViewportOffset);
+    window.addEventListener('orientationchange', syncFooterViewportOffset);
+}
+
 async function loadSharedComponents() {
     const base = getBasePath();
     const components = [
         { id: '.top-nav', file: 'components/shared/top-nav.html' },
         { id: '.sidebar-left', file: 'components/shared/sidebar-left.html' },
-        { id: '.main-footer-status', file: 'components/shared/footer.html' }
+        { id: '.main-footer-status', file: 'components/shared/footer.html', create: createFooterShell }
     ];
 
     for (const comp of components) {
-        const el = document.querySelector(comp.id);
+        let el = document.querySelector(comp.id);
+        if (!el && comp.create) {
+            el = comp.create();
+        }
+
         if (el) {
             try {
                 const response = await fetch(base + comp.file);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
                 const html = await response.text();
                 el.innerHTML = html;
+                if (comp.id === '.main-footer-status') {
+                    syncFooterViewportOffset();
+                }
             } catch (err) {
                 console.error(`Error loading ${comp.file}:`, err);
             }
@@ -896,6 +950,7 @@ function updateActiveNavLink() {
 document.addEventListener('DOMContentLoaded', async () => {
     initContactForm();
     await loadSharedComponents();
+    initFooterViewportOffset();
     await loadProjectGallery();
     await loadOngoingProjects();
     initPageEffects();
