@@ -1308,6 +1308,10 @@ h6 {
     .top-nav {
         justify-content: flex-start;
     }
+
+    .work-grid-brutalist.grid-4 {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @media (max-width: 992px) {
@@ -1326,6 +1330,15 @@ h6 {
         left: 0;
         width: 100%;
     }
+
+    .work-grid-brutalist.grid-3,
+    .work-grid-brutalist.grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .view-toggle {
+        display: none !important;
+    }
 }
 
 /* Mobile Overrides */
@@ -1341,7 +1354,9 @@ h6 {
     .about-layout,
     .contact-layout,
     .tech-grid-6col,
-    .feature-grid-3col {
+    .feature-grid-3col,
+    .work-grid-brutalist.grid-3,
+    .work-grid-brutalist.grid-4 {
         grid-template-columns: 1fr;
     }
 }
