@@ -1253,3 +1253,174 @@ document.addEventListener('DOMContentLoaded', async () => {
         updateTime();
     }
 });
+
+// --- Image Lightbox Functionality ---
+function initLightbox() {
+    let currentGallery = [];
+    let currentIndex = 0;
+
+    // 1. Ensure Lightbox HTML exists
+    let lightbox = document.getElementById('image-lightbox');
+    if (!lightbox) {
+        lightbox = document.createElement('div');
+        lightbox.id = 'image-lightbox';
+        lightbox.className = 'lightbox-overlay';
+        lightbox.innerHTML = `
+            <div id="lightbox-top-meta">
+                <div id="lightbox-caption"></div>
+                <span class="lightbox-close">&times;</span>
+            </div>
+            <div class="lightbox-nav-btn prev"><i class="fas fa-chevron-left"></i></div>
+            <img class="lightbox-content" id="lightbox-img">
+            <div id="lightbox-counter"></div>
+            <div class="lightbox-nav-btn next"><i class="fas fa-chevron-right"></i></div>
+        `;
+        document.body.appendChild(lightbox);
+    }
+
+    const lightboxImg = document.getElementById('lightbox-img');
+    const captionText = document.getElementById('lightbox-caption');
+    const counterText = document.getElementById('lightbox-counter');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+    const prevBtn = lightbox.querySelector('.lightbox-nav-btn.prev');
+    const nextBtn = lightbox.querySelector('.lightbox-nav-btn.next');
+
+    if (!lightboxImg) return;
+
+    const updateLightbox = (index) => {
+        currentIndex = index;
+        const item = currentGallery[currentIndex];
+        if (item) {
+            lightboxImg.src = item.src;
+            
+            // Format Caption: Project Name / Screen Name
+            const projectTitle = document.querySelector('[data-project-field="title"]')?.innerText || 'Project';
+            const screenName = item.alt || 'App Screen';
+            captionText.innerHTML = `<span class="lightbox-project-title">${projectTitle}</span> <span class="lightbox-sep">—</span> <span class="lightbox-screen-name">${screenName}</span>`;
+            
+            // Update Counter
+            if (counterText) {
+                counterText.innerText = `${currentIndex + 1} / ${currentGallery.length}`;
+            }
+            
+            // Hide/Show nav buttons based on gallery size
+            if (currentGallery.length > 1) {
+                prevBtn.style.display = 'flex';
+                nextBtn.style.display = 'flex';
+            } else {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            }
+        }
+    };
+
+    // 2. Delegate click events for all project images
+    document.addEventListener('click', (e) => {
+        const target = e.target;
+        
+        // Prevent lightbox if the image is inside a link (let normal navigation happen)
+        if (target.closest('a')) return;
+        
+        // Identify which images are "zoomable"
+        const isScreenshot = target.closest('.screenshot-card img');
+        const isHero = target.closest('.project-hero-image-wrap img') || target.closest('.project-hero-img-box img');
+        const isWorkCard = target.closest('.work-card img');
+
+        if (isScreenshot || isHero || isWorkCard) {
+            const clickedImg = isScreenshot || isHero || isWorkCard;
+            
+            // Build gallery from context
+            if (isScreenshot) {
+                const section = clickedImg.closest('.project-detail-section');
+                currentGallery = Array.from(section.querySelectorAll('img'));
+            } else {
+                currentGallery = [clickedImg];
+            }
+            
+            currentIndex = currentGallery.indexOf(clickedImg);
+            if (currentIndex === -1) currentIndex = 0;
+
+            updateLightbox(currentIndex);
+            
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Lock scroll
+            
+            // Trigger animation
+            setTimeout(() => {
+                lightbox.classList.add('active');
+            }, 10);
+        }
+    });
+
+    // 3. Navigation functionality
+    const goPrev = (e) => {
+        if (e) e.stopPropagation();
+        const nextIdx = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+        updateLightbox(nextIdx);
+    };
+
+    const goNext = (e) => {
+        if (e) e.stopPropagation();
+        const nextIdx = (currentIndex + 1) % currentGallery.length;
+        updateLightbox(nextIdx);
+    };
+
+    if (prevBtn) prevBtn.addEventListener('click', goPrev);
+    if (nextBtn) nextBtn.addEventListener('click', goNext);
+    
+    // Add click-to-next on the image itself
+    lightboxImg.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (currentGallery.length > 1) goNext();
+    });
+
+    // 4. Mouse wheel and Swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    lightbox.addEventListener('wheel', (e) => {
+        if (currentGallery.length <= 1) return;
+        if (Math.abs(e.deltaX) > 30 || Math.abs(e.deltaY) > 30) {
+            if (e.deltaX > 0 || e.deltaY > 0) goNext();
+            else goPrev();
+        }
+    }, { passive: true });
+
+    lightbox.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (Math.abs(touchStartX - touchEndX) > 50) {
+            if (touchStartX > touchEndX) goNext();
+            else goPrev();
+        }
+    }, { passive: true });
+
+    // 5. Close functionality
+    const closeLightbox = () => {
+        lightbox.classList.remove('active');
+        setTimeout(() => {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = '';
+        }, 300); // Wait for transition
+    };
+
+    if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (lightbox.style.display === 'flex') {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') goPrev();
+            if (e.key === 'ArrowRight') goNext();
+        }
+    });
+}
+
+// Initialize lightbox on DOM load
+document.addEventListener('DOMContentLoaded', initLightbox);
