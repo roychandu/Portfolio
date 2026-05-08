@@ -497,6 +497,26 @@ h6 {
     flex-shrink: 0;
 }
 
+.mobile-info-btn {
+    display: none;
+    color: var(--text-slate);
+    font-size: 1.15rem;
+    cursor: pointer;
+    width: 30px;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.mobile-info-btn:hover,
+.mobile-info-btn.active {
+    color: var(--text-white);
+    background: rgba(255, 255, 255, 0.05);
+}
+
 .nav-links {
     display: flex;
     gap: 30px;
@@ -1322,9 +1342,31 @@ h6 {
 
 @media (max-width: 992px) {
 
-    .sidebar-left,
+    .sidebar-left {
+        display: none;
+    }
+
     .nav-welcome {
         display: none;
+    }
+
+    .mobile-info-btn {
+        display: flex;
+    }
+
+    .sidebar-left.mobile-active {
+        display: flex !important;
+        position: fixed;
+        top: 40px;
+        left: 0;
+        height: calc(100vh - 40px - env(safe-area-inset-bottom));
+        width: 320px;
+        max-width: 100%;
+        background-color: var(--bg-graphite);
+        border-right: 1px solid var(--border);
+        z-index: 1000;
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
     }
 
     .main-content {

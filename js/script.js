@@ -92,6 +92,39 @@ async function loadSharedComponents() {
             link.classList.remove('active');
         }
     });
+
+    // Mobile Info Sidebar Toggle
+    const mobileInfoBtn = document.getElementById('mobile-info-toggle');
+    const sidebarLeft = document.querySelector('.sidebar-left');
+    
+    if (mobileInfoBtn && sidebarLeft) {
+        mobileInfoBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sidebarLeft.classList.toggle('mobile-active');
+            mobileInfoBtn.classList.toggle('active');
+        });
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992 && sidebarLeft.classList.contains('mobile-active')) {
+                if (!sidebarLeft.contains(e.target) && !mobileInfoBtn.contains(e.target)) {
+                    sidebarLeft.classList.remove('mobile-active');
+                    mobileInfoBtn.classList.remove('active');
+                }
+            }
+        });
+        
+        // Close sidebar when clicking a link inside it
+        const sidebarLinks = sidebarLeft.querySelectorAll('a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 992) {
+                    sidebarLeft.classList.remove('mobile-active');
+                    mobileInfoBtn.classList.remove('active');
+                }
+            });
+        });
+    }
 }
 
 // --- Role Typewriter Logic ---
