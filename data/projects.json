@@ -10,7 +10,7 @@
     "appleStoreLink": "#",
     "thumbnail": "assets/project-thumbnail/backpackr.png",
     "videoUrl": "assets/project-videos/backpackr.mp4",
-    "project-poster": "assets/project-poster/image 8.png",
+    "project-poster": "assets/project-poster/Backpackr-poster.png",
     "overview": {
       "about": "This is a dynamic social discovery platform tailored for travelers, backpackers, and digital nomads. The project focused on creating an interactive, real-time networking experience that makes discovering and connecting with nearby adventurers seamless and secure. We analyzed location-based networking trends, traveler pain points, and technical constraints to build an app that relies on precise proximity detection while maintaining high standards of data privacy.",
       "approach": "We follow a scalable, performance-driven development process that transforms complex social mechanics into intuitive digital journeys. Every technical decision in this project was approached with security, speed, and cross-platform consistency in mind. We began by solving the challenge of tracking users accurately without relying on expensive, heavy mapping APIs. Through architectural research and backend integrations, we defined a clear, mathematically driven direction that ensures a lightweight and stable core application."
@@ -21,7 +21,13 @@
       "assets/project-images/Screenshot_1777144946.png",
       "assets/project-images/Screenshot_1777144956.png",
       "assets/project-images/Screenshot_1777144960.png",
-      "assets/project-images/Screenshot_1777144965.png"
+      "assets/project-images/Screenshot_1777144965.png",
+      "assets/project-images/02_register.png.png",
+      "assets/project-images/Edit Profile.png",
+      "assets/project-images/Editable AppColors Mockup.png",
+      "assets/project-images/Professional AppColors Mockup.png",
+      "assets/project-images/Professional Editorial UI.png",
+      "assets/project-images/Professional UI.png"
     ],
     "keyFeatures": [
       "Proximity-Based Discovery: Implemented a custom mathematical algorithm (Haversine formula) to accurately detect and display other travelers within a 200km radius without relying on expensive third-party mapping APIs.",
