@@ -1,8 +1,8 @@
 {
-  "daily-expense": {
-    "title": "Daily Expense",
+  "sanatan-aarti": {
+    "title": "Sanatan Aarti",
     "status": "DEVELOPMENT",
-    "description": "A daily expense tracking app built to help users record spending and monitor routine finances.",
-    "thumbnail": "assets/project-thumbnail/expense.png"
+    "description": "A devotional mobile application designed to offer a comprehensive library of Hindu Aartis, Chalisas, and prayers, complete with integrated audio playback and lyrics.",
+    "thumbnail": "assets/project-thumbnail/sanatan_aarti.png"
   }
 }

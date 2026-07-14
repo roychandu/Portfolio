@@ -1154,5 +1154,71 @@
         "info": "Live mobile news reading experience tailored for readers."
       }
     ]
+  },
+  "countro": {
+    "title": "Countro - Expense Tracker",
+    "shortDescription": "Countro is a premium personal finance app built with Flutter and SQLite, designed to help users track transactions, manage custom categories, visualize budgets, and back up data securely with Firebase Realtime Database. It features localized notifications, full multi-currency and multi-language support, automated spreadsheet/PDF export, and robust ad-free premium in-app purchase modules.",
+    "role": "Lead Flutter Developer",
+    "platform": "Android",
+    "year": "2026",
+    "githubUrl": "",
+    "liveLink": "https://play.google.com/store/apps/details?id=com.neelstudio.countro",
+    "appleStoreLink": "#",
+    "thumbnail": "assets/project-thumbnail/expense.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-poster/countro-poster.png",
+    "overview": {
+      "about": "Countro is an offline-first, performance-driven personal finance utility designed to simplify wealth tracking and budgeting. Engineered as a high-fidelity utility for everyday users, it provides clear statistical insights into routine spending habits without requiring constant connectivity. By leveraging a local SQLite database, the app ensures that transaction logging is instantaneous, while integrating a reliable, battery-efficient Firebase sync pipeline for cloud backups.",
+      "approach": "We structured the codebase using clean architecture and Provider for robust state management. To guarantee a zero-latency user experience, we prioritized SQLite as the primary data store and implemented automatic synchronization with Firebase Realtime Database. The sync logic runs on a background periodic worker interval (every 10 minutes) when network access is active, preventing redundant cloud requests. Furthermore, we integrated local notification alarms to prompt user engagement and native Play Billing APIs to support premium tier subscriptions."
+    },
+    "screenshots": [
+      "assets/project-images/countro01.jpg",
+      "assets/project-images/countro02.jpg",
+      "assets/project-images/countro03.jpg",
+      "assets/project-images/countro04.jpg",
+      "assets/project-images/countro05.jpg",
+      "assets/project-images/countro06.jpg"
+    ],
+    "keyFeatures": [
+      "Offline-First Storage: Instant transaction logging powered by a local SQLite database utilizing dynamic schema upgrades.",
+      "Smart Real-Time Cloud Sync: Battery-optimized periodic sync worker connecting local data to Firebase Realtime Database when online.",
+      "Analytical Insights: Interactive dashboard presenting weekly/monthly reports, categorized breakdowns, and financial telemetry.",
+      "Financial Export Suite: Instant export of professional PDF ledgers or raw CSV sheets using path_provider and MediaStore APIs.",
+      "Custom Income & Expense Categories: Highly configurable category designer supporting dynamic colors and custom icons.",
+      "Monetization & Ads: Integrated Google Mobile Ads alongside a secure In-App Purchase pipeline to enable ad-free premium tiers."
+    ],
+    "techUsed": {
+      "core": [
+        "Flutter & Dart: cross-platform mobile delivery for smooth 60FPS fluid UI transitions.",
+        "Provider: Primary state management to handle reactive controllers, local settings, and background services.",
+        "SQLite (sqflite): Robust local storage tier for caching user profiles and expense histories."
+      ],
+      "backend": [
+        "Firebase Core & Auth: Secure registration and login workflows supporting email and Google credentials.",
+        "Firebase Realtime Database: High-speed sync layer for backing up transactions to the cloud securely.",
+        "Google Mobile Ads SDK: Configured localized banner and interstitial ad inventory for continuous monetization.",
+        "In-App Purchases (IAP): Native Google Play Billing framework integration to manage premium upgrades.",
+        "Local Notifications: Scheduled notifications utilizing localized timezone utilities for daily reminders.",
+        "PDF & CSV Writers: Custom file compilation engines mapping SQL data to standard document formats."
+      ]
+    },
+    "results": [
+      {
+        "number": "500+",
+        "info": "Active downloads on Google Play Store"
+      },
+      {
+        "number": "100%",
+        "info": "Offline capability with zero load latency"
+      },
+      {
+        "number": "10m",
+        "info": "Battery-optimized periodic sync interval"
+      },
+      {
+        "number": "2x",
+        "info": "Monetization streams (Ads & Premium IAPs)"
+      }
+    ]
   }
 }
