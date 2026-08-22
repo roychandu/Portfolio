@@ -381,9 +381,19 @@ async function loadOngoingProjects() {
         const response = await fetch(getBasePath() + 'data/ongoing.json');
         const ongoing = await response.json();
 
+        const ongoingSection = document.getElementById('ongoing-projects');
+        const entries = Object.entries(ongoing);
+
         ongoingGrid.innerHTML = '';
 
-        Object.entries(ongoing).forEach(([id, project]) => {
+        if (entries.length === 0) {
+            if (ongoingSection) ongoingSection.style.display = 'none';
+            return;
+        } else {
+            if (ongoingSection) ongoingSection.style.display = '';
+        }
+
+        entries.forEach(([id, project]) => {
             const card = document.createElement('div');
             card.className = 'work-card';
 

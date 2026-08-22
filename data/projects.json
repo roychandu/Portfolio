@@ -1220,5 +1220,77 @@
         "info": "Monetization streams (Ads & Premium IAPs)"
       }
     ]
+  },
+  "sanatan-aarti": {
+    "title": "Sanatan Aarti",
+    "shortDescription": "Sanatan Aarti is a comprehensive Hindu devotional and spiritual companion app built with Flutter. It offers a complete collection of sacred Aartis, Chalisas, Mantras, and Stotrams with integrated text-to-speech audio playback and synchronized lyrics in Hindi and English. The app features a live temple darshan hub, a customizable devotional photo frame editor, and a daily Hindu Panchang with Shubh Muhurat and festival calendar.",
+    "role": "Lead Flutter Developer",
+    "platform": "Android",
+    "year": "2026",
+    "githubUrl": "#",
+    "liveLink": "https://play.google.com/store/apps/details?id=com.neelstudio.sanatanaarti&hl=en_IN",
+    "appleStoreLink": "#",
+    "thumbnail": "assets/project-thumbnail/sanatan_aarti.png",
+    "videoUrl": "",
+    "project-poster": "assets/project-poster/sanatan-aarti-poster.png",
+    "overview": {
+      "about": "Sanatan Aarti (Sanatan Bhakti) is an all-in-one devotional ecosystem designed to bring daily Hindu prayers, sacred rituals, and spiritual wisdom into a modern, beautifully designed mobile application. Crafted for devotees of all generations, the app combines five core pillars: a comprehensive library of sacred Aartis, Chalisas, and Mantras across 20+ deities with TTS audio playback; a Devotional Photo Frame Studio for creating festive personalized greetings; a Live Darshan portal connecting devotees with prominent Indian temples (including Ayodhya Ram Mandir); and an accurate daily Hindu Panchang with Tithi, Nakshatra, and Shubh Muhurat calculations.",
+      "approach": "The application is built on a scalable Flutter architecture with Provider state management to ensure ultra-smooth 60FPS UI interactions and low-memory overhead. We designed a dual-language (Hindi & English) localization engine using AppLocalizations and integrated Flutter TTS for seamless, offline-ready audio recitation of holy verses. For the photo editor studio, we integrated Pro Image Editor with Matrix Gesture Detector and MediaStore API to ensure effortless image manipulation and instant high-res gallery saving. Enterprise-grade security is ensured using Firebase App Check (Play Integrity) and Firebase Crashlytics for real-time telemetry."
+    },
+    "screenshots": [
+      "assets/project-images/sanatan aarti01.webp",
+      "assets/project-images/sanatan aarti 02.webp",
+      "assets/project-images/sanatan aarti 03.webp",
+      "assets/project-images/sanatan aarti 04.webp",
+      "assets/project-images/sanatan aarti 05.webp",
+      "assets/project-images/sanatan aarti 06.webp",
+      "assets/project-images/sanatan-aarti-home.png",
+      "assets/project-images/sanatan-aarti01.png",
+      "assets/project-images/sanatan-aarti02.png",
+      "assets/project-images/sanatan-aarti03.png",
+      "assets/project-images/sanatan-aarti04.jpg"
+    ],
+    "keyFeatures": [
+      "Comprehensive Aarti & Mantra Collection: Over 20+ Hindu deities with full lyrics in Hindi and English, accompanied by Text-to-Speech (TTS) audio narration and customizable playback speeds.",
+      "Devotional Photo Frame Studio: Powerful in-app image editor with multi-touch gesture scaling, custom deity borders (Ganesh, Shiv, Krishna, Navratri), and one-tap gallery export.",
+      "Live Temple Darshan & Virtual Puja: High-definition live streams and virtual darshan portals for revered pilgrimage sites like Ayodhya Ram Mandir and Khatu Shyam.",
+      "Daily Hindu Panchang & Calendar: Comprehensive daily astrological telemetry including Tithi, Nakshatra, Yoga, Karana, Rahu Kaal, sunrise/sunset times, and upcoming Vrat/festivals.",
+      "Smart Reminders & Notifications: Localized daily morning and evening puja notifications ensuring timely spiritual practice.",
+      "Monetization & Ad-Free Premium: Integrated Google Mobile Ads (Banner, Interstitial, Rewarded) and Google Play In-App Purchases (IAP) for permanent ad removal."
+    ],
+    "techUsed": {
+      "core": [
+        "Flutter & Dart: High-performance cross-platform codebase delivering smooth 60FPS devotional animations and fluid UI transitions.",
+        "Provider: Robust state management handling multi-language locales, referrals, favorites, and background services.",
+        "Pro Image Editor & Matrix Gesture: Advanced multi-touch canvas manipulation for photo frame editing and layering.",
+        "Flutter TTS & Media Engine: Text-to-Speech synthesis and audio playback coordination for mantras and aartis."
+      ],
+      "backend": [
+        "Firebase Core & App Check: Enterprise-level app integrity verification using Google Play Integrity provider.",
+        "Firebase Crashlytics & Analytics: Real-time crash diagnostics and error tracking for crash-free user sessions.",
+        "Google Mobile Ads SDK: Optimized banner, interstitial, and rewarded ad placements for organic monetization.",
+        "In-App Purchases (IAP): Native Google Play Billing framework integration supporting lifetime premium upgrades.",
+        "DeepLinking & Referral Attribution: Deep-linking architecture for tracking install attribution and rewarding user invitations.",
+        "MediaStore & Local Notifications: Secure local gallery storage operations and localized scheduled alarm reminders."
+      ]
+    },
+    "results": [
+      {
+        "number": "Live",
+        "info": "Published & active on Google Play Store"
+      },
+      {
+        "number": "20+",
+        "info": "Hindu deities covered with Aartis & Mantras"
+      },
+      {
+        "number": "100%",
+        "info": "Offline-ready devotional reading & TTS recitation"
+      },
+      {
+        "number": "5 in 1",
+        "info": "Modules: Aartis, Frames, Darshan, Panchang, Reminders"
+      }
+    ]
   }
 }
