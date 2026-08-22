@@ -1,1 +1,14 @@
-{}
+{
+  "tinytales": {
+    "title": "TinyTales",
+    "status": "DEVELOPMENT",
+    "description": "A private parenting app for capturing baby milestones, photo & audio memories, India vaccination tracking, and time-capsule stories.",
+    "thumbnail": "assets/project-thumbnail/tinytales.png"
+  },
+  "dukaandar": {
+    "title": "Dukaandar",
+    "status": "DEVELOPMENT",
+    "description": "A modern smart digital ledger (Bahi Khata), POS billing, inventory management, and Bluetooth thermal printing system for Indian retail shops.",
+    "thumbnail": "assets/project-thumbnail/dukaandar.png"
+  }
+}
