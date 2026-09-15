@@ -272,7 +272,7 @@ async function loadProjectGallery() {
         
         // Define IDs to be simplified into the list view (only for work.html)
         const news10kIds = [
-            'india-7-live-news', 'khoji-narad-news', 'narad-post-news', 'tehelka-india-news'
+            'bharat-news-first', 'cyber-youth-news', 'india-7-live-news', 'khoji-narad-news', 'narad-post-news', 'tehelka-india-news'
         ];
 
         // Other news projects to exclude from work.html to avoid duplication
@@ -283,13 +283,18 @@ async function loadProjectGallery() {
 
         const projectEntries = Object.entries(projects);
 
-        // Filter projects to define the "curated" pool (excluding hidden news apps)
-        const curatedEntries = projectEntries.filter(([id]) => !news10kIds.includes(id) && !excludeNewsIds.includes(id));
+        // Include Bharat News First and Cyber Youth News in the main "All Projects" grid as well
+        const featuredNewsInGrid = ['bharat-news-first', 'cyber-youth-news'];
+
+        // Filter projects to define the "All Projects" grid (curated standalone apps + featured news cards)
+        const curatedEntries = projectEntries.filter(([id]) => 
+            (!news10kIds.includes(id) || featuredNewsInGrid.includes(id)) && !excludeNewsIds.includes(id)
+        );
         const news10kEntries = projectEntries.filter(([id]) => news10kIds.includes(id));
         const otherNewsEntries = projectEntries.filter(([id]) => excludeNewsIds.includes(id));
 
-        // The total count of projects we want to acknowledge in the portfolio
-        const displayCount = curatedEntries.length + news10kEntries.length + otherNewsEntries.length;
+        // The total count of unique projects acknowledged in the portfolio
+        const displayCount = projectEntries.length;
 
         let mainProjects = [];
         let newsProjects = [];
