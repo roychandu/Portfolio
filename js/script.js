@@ -58,7 +58,7 @@ async function loadSharedComponents() {
         { id: '.main-footer-status', file: 'components/shared/footer.html', create: createFooterShell }
     ];
 
-    for (const comp of components) {
+    await Promise.all(components.map(async (comp) => {
         let el = document.querySelector(comp.id);
         if (!el && comp.create) {
             el = comp.create();
@@ -79,7 +79,7 @@ async function loadSharedComponents() {
                 console.error(`Error loading ${comp.file}:`, err);
             }
         }
-    }
+    }));
 
     // Set Active Link in Top Nav
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
@@ -336,7 +336,7 @@ async function loadProjectGallery() {
                     <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
                 </div>
                 <div class="card-body">
-                    <img src="${project.thumbnail}" alt="${project.title} Project">
+                    <img src="${project.thumbnail}" alt="${project.title} Project" loading="lazy" decoding="async">
                 </div>
             `;
             workGrid.appendChild(card);
@@ -408,7 +408,7 @@ async function loadOngoingProjects() {
                     <div class="card-arrow"><i class="fas fa-clock"></i></div>
                 </div>
                 <div class="card-body" style="position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #1a1a1a;">
-                    <img src="${project.thumbnail}" alt="${project.title} Ongoing" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.4;">
+                    <img src="${project.thumbnail}" alt="${project.title} Ongoing" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.4;">
                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));">
                         <span style="color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 12px; text-transform: uppercase; border: 1px solid var(--accent); padding: 3px 10px; background: rgba(0,0,0,0.3);">${project.status}</span>
                         <p style="font-size: 13px; color: #eee; line-height: 1.5; margin: 0; font-family: 'IBM Plex Mono', monospace; max-width: 90%; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">${project.description}</p>
@@ -535,9 +535,9 @@ async function loadProjectDetails() {
         // Screenshots Grid
         const screenGrid = document.querySelector('.work-grid-brutalist');
         if (screenGrid && project.screenshots) {
-            screenGrid.innerHTML = project.screenshots.map(src => `
+            screenGrid.innerHTML = project.screenshots.map((src, index) => `
                 <div class="screenshot-card">
-                    <img src="${src}" alt="App Screen">
+                    <img src="${src}" alt="App Screen" loading="${index < 2 ? 'eager' : 'lazy'}" decoding="async">
                 </div>
             `).join('');
         }
@@ -649,7 +649,7 @@ function loadRandomProjects(currentId, projects) {
                 <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
             </div>
             <div class="card-body">
-                <img src="${project.thumbnail}" alt="${project.title}">
+                <img src="${project.thumbnail}" alt="${project.title}" loading="lazy" decoding="async">
             </div>
         `;
         grid.appendChild(card);
@@ -1039,13 +1039,19 @@ function updateActiveNavLink() {
 // --- Initialize All ---
 document.addEventListener('DOMContentLoaded', async () => {
     initContactForm();
-    await loadSharedComponents();
-    initFooterViewportOffset();
-    await loadProjectGallery();
-    await loadOngoingProjects();
+
+    // Fetch shared layout components and dynamic content concurrently in parallel
+    await Promise.all([
+        loadSharedComponents().then(() => {
+            initFooterViewportOffset();
+            updateActiveNavLink();
+            initRoleRotation();
+        }),
+        loadProjectGallery(),
+        loadOngoingProjects()
+    ]);
+
     initPageEffects();
-    initRoleRotation();
-    updateActiveNavLink();
 
     // Intercept Page Navigation
     document.body.addEventListener('click', (e) => {
